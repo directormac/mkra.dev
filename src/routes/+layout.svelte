@@ -3,7 +3,10 @@
 	import '../app.pcss';
 	import '@fontsource-variable/inter';
 	import '@fontsource-variable/caveat';
+	import { ModeWatcher } from 'mode-watcher';
 </script>
+
+<ModeWatcher />
 
 <div class="flex min-h-full flex-col">
 	<Navbar />
