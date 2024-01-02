@@ -20,19 +20,22 @@
 		</p>
 
 		<p class="py-4">
-			<span class="ml-8">Over </span>the past years, I've broadened my skill set, mastering meta
-			frameworks, and delving into cutting-edge technologies such as SvelteKit and Astro. I'm
-			particularly enthusiastic about designing and constructing intricate infrastructure projects
-			from concept to deployment. My hands-on approach involves utilizing a diverse range of
-			open-source tools to ensure the seamless development of robust solutions.
+			<span class="ml-8">Over </span> the years, I've broadened my skill set, mastering meta frameworks
+			like SvelteKit and Astro, with a particular passion for executing intricate infrastructure projects
+			from concept to deployment. My hands-on approach involves leveraging a diverse array of open-source
+			tools for seamless development. What sets me apart is not just my proficiency in crafting applications
+			but also my adeptness in deploying them using a DevOps/GitOps approach. I have extensive experience
+			working across major cloud providers and platforms, enabling me to orchestrate virtual machines,
+			containerize applications, and deploy solutions effectively. My repertoire extends to utilizing
+			various services and running applications on my meticulously curated homelab.
 		</p>
 
 		<p class="py-4">
 			<span class="ml-8">My </span> services encompass a spectrum of capabilities, from network design,
 			implementation, and troubleshooting to comprehensive project management for all aspects of network
 			infrastructure. On the software engineering front, I serve as your dedicated expert for JavaScript
-			and TypeScript, collaborating with frameworks such as React, Remix, NextJS, Svelte, SvelteKit,
-			TailwindCSS, NestJS, and more within the Node.js ecosystem.
+			and TypeScript, collaborating with frameworks such as Remix, NextJS, SvelteKit, Astro, TailwindCSS,
+			NestJS, and more within the Node.js ecosystem.
 		</p>
 
 		<p class="py-4">
