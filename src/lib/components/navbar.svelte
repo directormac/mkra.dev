@@ -18,7 +18,7 @@
 </script>
 
 <svelte:window bind:scrollY={positionY} />
-<header use:transition={'header'} class={cn('sticky top-0 z-50  shrink-0')}>
+<header use:transition={'header'} class={cn('sticky top-0 z-50 shrink-0')}>
 	<div class="h-18 mx-auto flex max-w-7xl items-center justify-between px-4">
 		<a href="/" class="hover:underline">
 			<span class="font-writing text-4xl font-black md:block"> mkra.dev </span>
