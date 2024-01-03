@@ -25,10 +25,13 @@
 
 	<div class="grid grid-cols-2 gap-6 md:grid-cols-4">
 		{#each placeholders as _, index}
-			<a class="aspect-square overflow-hidden rounded-lg bg-green-400 shadow-xl" href="/projects">
+			<a
+				class="group aspect-square overflow-hidden rounded-lg bg-green-400 shadow-xl"
+				href="/projects"
+			>
 				<p class="hidden">{_}</p>
 				<img
-					class="aspect-square w-full transition-all duration-[200] group-hover:-translate-y-full"
+					class="aspect-square w-full transition-all duration-[150] group-hover:-translate-y-[101%]"
 					src="https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?ixlib=rb-4.0.3&w=400&h=400&auto=format&fit=crop"
 					alt="Preview"
 				/>

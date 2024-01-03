@@ -12,7 +12,7 @@
 <div class="flex flex-col-reverse px-4 py-24 md:flex-row md:items-center">
 	<div class="flex flex-col gap-4 md:w-1/2">
 		<h1 class="scroll-m-20 text-2xl font-bold tracking-tight md:text-4xl lg:text-7xl">
-			Hello, I'm mac.
+			Hello, I'm mark.
 		</h1>
 		<p class="text-md py-4 font-medium tracking-wide md:text-xl">
 			<span class="ml-8">A </span>
