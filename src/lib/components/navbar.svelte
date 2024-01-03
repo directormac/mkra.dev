@@ -5,7 +5,7 @@
 	import { setupViewTransition } from 'sveltekit-view-transition';
 	import { matchMedia } from '@utils';
 
-	const isLargeScreen = matchMedia('(min-width: 768px)');
+	// const isLargeScreen = matchMedia('(min-width: 768px)');
 
 	const { transition } = setupViewTransition();
 
@@ -13,15 +13,23 @@
 		{ label: 'About', href: '/about' },
 		{ label: 'Projects', href: '/projects' }
 	];
+
+	let positionY: number = 0;
 </script>
 
-<header use:transition={'header'} class="shrink-0 border-b">
-	<div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+<svelte:window bind:scrollY={positionY} />
+<header use:transition={'header'} class={cn('sticky top-0 z-50  shrink-0')}>
+	<div class="h-18 mx-auto flex max-w-7xl items-center justify-between px-4">
 		<a href="/" class="hover:underline">
-			<span class="font-writing text-4xl font-black md:block"> mkra </span>
+			<span class="font-writing text-4xl font-black md:block"> mkra.dev </span>
 		</a>
-		<div class="mx-auto">
-			<nav class="flex items-center justify-center gap-x-8 rounded-full p-2">
+		<div
+			class={cn(
+				'mx-auto rounded-full px-4 dark:text-white',
+				positionY > 50 ? 'bg-zinc-900 text-white' : ''
+			)}
+		>
+			<nav class="flex items-center justify-center gap-x-12 rounded-full p-2">
 				{#each links as { href, label }}
 					<Link {href} {label} />
 				{/each}

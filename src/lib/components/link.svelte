@@ -9,8 +9,8 @@
 <a
 	{href}
 	class={cn(
-		'text-sm font-bold tracking-wider transition-colors hover:text-blue-600 hover:underline hover:underline-offset-4',
-		$page.url.pathname === href ? 'text-green-600' : ''
+		'text-sm  tracking-wider transition-colors hover:text-blue-500 hover:underline hover:underline-offset-4',
+		$page.url.pathname === href ? 'font-bold underline underline-offset-4' : ''
 	)}
 >
 	{label}
