@@ -22,7 +22,7 @@
 		</p>
 		<div class="flex gap-4 py-2">
 			{#each socials as social}
-				<a href={social.link} class="rounded-full bg-teal-800 p-2 hover:bg-teal-500">
+				<a href={social.link} class="rounded-full bg-green-500 p-2 text-black hover:bg-green-300">
 					<svelte:component this={social.icon} />
 				</a>
 			{/each}
