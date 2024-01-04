@@ -21,9 +21,13 @@
 	>
 		Projects
 	</h1>
+	<p class="text-center">
+		Only the open sourced projects have repo links, if a live link seems to be down, please contact
+		me!
+	</p>
 	<Separator class="my-4" />
 
-	<div class="grid grid-cols-2 gap-6 md:grid-cols-4">
+	<div class="grid grid-cols-2 gap-6 px-4 md:grid-cols-4">
 		{#each placeholders as _, index}
 			<a
 				class="group aspect-square overflow-hidden rounded-lg bg-green-400 shadow-xl"
