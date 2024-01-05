@@ -29,6 +29,6 @@
 		</div>
 	</div>
 	<div class="mx-auto flex justify-end py-4 md:w-1/2">
-		<Skeleton class="h-[200px] w-[200px] rounded-full md:h-[380px] md:w-[380px]" />
+		<Skeleton class="h-[200px] w-[200px] rounded-full md:h-[350px] md:w-[350px]" />
 	</div>
 </div>
