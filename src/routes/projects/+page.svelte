@@ -36,7 +36,7 @@
 				<p class="hidden">{_}</p>
 				<img
 					class="aspect-square w-full transition-all duration-[150] group-hover:-translate-y-[101%]"
-					src="https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?ixlib=rb-4.0.3&w=400&h=400&auto=format&fit=crop"
+					src="/color.webp"
 					alt="Preview"
 				/>
 				<caption

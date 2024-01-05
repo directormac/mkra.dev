@@ -10,7 +10,7 @@
 </script>
 
 <div class="flex flex-col-reverse px-4 py-24 md:flex-row md:items-center">
-	<div class="flex flex-col gap-4 md:w-1/2">
+	<div class="flex flex-col md:w-1/2 md:pt-8">
 		<h1 class="scroll-m-20 text-2xl font-bold tracking-tight md:text-4xl lg:text-7xl">
 			Hello, I'm mark.
 		</h1>
@@ -28,7 +28,12 @@
 			{/each}
 		</div>
 	</div>
-	<div class="mx-auto flex justify-end py-4 md:w-1/2">
-		<Skeleton class="h-[200px] w-[200px] rounded-full md:h-[350px] md:w-[350px]" />
+	<div class="mx-auto flex justify-end py-4 md:w-1/2 lg:pr-24">
+		<img
+			src="/bw.webp"
+			alt="bw"
+			class="h-[200px] w-[200px] rounded-full md:h-[350px] md:w-[350px]"
+		/>
+		<!-- <Skeleton class="h-[200px] w-[200px] rounded-full md:h-[350px] md:w-[350px]" /> -->
 	</div>
 </div>
