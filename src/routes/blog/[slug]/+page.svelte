@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_APIURL } from '$env/static/public';
+	import { PUBLIC_API_URL } from '$env/static/public';
 	import type { PageServerData } from './$types';
 	import '@cartamd/plugin-code/default.css';
 	import { Carta, CartaViewer } from 'carta-md';
@@ -17,9 +17,9 @@
 </script>
 
 {#if data.post.cover}
-	<img src={`${PUBLIC_APIURL}/assets/${data.post.cover.filename_disk}`} alt={data.post.title} />
+	<img src={`${PUBLIC_API_URL}/assets/${data.post.cover.filename_disk}`} alt={data.post.title} />
 	<p>hey</p>
-	{`${PUBLIC_APIURL}/assets/${data.post.cover.filename_disk}`}
+	{`${PUBLIC_API_URL}/assets/${data.post.cover.filename_disk}`}
 {/if}
 <article class="py-4">
 	<h1 class="scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-5xl">
