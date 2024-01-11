@@ -60,9 +60,9 @@ const config = {
 				sans: ['Inter Variable', ...fontFamily.sans],
 				writing: ['Caveat Variable', ...fontFamily.mono]
 			}
-		},
-		plugins: [forms, typography]
-	}
+		}
+	},
+	plugins: [forms, typography]
 } satisfies Config;
 
 export default config;
