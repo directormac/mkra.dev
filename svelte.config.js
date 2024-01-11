@@ -1,4 +1,8 @@
-import adapter from '@sveltejs/adapter-auto';
+import 'dotenv/config';
+import adapterAuto from '@sveltejs/adapter-auto';
+import adapterNode from '@sveltejs/adapter-node';
+const dev = process.env.NODE_ENV === 'development' ? false : true;
+const adapter = process.env.ADAPTER === 'node' ? adapterNode : adapterAuto;
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -17,7 +21,8 @@ const config = {
 			'@ui': './src/lib/components/ui',
 			'@utils': './src/lib/utils',
 			'@types': './src/lib/types'
-		}
+		},
+		csrf: { checkOrigin: dev }
 	}
 };
 
