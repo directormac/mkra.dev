@@ -2,8 +2,8 @@
 import fetch from 'cross-fetch';
 import 'dotenv/config';
 
-const BASE_URL = process.env.BASE_URL ?? '';
-const BASE_ACCESS_TOKEN = process.env.BASE_ACCESS_TOKEN ?? '';
+const BASE_URL = process.env.PUBLIC_API_URL ?? '';
+const BASE_ACCESS_TOKEN = process.env.API_TOKEN ?? '';
 
 const TARGET_URL = process.env.TARGET_URL ?? '';
 const TARGET_ACCESS_TOKEN = process.env.TARGET_ACCESS_TOKEN ?? '';

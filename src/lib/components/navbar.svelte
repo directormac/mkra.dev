@@ -3,10 +3,10 @@
 	import LightSwitch from './light-switch.svelte';
 	import Link from './link.svelte';
 	import { setupViewTransition } from 'sveltekit-view-transition';
-	import { matchMedia } from '@utils';
 	import * as Sheet from '@ui/sheet';
 	import { Button } from './ui/button';
 	import { Menu } from 'lucide-svelte';
+	import { matchMedia } from '@utils';
 
 	const isLargeScreen = matchMedia('(min-width: 768px)');
 
@@ -24,7 +24,7 @@
 <svelte:window bind:scrollY={positionY} />
 <header use:transition={'header'} class={cn('sticky top-0 z-10 shrink-0')}>
 	<div class="h-18 mx-auto flex max-w-7xl items-center justify-between px-4">
-		<a href="/" class={cn('hover:underline', positionY > 50 ? 'hidden' : '')}>
+		<a href="/" class={cn('hover:underline')}>
 			<span class={cn('text-center font-writing text-4xl font-black md:block')}> mkra.dev </span>
 		</a>
 		{#if $isLargeScreen}
