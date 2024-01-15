@@ -24,7 +24,7 @@
 	></script>
 </svelte:head>
 
-{$page.route.id}
+<!-- {$page.route.id} -->
 
 <svelte:window bind:scrollY />
 
