@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { Skeleton } from '@ui/skeleton';
 	import { Github, Linkedin, Mail } from 'lucide-svelte';
-
 	const socials = [
 		{ link: 'https://github.com/directormac', icon: Github },
 		{ link: 'https://www.linkedin.com/in/markasena', icon: Linkedin },
