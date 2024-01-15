@@ -24,17 +24,18 @@
 <svelte:window bind:scrollY={positionY} />
 <header use:transition={'header'} class={cn('sticky top-0 z-10 shrink-0')}>
 	<div class="h-18 mx-auto flex max-w-7xl items-center justify-between px-4">
-		<a href="/" class="hover:underline">
-			<span class="font-writing text-4xl font-black md:block"> mkra.dev </span>
+		<a href="/" class={cn('hover:underline', positionY > 50 ? 'hidden' : '')}>
+			<span class={cn('text-center font-writing text-4xl font-black md:block')}> mkra.dev </span>
 		</a>
 		{#if $isLargeScreen}
 			<div
 				class={cn(
 					'mx-auto rounded-full px-4 dark:text-white',
-					positionY > 50 ? 'bg-zinc-900 text-white' : ''
+					positionY > 50 ? 'bg-zinc-800 text-white' : ''
 				)}
 			>
 				<nav class="flex items-center justify-center gap-x-12 rounded-full p-2 text-sm">
+					<Link href="/" label="Home" />
 					{#each links as { href, label }}
 						<Link {href} {label} />
 					{/each}
@@ -52,6 +53,12 @@
 						<nav
 							class="flex flex-col items-center justify-center gap-y-4 rounded-full p-2 pt-12 text-xl"
 						>
+							<Sheet.Close asChild let:builder>
+								<Button variant="ghost" builders={[builder]}>
+									<Link href="/" label="Home" />
+								</Button>
+							</Sheet.Close>
+
 							{#each links as { href, label }}
 								<Sheet.Close asChild let:builder>
 									<Button variant="ghost" builders={[builder]}>
