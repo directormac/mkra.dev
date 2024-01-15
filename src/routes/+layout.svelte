@@ -12,16 +12,10 @@
 </script>
 
 <svelte:head>
-	<title>{$page.data.global.title ?? 'MKRA'}</title>
+	<title>{$page.data.meta.title ?? 'MKRA'}</title>
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content={$page.data.global.title ?? 'MKRA'} />
-	<meta
-		property="og:description"
-		content={`A	seasoned network engineer with over a decade of experience, I've transitioned into full-stack web
-			development, driven by a passion for building innovative solutions. I bring a wealth of expertise
-			to guide your projects through the ever-evolving technological landscape.
-`}
-	/>
+	<meta property="og:title" content={$page.data.meta.title ?? 'MKRA'} />
+	<meta property="og:description" content={$page.data.meta.description ?? ''} />
 	<meta property="og:image" content={`/color.webp`} />
 	<script
 		async
@@ -29,6 +23,8 @@
 		data-website-id={PUBLIC_ANALYTICS_WEB_ID}
 	></script>
 </svelte:head>
+
+{$page.route.id}
 
 <svelte:window bind:scrollY />
 
