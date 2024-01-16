@@ -38,17 +38,22 @@
 					{article.description}
 				</h2>
 			</div>
-			<div>tags here</div>
+
+			<div class="mx-4 grid grid-cols-3 items-center gap-1 md:ml-auto">
+				{#each article.tags as tag}
+					<a
+						href="/blog?tag={tag.tags_tag}"
+						class="rounded-lg bg-gray-600 p-1 text-center text-sm italic text-white hover:bg-cyan-800"
+						>{tag.tags_tag}</a
+					>
+				{/each}
+			</div>
 		</div>
 
 		<Separator class="my-4" />
 
 		{#if article.image}
-			<img
-				class="p-4"
-				src={imageLinkTransformer(article.image.filename_disk)}
-				alt={article.title}
-			/>
+			<img class="p-4" src={imageLinkTransformer(article.image)} alt={article.title} />
 		{/if}
 		<Separator class="my-4" />
 		<CartaViewer {carta} value={article.content} />

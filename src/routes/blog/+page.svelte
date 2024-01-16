@@ -6,7 +6,7 @@
 </script>
 
 <div class="container">
-	<h1 class="py-12 text-4xl">A place where i share my notes and learnings.</h1>
+	<h1 class="py-12 text-4xl italic">A place where i share my notes and learnings.</h1>
 	{#await data.articles}
 		<h1>Fetching Articles</h1>
 	{:then articles}
@@ -17,6 +17,8 @@
 						title={article.title}
 						description={article.description}
 						image={article.image}
+						tags={article.tags}
+						datePublished={article.date_created}
 					/>
 				</a>
 			</div>

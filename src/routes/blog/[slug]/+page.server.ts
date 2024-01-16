@@ -23,7 +23,16 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 		article: getDirectusInstance(fetch).then((client) =>
 			client.request(
 				readItem('articles', params.slug, {
-					fields: ['*', { '*': ['*'] }]
+					fields: [
+						'slug',
+						'title',
+						'description',
+						'image',
+						'published_at',
+						'date_created',
+						'tags.tags_tag',
+						'content'
+					]
 				})
 			)
 		)

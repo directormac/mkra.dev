@@ -59,6 +59,7 @@
 		"carta-md": "^3.4.0",
 		"clsx": "^2.1.0",
 		"cross-env": "^7.0.3",
+		"date-fns": "^3.2.0",
 		"dotenv": "^16.3.1",
 		"lucide-svelte": "^0.309.0",
 		"mode-watcher": "^0.1.2",

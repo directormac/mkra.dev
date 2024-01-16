@@ -4,7 +4,11 @@ import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async ({ fetch }) => {
 	const meta = await getDirectusInstance(fetch).then((client) => {
-		return client.request(readSingleton('global'));
+		return client.request(
+			readSingleton('global', {
+				fields: ['title', 'description', 'image', 'keywords']
+			})
+		);
 	});
 	return {
 		meta

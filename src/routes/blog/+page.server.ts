@@ -18,7 +18,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 					'image',
 					'published_at',
 					'date_created',
-					'categories'
+					'tags.tags_tag'
 				]
 			})
 		);
