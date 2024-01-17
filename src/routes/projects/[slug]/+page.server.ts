@@ -31,7 +31,9 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 						'published_at',
 						'date_created',
 						'tags.tags_tag',
-						'content'
+						'content',
+						'link',
+						'repository'
 					]
 				})
 			)

@@ -9,6 +9,8 @@
 	import { code } from '@cartamd/plugin-code';
 	import { emoji } from '@cartamd/plugin-emoji';
 	import { page } from '$app/stores';
+	import { Code, PanelTop } from 'lucide-svelte';
+	import LinkPreview from '@components/link-preview.svelte';
 
 	const carta = new Carta({
 		extensions: [code(), emoji()]
@@ -32,11 +34,22 @@
 						{project.title}
 					</a>
 				</h1>
-				<h2
-					class="mt-10 scroll-m-20 pb-2 text-2xl font-semibold tracking-tight text-gray-600 transition-colors first:mt-0 dark:text-gray-400"
-				>
-					{project.description}
-				</h2>
+				<div>
+					<h2
+						class="mt-10 scroll-m-20 pb-2 text-xl font-semibold tracking-tight text-gray-600 transition-colors first:mt-0 dark:text-gray-400"
+					>
+						{project.description}
+					</h2>
+					<div class="flex justify-end gap-x-4">
+						<LinkPreview href={project.link} label="Project Link">
+							<PanelTop class="inline-flex h-8 w-8" /> <span>Project Link</span>
+						</LinkPreview>
+
+						<LinkPreview href={project.repository} label="Project Source Code">
+							<Code class="inline-flex h-8 w-8" /> <span>Source Code</span>
+						</LinkPreview>
+					</div>
+				</div>
 			</div>
 
 			<div class="mx-4 grid grid-cols-3 items-center gap-1 md:ml-auto">
@@ -51,10 +64,13 @@
 		</div>
 
 		<Separator class="my-4" />
-
-		{#if project.image}
-			<img class="p-4" src={imageLinkTransformer(project.image)} alt={project.title} />
-		{/if}
+		<a href={project.link}>
+			<img
+				class="p-4"
+				src={project.image ? imageLinkTransformer(project.image) : '/color.webp'}
+				alt={project.title}
+			/>
+		</a>
 		<Separator class="my-4" />
 		<CartaViewer {carta} value={project.content} />
 	</article>
