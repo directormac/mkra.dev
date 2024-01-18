@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { PageServerData } from './$types';
-	import '@cartamd/plugin-code/default.css';
 	import { Separator } from '@components/ui/separator';
 	import { Carta, CartaViewer } from 'carta-md';
 	import { imageLinkTransformer } from '@utils';
 	import 'carta-md/light.css';
+	import '@cartamd/plugin-code/default.css';
 	import { code } from '@cartamd/plugin-code';
 	import { emoji } from '@cartamd/plugin-emoji';
 	import { page } from '$app/stores';
@@ -17,11 +17,10 @@
 	export let data: PageServerData;
 </script>
 
-<Meta />
-
 {#await data.article}
 	Loading ...
 {:then article}
+	<Meta />
 	<article>
 		<div class="flex flex-col md:flex-row">
 			<div class="mx-4">
