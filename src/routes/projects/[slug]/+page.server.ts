@@ -1,42 +1,17 @@
-import { getDirectusInstance } from '$lib/directus';
-import { readItem } from '@directus/sdk';
-import type { PageServerLoad } from './$types';
-import { error } from '@sveltejs/kit';
+import { getCollectionItemBySlug, getItemSlug, getSlugs } from '$lib/directus';
+import type { EntryGenerator, PageServerLoad } from './$types';
+
+export const entries: EntryGenerator = async () => {
+	const projects = await getSlugs(fetch, 'projects');
+	return projects;
+};
 
 export const load: PageServerLoad = async ({ params, fetch }) => {
-	// Preventive error
-	await getDirectusInstance(fetch).then((client) =>
-		client
-			.request(
-				readItem('projects', params.slug, {
-					fields: ['slug']
-				})
-			)
-			.catch(() =>
-				error(404, {
-					message: `Project not found`
-				})
-			)
-	);
+	await getItemSlug(fetch, 'projects', params.slug);
 
 	return {
-		project: getDirectusInstance(fetch).then((client) =>
-			client.request(
-				readItem('projects', params.slug, {
-					fields: [
-						'slug',
-						'title',
-						'description',
-						'image',
-						'published_at',
-						'date_created',
-						'tags.tags_tag',
-						'content',
-						'link',
-						'repository'
-					]
-				})
-			)
-		)
+		project: await getCollectionItemBySlug(fetch, 'projects', params.slug, ['link', 'repository'])
 	};
 };
+
+export const prerender = true;

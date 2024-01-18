@@ -1,15 +1,8 @@
-import { getDirectusInstance } from '$lib/directus';
-import { readSingleton } from '@directus/sdk';
 import type { LayoutServerLoad } from './$types';
+import { getGlobals } from '$lib/config';
 
-export const load: LayoutServerLoad = async ({ fetch }) => {
-	const meta = await getDirectusInstance(fetch).then((client) => {
-		return client.request(
-			readSingleton('global', {
-				fields: ['title', 'description', 'image', 'keywords']
-			})
-		);
-	});
+export const load: LayoutServerLoad = async () => {
+	const meta = await getGlobals();
 	return {
 		meta
 	};
