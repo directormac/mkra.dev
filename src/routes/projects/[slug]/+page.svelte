@@ -77,6 +77,8 @@
 <a href={project.link} target="_blank" rel="noreferrer noopener">
 	<img
 		class="p-4"
+		width="1280"
+		height="720"
 		src={project.image
 			? imageLinkTransformer(project.image, 'preview', 'preview')
 			: imageLinkTransformer($page.data.meta.image, 'preview', 'preview')}
@@ -90,5 +92,10 @@
 </article>
 
 <div class="sticky bottom-0 -mx-8">
-	<Progress value={readProgress * 100} max={100} class="h-2 w-full rounded-none bg-transparent" />
+	<Progress
+		aria-label="Read Progress"
+		value={readProgress * 100}
+		max={100}
+		class="h-2 w-full rounded-none bg-transparent"
+	/>
 </div>

@@ -63,6 +63,8 @@
 {#if article.image}
 	<img
 		class="p-4"
+		width="1280"
+		height="720"
 		src={article.image
 			? imageLinkTransformer(article.image, 'preview', 'preview')
 			: imageLinkTransformer($page.data.meta.image, 'preview', 'preview')}
@@ -77,5 +79,10 @@
 </article>
 
 <div class="sticky bottom-0 -mx-8">
-	<Progress value={readProgress * 100} max={100} class="h-2 w-full rounded-none bg-transparent" />
+	<Progress
+		value={readProgress * 100}
+		aria-label="Read Progress"
+		max={100}
+		class="h-2 w-full rounded-none bg-transparent"
+	/>
 </div>
