@@ -17,16 +17,16 @@ export const getDirectusInstance = async (fetch: any) => {
 export const getSlugs = async (
 	sFetch: any = fetch,
 	collection: string
-): Promise<{ slug: string }[]> => {
+): Promise<{ slug: string; date_updated: string }[]> => {
 	return await getDirectusInstance(sFetch).then((client) => {
-		return client.request<{ slug: string }[]>(
+		return client.request<{ slug: string; date_updated: string }[]>(
 			readItems(collection, {
 				filter: {
 					status: {
 						_eq: 'published'
 					}
 				},
-				fields: ['slug']
+				fields: ['slug', 'date_updated']
 			})
 		);
 	});
