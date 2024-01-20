@@ -21,7 +21,7 @@
 	const { project } = data;
 </script>
 
-<Meta />
+<Meta article />
 <div class="flex flex-col md:flex-row">
 	<div class="mx-4">
 		<h1

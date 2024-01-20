@@ -64,6 +64,7 @@ export const getCollection = async (sFetch: any = fetch, collection: string) => 
 					'image',
 					'published_at',
 					'date_created',
+					'date_updated',
 					'tags.tags_tag'
 				]
 			})
@@ -84,6 +85,7 @@ export const getCollectionItemBySlug = async (
 		'image',
 		'published_at',
 		'date_created',
+		'date_updated',
 		'tags.tags_tag',
 		'content'
 	];
