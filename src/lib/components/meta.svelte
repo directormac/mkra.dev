@@ -16,23 +16,25 @@
 	const split = routeId.split('/');
 
 	if (split.length === 2 && routeId !== '/') {
-		title = config.title + '|' + capitalizeFirstLetter(split[1]);
+		title = config.title + ' - ' + capitalizeFirstLetter(split[1]);
 	} else {
-		title = config.title + '|Portfolio';
+		title = config.title + ' - Portfolio';
 	}
 
 	if (routeId.includes('blog') && split.length > 2) {
 		const article = $page.data.article;
-		title = article.title + '|' + config.title;
+		title = article.title + ' - ' + config.title;
 		config.image = imageLinkTransformer(article.image);
+		config.description = article.description;
 		const additionalKeywords = article.tags.map((tag: { tags_tag: string }) => tag.tags_tag);
 		config.keywords = additionalKeywords.join(', ') + ', ' + config.keywords;
 		datePublished = new Date(article.date_created).toISOString();
 		dateUpdated = new Date(article.date_updated).toISOString();
 	} else if (routeId.includes('projects') && split.length > 2) {
 		const project = $page.data.project;
-		title = project.title + '|' + config.title;
+		title = project.title + ' - ' + config.title;
 		config.image = imageLinkTransformer(project.image);
+		config.description = project.description;
 		const additionalKeywords = project.tags.map((tag: { tags_tag: string }) => tag.tags_tag);
 		config.keywords = additionalKeywords.join(', ') + ', ' + config.keywords;
 		datePublished = new Date(project.date_created).toISOString();
@@ -51,8 +53,8 @@
 	<meta property="og:title" content={config.title} />
 	<meta property="og:description" content={config.description} />
 	<meta property="og:image" content={config.image} />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="627" />
+	<meta property="og:image:width" content="1000" />
+	<meta property="og:image:height" content="1000" />
 	<meta property="og:image:alt" content={config.title} />
 	{#if article}
 		<meta property="article:publisher" content={config.url} />
