@@ -1,9 +1,15 @@
 <script lang="ts">
-	import { Github, Linkedin, Mail } from 'lucide-svelte';
+	import { Send, Github, Linkedin, Mail } from 'lucide-svelte';
+
+	import { page } from '$app/stores';
+
+	const global = $page.data.meta;
+
 	const socials = [
-		{ link: 'https://github.com/directormac', icon: Github },
-		{ link: 'https://www.linkedin.com/in/markasena', icon: Linkedin },
-		{ link: 'mailto:mac@mkra.dev', icon: Mail }
+		{ label: 'Github', link: `https://github.com/${global.github}`, icon: Github },
+		{ label: 'LinkedIn', link: `https://www.linkedin.com/in/${global.linkedin}`, icon: Linkedin },
+		{ label: 'Telegram', link: `mailto:${global.telegram}`, icon: Send },
+		{ label: 'Mail', link: `mailto:${global.email}`, icon: Mail }
 	];
 </script>
 
@@ -13,25 +19,25 @@
 			Hello, I'm mark.
 		</h1>
 		<p class="text-md py-4 font-medium tracking-wide md:text-xl">
-			<span class="ml-8">A </span>
-			seasoned network engineer with over a decade of experience, I've transitioned into full-stack web
-			development, driven by a passion for building innovative solutions. I bring a wealth of expertise
-			to guide your projects through the ever-evolving technological landscape.
+			<span class="ml-8"> {global.description}</span>
 		</p>
 		<div class="flex gap-4 py-2">
 			{#each socials as social}
-				<a href={social.link} class="rounded-full bg-green-500 p-2 text-black hover:bg-green-300">
-					<svelte:component this={social.icon} />
+				<a
+					href={social.link}
+					class="inline-flex rounded-full bg-green-600 p-2 text-black hover:bg-green-400"
+				>
+					{social.label}
+					<svelte:component this={social.icon} class="ml-2" />
 				</a>
 			{/each}
 		</div>
 	</div>
 	<div class="mx-auto flex justify-end py-4 md:w-1/2 lg:pr-24">
 		<img
-			src="/bw.webp"
+			src="/color.webp"
 			alt="bw"
 			class="h-[200px] w-[200px] rounded-full md:h-[350px] md:w-[350px]"
 		/>
-		<!-- <Skeleton class="h-[200px] w-[200px] rounded-full md:h-[350px] md:w-[350px]" /> -->
 	</div>
 </div>
