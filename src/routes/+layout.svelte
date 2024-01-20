@@ -1,20 +1,11 @@
 <script lang="ts">
 	import Navbar from '@components/navbar.svelte';
-	import Meta from '@components/meta.svelte';
 	import { cn } from '@utils';
 	import '../app.pcss';
 	import '@fontsource-variable/inter';
 	import '@fontsource-variable/caveat';
 	import { ModeWatcher } from 'mode-watcher';
-
-	let scrollY: number = 0;
 </script>
-
-<Meta />
-
-<!-- {$page.route.id} -->
-
-<svelte:window bind:scrollY />
 
 <ModeWatcher />
 

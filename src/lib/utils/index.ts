@@ -15,7 +15,7 @@ export const seoTransformer = (base: SeoModel, model: CommonModel, routeId: stri
 	const additionalKeywords = model.tags.map((tag: { tags_tag: string }) => tag.tags_tag);
 	const image = model.image ? imageLinkTransformer(model.image.filename_disk) : '/color.webp';
 	return {
-		title: base.title + '|' + model.title + capitalizeFirstLetter(routeId.split('/')[1]),
+		title: model.title + capitalizeFirstLetter(routeId.split('/')[1] + '|' + base.title),
 		description: model.description,
 		keywords: additionalKeywords.join(', ') + ', ' + base.keywords,
 		image

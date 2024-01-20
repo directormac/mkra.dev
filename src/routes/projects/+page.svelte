@@ -3,10 +3,12 @@
 	import ProjectCard from './project-card.svelte';
 	import type { PageServerData } from './$types';
 	import { imageLinkTransformer } from '@utils';
+	import Meta from '@components/meta.svelte';
 
 	export let data: PageServerData;
 </script>
 
+<Meta />
 <div class="max-w-7xl px-2 py-12">
 	<h1
 		class="mx-auto scroll-m-20 text-center text-2xl font-extrabold tracking-tight md:text-4xl lg:text-5xl"

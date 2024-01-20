@@ -1,3 +1,8 @@
+<script lang="ts">
+	import Meta from '@components/meta.svelte';
+</script>
+
+<Meta />
 <div class="mx-auto flex flex-col justify-center gap-y-8 px-12 py-6">
 	<h1
 		class="mx-auto scroll-m-20 border-b text-2xl font-extrabold tracking-tight md:text-4xl lg:text-5xl"

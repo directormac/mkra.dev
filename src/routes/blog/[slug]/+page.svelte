@@ -8,6 +8,7 @@
 	import { code } from '@cartamd/plugin-code';
 	import { emoji } from '@cartamd/plugin-emoji';
 	import { page } from '$app/stores';
+	import Meta from '@components/meta.svelte';
 
 	const carta = new Carta({
 		extensions: [code(), emoji()]
@@ -17,6 +18,7 @@
 	const { article } = data;
 </script>
 
+<Meta />
 <div class="flex flex-col md:flex-row">
 	<div class="mx-4">
 		<h1

@@ -1,10 +1,12 @@
 <script lang="ts">
+	import Meta from '@components/meta.svelte';
 	import type { PageServerData } from './$types';
 	import ArticleCard from './article-card.svelte';
 
 	export let data: PageServerData;
 </script>
 
+<Meta />
 <div class="container">
 	<h1 class="py-12 text-4xl italic">A place where i share my notes and learnings.</h1>
 	{#await data.articles}
