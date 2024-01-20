@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { Send, Github, Linkedin, Mail } from 'lucide-svelte';
+	import type { Website } from '$lib/config';
 
-	import { page } from '$app/stores';
+	export let meta: Website;
 
-	const global = $page.data.meta;
+	const global = meta;
 
 	const socials = [
 		{ label: 'Github', link: `https://github.com/${global.github}`, icon: Github },

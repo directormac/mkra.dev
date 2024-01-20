@@ -1,7 +1,7 @@
 import { getDirectusInstance } from '$lib/directus';
 import { readSingleton } from '@directus/sdk';
 
-type Website = {
+export type Website = {
 	author: string;
 	language: string;
 	title: string;
