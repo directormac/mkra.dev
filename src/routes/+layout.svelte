@@ -7,6 +7,7 @@
 	import 'carta-md/light.css';
 	import '@cartamd/plugin-code/default.css';
 	import { ModeWatcher } from 'mode-watcher';
+	import Separator from '@components/ui/separator/separator.svelte';
 </script>
 
 <ModeWatcher />
@@ -17,5 +18,7 @@
 		<main>
 			<slot />
 		</main>
+		<Separator />
+		<div class="flex justify-center py-4">Handcrafted by mac</div>
 	</div>
 </div>
