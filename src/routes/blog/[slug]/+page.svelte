@@ -61,7 +61,11 @@
 <Separator class="my-4" />
 
 {#if article.image}
-	<img class="p-4" src={imageLinkTransformer(article.image)} alt={article.title} />
+	<img
+		class="p-4"
+		src={article.image ? imageLinkTransformer(article.image, 'preview', 'preview') : '/color.webp'}
+		alt={article.title}
+	/>
 {/if}
 
 <Separator class="my-4" />

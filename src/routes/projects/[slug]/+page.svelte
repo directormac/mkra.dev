@@ -77,7 +77,7 @@
 <a href={project.link} target="_blank" rel="noreferrer noopener">
 	<img
 		class="p-4"
-		src={project.image ? imageLinkTransformer(project.image) : '/color.webp'}
+		src={project.image ? imageLinkTransformer(project.image, 'preview', 'preview') : '/color.webp'}
 		alt={project.title}
 	/>
 </a>
