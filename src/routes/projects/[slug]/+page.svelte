@@ -61,7 +61,7 @@
 		</div>
 	</div>
 
-	<div class="mx-4 grid grid-cols-3 items-center gap-1 md:ml-auto">
+	<div class="mx-4 grid grid-cols-3 items-center gap-1 py-2 md:ml-auto">
 		{#each project.tags as tag}
 			<a
 				href="/projects?tag={tag.tags_tag}"
@@ -77,7 +77,9 @@
 <a href={project.link} target="_blank" rel="noreferrer noopener">
 	<img
 		class="p-4"
-		src={project.image ? imageLinkTransformer(project.image, 'preview', 'preview') : '/color.webp'}
+		src={project.image
+			? imageLinkTransformer(project.image, 'preview', 'preview')
+			: imageLinkTransformer($page.data.meta.image, 'preview', 'preview')}
 		alt={project.title}
 	/>
 </a>

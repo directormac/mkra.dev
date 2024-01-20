@@ -41,7 +41,7 @@
 			}}
 		/>
 		<h2
-			class="scroll-m-20 text-2xl font-semibold tracking-tight text-gray-600 transition-colors first:mt-0 dark:text-gray-400"
+			class="text-2xl font-semibold tracking-tight text-gray-600 transition-colors first:mt-0 dark:text-gray-400"
 		>
 			{article.description}
 		</h2>
@@ -63,7 +63,9 @@
 {#if article.image}
 	<img
 		class="p-4"
-		src={article.image ? imageLinkTransformer(article.image, 'preview', 'preview') : '/color.webp'}
+		src={article.image
+			? imageLinkTransformer(article.image, 'preview', 'preview')
+			: imageLinkTransformer($page.data.meta.image, 'preview', 'preview')}
 		alt={article.title}
 	/>
 {/if}
