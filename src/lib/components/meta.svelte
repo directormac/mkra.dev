@@ -2,7 +2,7 @@
 	import { PUBLIC_ANALYTICS_ENDPOINT, PUBLIC_ANALYTICS_WEB_ID } from '$env/static/public';
 	import { page } from '$app/stores';
 	import { capitalizeFirstLetter, imageLinkTransformer, seoTransformer } from '@utils';
-	import type { CommonModel, SeoModel } from '@types';
+	import type { SeoModel } from '@types';
 	import SvelteSeo from 'svelte-seo';
 
 	const canonical = `${$page.url}`;
@@ -20,37 +20,33 @@
 	export let title: string = base.title;
 	export let type = 'website';
 
-	async function handleRouteChange() {
-		const routeId = String($page.route.id);
+	const routeId = String($page.route.id);
 
-		function setCommonProperties(transformed: SeoModel, newType: string) {
-			title = transformed.title;
-			description = transformed.description;
-			keywords = transformed.keywords;
-			image = transformed.image;
-			type = newType;
-		}
-
-		if (routeId !== '/') {
-			const split = routeId.split('/');
-			if (split.length === 2) {
-				title = base.title + '|' + capitalizeFirstLetter(split[1]);
-			} else if (routeId.includes('blog')) {
-				const article = (await $page.data.article) as CommonModel;
-				setCommonProperties(seoTransformer(base, article, routeId), 'article');
-			} else if (routeId.includes('projects')) {
-				const project = await $page.data.project;
-				setCommonProperties(seoTransformer(base, project, routeId), 'article');
-			}
-		} else {
-			title = base.title + '|Portfolio';
-			keywords = base.keywords;
-			type = 'website';
-			image = base.image;
-		}
+	function setCommonProperties(transformed: SeoModel, newType: string) {
+		title = transformed.title;
+		description = transformed.description;
+		keywords = transformed.keywords;
+		image = transformed.image;
+		type = newType;
 	}
 
-	$: $page.route.id, handleRouteChange();
+	if (routeId !== '/') {
+		const split = routeId.split('/');
+		if (split.length === 2) {
+			title = base.title + '|' + capitalizeFirstLetter(split[1]);
+		} else if (routeId.includes('blog')) {
+			const article = $page.data.article;
+			setCommonProperties(seoTransformer(base, article, routeId), 'article');
+		} else if (routeId.includes('projects')) {
+			const project = $page.data.project;
+			setCommonProperties(seoTransformer(base, project, routeId), 'article');
+		}
+	} else {
+		title = base.title + '|Portfolio';
+		keywords = base.keywords;
+		type = 'website';
+		image = base.image;
+	}
 </script>
 
 <SvelteSeo
@@ -83,8 +79,8 @@
 />
 
 <svelte:head>
-	<title>{title}</title>
-	<meta name="description" content={description} />
+	<!-- <title>{title}</title> -->
+	<!-- <meta name="description" content={description} /> -->
 	<meta
 		name="robots"
 		content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
