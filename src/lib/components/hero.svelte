@@ -23,13 +23,13 @@
 		<p class="text-md py-4 font-medium tracking-wide md:text-xl">
 			<span class="ml-8"> {global.description}</span>
 		</p>
-		<div class="flex gap-4 py-2">
+		<div class="grid grid-cols-3 gap-6 py-2 md:grid-cols-4 md:gap-4">
 			{#each socials as social}
 				<a
 					href={social.link}
-					class="inline-flex items-center rounded-full bg-green-600 p-2 text-black hover:bg-green-400"
+					class="inline-flex items-center justify-center rounded-full bg-green-600 p-2 text-black hover:bg-green-400"
 				>
-					<span class="hidden text-sm md:block">{social.label}</span>
+					<span class="text-xs md:text-sm">{social.label}</span>
 					<svelte:component this={social.icon} class="md:ml-1" />
 				</a>
 			{/each}
