@@ -8,8 +8,6 @@
 	let title = config.title;
 	const routeId = String($page.route.id);
 
-	// config.image = imageLinkTransformer(config.image);
-
 	let datePublished = new Date().toISOString();
 	let dateUpdated = new Date().toISOString();
 
@@ -24,7 +22,7 @@
 	if (routeId.includes('blog') && split.length > 2) {
 		const article = $page.data.article;
 		title = article.title + ' - ' + config.title;
-		config.image = imageLinkTransformer(article.image);
+		config.image = article.image;
 		config.description = article.description;
 		const additionalKeywords = article.tags.map((tag: { tags_tag: string }) => tag.tags_tag);
 		config.keywords = additionalKeywords.join(', ') + ', ' + config.keywords;
@@ -33,7 +31,7 @@
 	} else if (routeId.includes('projects') && split.length > 2) {
 		const project = $page.data.project;
 		title = project.title + ' - ' + config.title;
-		config.image = imageLinkTransformer(project.image);
+		config.image = project.image;
 		config.description = project.description;
 		const additionalKeywords = project.tags.map((tag: { tags_tag: string }) => tag.tags_tag);
 		config.keywords = additionalKeywords.join(', ') + ', ' + config.keywords;

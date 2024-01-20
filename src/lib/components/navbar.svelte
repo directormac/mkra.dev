@@ -45,7 +45,7 @@
 			<div class="ml-auto">
 				<Sheet.Root>
 					<Sheet.Trigger asChild let:builder>
-						<Button builders={[builder]} variant="ghost">
+						<Button aria-label="hamburger menu" builders={[builder]} variant="ghost">
 							<Menu />
 						</Button>
 					</Sheet.Trigger>

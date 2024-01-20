@@ -2,7 +2,9 @@
 	import { Send, Github, Linkedin, Mail } from 'lucide-svelte';
 	import type { Website } from '$lib/config';
 	import { imageLinkTransformer } from '@utils';
+	import { matchMedia } from '@utils';
 
+	const isLargeScreen = matchMedia('(min-width: 768px)');
 	export let meta: Website;
 
 	const global = meta;
@@ -36,10 +38,22 @@
 		</div>
 	</div>
 	<div class="mx-auto flex justify-end py-4 md:w-1/2 lg:pr-24">
-		<img
-			src={imageLinkTransformer(global.image, '500')}
-			alt={global.title}
-			class="h-[200px] w-[200px] rounded-full md:h-[350px] md:w-[350px]"
-		/>
+		{#if $isLargeScreen}
+			<img
+				src={imageLinkTransformer(global.image, '350')}
+				alt={global.title}
+				width="350"
+				height="350"
+				class="rounded-full md:h-[350px] md:w-[350px]"
+			/>
+		{:else}
+			<img
+				src={imageLinkTransformer(global.image, '200')}
+				alt={global.title}
+				width="200"
+				height="200"
+				class="h-[200px] w-[200px] rounded-full"
+			/>
+		{/if}
 	</div>
 </div>
