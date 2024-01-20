@@ -8,7 +8,7 @@
 	let title = config.title;
 	const routeId = String($page.route.id);
 
-	config.image = imageLinkTransformer(config.image);
+	// config.image = imageLinkTransformer(config.image);
 
 	let datePublished = new Date().toISOString();
 	let dateUpdated = new Date().toISOString();
@@ -52,9 +52,9 @@
 	<meta property="og:type" content={article ? 'article' : 'website'} />
 	<meta property="og:title" content={config.title} />
 	<meta property="og:description" content={config.description} />
-	<meta property="og:image" content={config.image} />
-	<meta property="og:image:width" content="1000" />
-	<meta property="og:image:height" content="1000" />
+	<meta property="og:image" content={imageLinkTransformer(config.image, '500')} />
+	<meta property="og:image:width" content="500" />
+	<meta property="og:image:height" content="500" />
 	<meta property="og:image:alt" content={config.title} />
 	{#if article}
 		<meta property="article:publisher" content={config.url} />
@@ -64,7 +64,7 @@
 	{/if}
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:image" content={config.image} />
+	<meta name="twitter:image" content={imageLinkTransformer(config.image)} />
 	<meta name="twitter:creator" content={`@${config.twitter}`} />
 	<meta name="twitter:site" content={`@${config.twitter}`} />
 	{#if article}

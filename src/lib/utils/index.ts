@@ -2,22 +2,13 @@ export * from './ui';
 export * from './matchMedia';
 
 import { PUBLIC_API_URL } from '$env/static/public';
-import type { CommonModel, SeoModel } from '@types';
 
-export const imageLinkTransformer = (image: string): string => {
-	return `${PUBLIC_API_URL}/assets/${image}`;
+type TransformKey = 'small' | 'medium' | 'none' | '200' | '500';
+
+export const imageLinkTransformer = (image: string, transform: TransformKey = 'none'): string => {
+	const key = transform !== 'none' ? `?key=${transform}` : '';
+	return `${PUBLIC_API_URL}/assets/${image}${key}`;
 };
 
 export const capitalizeFirstLetter = (str: string): string =>
 	str.slice(0, 1).toUpperCase() + str.slice(1);
-
-export const seoTransformer = (base: SeoModel, model: CommonModel, routeId: string): SeoModel => {
-	const additionalKeywords = model.tags.map((tag: { tags_tag: string }) => tag.tags_tag);
-	const image = model.image ? imageLinkTransformer(model.image.filename_disk) : '/color.webp';
-	return {
-		title: model.title + capitalizeFirstLetter(routeId.split('/')[1] + '|' + base.title),
-		description: model.description,
-		keywords: additionalKeywords.join(', ') + ', ' + base.keywords,
-		image
-	};
-};

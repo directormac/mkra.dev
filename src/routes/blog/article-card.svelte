@@ -19,7 +19,7 @@
 			<div class="hidden md:block">
 				<img
 					class="rounded-lg md:h-[100px] md:w-[100px]"
-					src={image ? imageLinkTransformer(image) : '/color.webp'}
+					src={image ? imageLinkTransformer(image, 'small') : '/color.webp'}
 					alt={title}
 				/>
 			</div>

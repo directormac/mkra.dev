@@ -28,7 +28,7 @@
 				<ProjectCard
 					title={project.title}
 					slug={`/projects/${project.slug}`}
-					image={imageLinkTransformer(project.image)}
+					image={imageLinkTransformer(project.image, '500')}
 					description={project.description}
 				/>
 			{/each}

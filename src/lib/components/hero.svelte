@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Send, Github, Linkedin, Mail } from 'lucide-svelte';
 	import type { Website } from '$lib/config';
+	import { imageLinkTransformer } from '@utils';
 
 	export let meta: Website;
 
@@ -26,18 +27,18 @@
 			{#each socials as social}
 				<a
 					href={social.link}
-					class="inline-flex rounded-full bg-green-600 p-2 text-black hover:bg-green-400"
+					class="inline-flex items-center rounded-full bg-green-600 p-2 text-black hover:bg-green-400"
 				>
-					{social.label}
-					<svelte:component this={social.icon} class="ml-2" />
+					<span class="hidden text-sm md:block">{social.label}</span>
+					<svelte:component this={social.icon} class="md:ml-1" />
 				</a>
 			{/each}
 		</div>
 	</div>
 	<div class="mx-auto flex justify-end py-4 md:w-1/2 lg:pr-24">
 		<img
-			src="/color.webp"
-			alt="bw"
+			src={imageLinkTransformer(global.image, '500')}
+			alt={global.title}
 			class="h-[200px] w-[200px] rounded-full md:h-[350px] md:w-[350px]"
 		/>
 	</div>
