@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { PUBLIC_ANALYTICS_ENDPOINT, PUBLIC_ANALYTICS_WEB_ID } from '$env/static/public';
 	import { page } from '$app/stores';
-	import { capitalizeFirstLetter } from '@utils';
+	import { capitalizeFirstLetter, imageLinkTransformer } from '@utils';
 
 	export let article = false;
 	const config = $page.data.meta;
 	let title = config.title;
 	const routeId = String($page.route.id);
+
+	config.image = imageLinkTransformer(config.image);
 
 	let datePublished = new Date().toISOString();
 	let dateUpdated = new Date().toISOString();
@@ -20,21 +22,21 @@
 	}
 
 	if (routeId.includes('blog') && split.length > 2) {
-		title = $page.data.article.title + '|' + config.title;
-		const additionalKeywords = $page.data.article.tags.map(
-			(tag: { tags_tag: string }) => tag.tags_tag
-		);
+		const article = $page.data.article;
+		title = article.title + '|' + config.title;
+		config.image = imageLinkTransformer(article.image);
+		const additionalKeywords = article.tags.map((tag: { tags_tag: string }) => tag.tags_tag);
 		config.keywords = additionalKeywords.join(', ') + ', ' + config.keywords;
-		datePublished = new Date($page.data.article.date_created).toISOString();
-		dateUpdated = new Date($page.data.article.date_updated).toISOString();
+		datePublished = new Date(article.date_created).toISOString();
+		dateUpdated = new Date(article.date_updated).toISOString();
 	} else if (routeId.includes('projects') && split.length > 2) {
-		title = $page.data.project.title + '|' + config.title;
-		const additionalKeywords = $page.data.project.tags.map(
-			(tag: { tags_tag: string }) => tag.tags_tag
-		);
+		const project = $page.data.project;
+		title = project.title + '|' + config.title;
+		config.image = imageLinkTransformer(project.image);
+		const additionalKeywords = project.tags.map((tag: { tags_tag: string }) => tag.tags_tag);
 		config.keywords = additionalKeywords.join(', ') + ', ' + config.keywords;
-		datePublished = new Date($page.data.project.date_created).toISOString();
-		dateUpdated = new Date($page.data.project.date_updated).toISOString();
+		datePublished = new Date(project.date_created).toISOString();
+		dateUpdated = new Date(project.date_updated).toISOString();
 	}
 </script>
 
