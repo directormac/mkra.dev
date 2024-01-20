@@ -3,7 +3,7 @@ export * from './matchMedia';
 
 import { PUBLIC_API_URL } from '$env/static/public';
 
-type TransformKey = 'small' | 'medium' | 'none' | '200' | '350' | '500';
+type TransformKey = 'small' | 'medium' | 'none' | '200' | '300' | '350' | '500';
 
 export const imageLinkTransformer = (image: string, transform: TransformKey = 'none'): string => {
 	const key = transform !== 'none' ? `?key=${transform}` : '';
