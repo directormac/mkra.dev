@@ -12,7 +12,7 @@
 <div class={cn('flex min-h-full flex-col')}>
 	<Navbar />
 	<div class="gap-x-6 py-2 md:container">
-		<main class="">
+		<main>
 			<slot />
 		</main>
 	</div>

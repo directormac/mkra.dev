@@ -11,6 +11,10 @@
 	import { page } from '$app/stores';
 	import { Code, PanelTop } from 'lucide-svelte';
 	import LinkPreview from '@components/link-preview.svelte';
+	import { Progress } from '@components/ui/progress';
+	import Readotron from '@untemps/svelte-readotron';
+
+	let readProgress = 0;
 
 	const carta = new Carta({
 		extensions: [code(), emoji()]
@@ -31,9 +35,17 @@
 				{project.title}
 			</a>
 		</h1>
+		<Readotron
+			class="mt-2 flex justify-end"
+			selector=".content"
+			withScroll
+			on:change={(event) => {
+				readProgress = event.detail.progress;
+			}}
+		/>
 		<div>
 			<h2
-				class="flex scroll-m-20 justify-end py-4 pb-2 text-xl font-semibold tracking-tight text-gray-600 transition-colors first:mt-0 dark:text-gray-400"
+				class="flex scroll-m-20 justify-end pb-2 text-xl font-semibold tracking-tight text-gray-600 transition-colors first:mt-0 dark:text-gray-400"
 			>
 				{project.description}
 			</h2>
@@ -71,6 +83,10 @@
 </a>
 <Separator class="my-4" />
 
-<article>
+<article class="content">
 	<CartaViewer {carta} value={project.content} />
 </article>
+
+<div class="sticky bottom-0 -mx-8">
+	<Progress value={readProgress * 100} max={100} class="h-2 w-full rounded-none bg-transparent" />
+</div>

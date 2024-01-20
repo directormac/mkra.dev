@@ -9,6 +9,10 @@
 	import { emoji } from '@cartamd/plugin-emoji';
 	import { page } from '$app/stores';
 	import Meta from '@components/meta.svelte';
+	import { Progress } from '@components/ui/progress';
+	import Readotron from '@untemps/svelte-readotron';
+
+	let readProgress = 0;
 
 	const carta = new Carta({
 		extensions: [code(), emoji()]
@@ -28,8 +32,16 @@
 				{article.title}
 			</a>
 		</h1>
+		<Readotron
+			class="flex justify-end"
+			selector=".content"
+			withScroll
+			on:change={(event) => {
+				readProgress = event.detail.progress;
+			}}
+		/>
 		<h2
-			class="mt-10 scroll-m-20 pb-2 text-2xl font-semibold tracking-tight text-gray-600 transition-colors first:mt-0 dark:text-gray-400"
+			class="scroll-m-20 text-2xl font-semibold tracking-tight text-gray-600 transition-colors first:mt-0 dark:text-gray-400"
 		>
 			{article.description}
 		</h2>
@@ -51,8 +63,13 @@
 {#if article.image}
 	<img class="p-4" src={imageLinkTransformer(article.image)} alt={article.title} />
 {/if}
+
 <Separator class="my-4" />
 
-<article>
+<article class="content">
 	<CartaViewer {carta} value={article.content} />
 </article>
+
+<div class="sticky bottom-0 -mx-8">
+	<Progress value={readProgress * 100} max={100} class="h-2 w-full rounded-none bg-transparent" />
+</div>

@@ -26,6 +26,9 @@ dependencies:
   '@umami/api-client':
     specifier: ^0.55.0
     version: 0.55.0(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
+  '@untemps/svelte-readotron':
+    specifier: ^2.0.0
+    version: 2.0.0(svelte@4.2.9)
   bits-ui:
     specifier: ^0.15.1
     version: 0.15.1(svelte@4.2.9)
@@ -1137,6 +1140,56 @@ packages:
   /@ungap/structured-clone@1.2.0:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
+
+  /@untemps/dom-observer@2.0.0:
+    resolution: {integrity: sha512-oZBj7j9hYSbuveNFvyPLamRfNh15KvGJC5pLGGpWVcO61EzISMESL0wudwP0UZETEu+0WfaJ16rGXtEZHsq+xw==}
+    dev: false
+
+  /@untemps/read-per-minute@2.0.1:
+    resolution: {integrity: sha512-hKUSIBMxBY9pD1AUrJbGEIQNdsPcVx5OiF4iu8KVG/raK6ZX9tOzY0K5LtSrG0Ub0LNoDb/YQxNDGw+33YJ0OA==}
+    engines: {node: '>=18'}
+    dev: false
+
+  /@untemps/svelte-readotron@2.0.0(svelte@4.2.9):
+    resolution: {integrity: sha512-f5wh4F7VLHQT7ZUQQoVR1U+E1OyYdU38TKuMqdrIhcJFzi7eaq1qhqZcdGMCoR5MlbfQQd3PIzs+urXGV8szgw==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      svelte: ^4.0.0
+    dependencies:
+      '@untemps/read-per-minute': 2.0.1
+      '@untemps/svelte-use-drop-outside': 1.6.0
+      '@untemps/svelte-use-tooltip': 2.8.0
+      '@untemps/utils': 3.0.0
+      svelte: 4.2.9
+    dev: false
+
+  /@untemps/svelte-use-drop-outside@1.6.0:
+    resolution: {integrity: sha512-izzpTG27DwMzx7QIIkt1S+Z5JAbzNAKn568JZWJXR1ZXWx6ZAJigj8oFlSDAVltlFjeasDPXPJSmGoXALgTw/A==}
+    dependencies:
+      '@untemps/dom-observer': 2.0.0
+      '@untemps/utils': 2.6.0
+      svelte: 3.49.0
+    dev: false
+
+  /@untemps/svelte-use-tooltip@2.8.0:
+    resolution: {integrity: sha512-rXzYyU1JzKucyjAr4J+byrDUk0eFhwC8ggiitJE/v945OJDjjA29dA2d+DTjyppqlm2ZQZzGHYKY5hrdRKdrAg==}
+    dependencies:
+      '@untemps/dom-observer': 2.0.0
+      '@untemps/utils': 2.6.0
+      svelte: 3.49.0
+    dev: false
+
+  /@untemps/utils@2.6.0:
+    resolution: {integrity: sha512-3B5bb4iYkh2h86vqtY8+Mo9vdX1s/NT1cltWpS4U3/WHXFgy/4lJ9180vELJv01MbNNhjlZPtJCMtBp7Fpsb1Q==}
+    engines: {node: '>=14.17'}
+    dependencies:
+      '@babel/runtime': 7.23.7
+    dev: false
+
+  /@untemps/utils@3.0.0:
+    resolution: {integrity: sha512-Iv7a1nvbTzk7ho8bry5iN/RYtns4dwNRuTqD49ixq0N3dOpoMIdSlhvVanbxEmRBqtV7MirCBEfScpTjDbo0ag==}
+    engines: {node: '>=14.17'}
+    dev: false
 
   /@vitest/expect@1.2.1:
     resolution: {integrity: sha512-/bqGXcHfyKgFWYwIgFr1QYDaR9e64pRKxgBNWNXPefPFRhgm+K3+a/dS0cUGEreWngets3dlr8w8SBRw2fCfFQ==}
@@ -3362,6 +3415,11 @@ packages:
       svelte: 4.2.9
       typescript: 5.3.3
     dev: true
+
+  /svelte@3.49.0:
+    resolution: {integrity: sha512-+lmjic1pApJWDfPCpUUTc1m8azDqYCG1JN9YEngrx/hUyIcFJo6VZhj0A1Ai0wqoHcEIuQy+e9tk+4uDgdtsFA==}
+    engines: {node: '>= 8'}
+    dev: false
 
   /svelte@4.2.9:
     resolution: {integrity: sha512-hsoB/WZGEPFXeRRLPhPrbRz67PhP6sqYgvwcAs+gWdSQSvNDw+/lTeUJSWe5h2xC97Fz/8QxAOqItwBzNJPU8w==}
