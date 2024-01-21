@@ -7,6 +7,7 @@
 	const config = $page.data.meta;
 	let title = config.title;
 	const routeId = String($page.route.id);
+	const canonical = $page.url.href;
 
 	let datePublished = new Date().toISOString();
 	let dateUpdated = new Date().toISOString();
@@ -43,6 +44,7 @@
 <svelte:head>
 	<title>{title}</title>
 	<meta name="description" content={config.description} />
+	<link rel="canonical" href={canonical} />
 	<!-- Open Graph -->
 	<meta property="og:site_name" content={title} />
 	<meta property="og:locale" content={config.language} />
