@@ -3,6 +3,8 @@
 	import { onMount, type SvelteComponent } from 'svelte';
 	import { page } from '$app/stores';
 	import { base } from '$app/paths';
+	import './coldark.scss';
+	import './markdown.scss';
 
 	export let data: PageData;
 
@@ -23,17 +25,21 @@
 		renderClientSideComponent();
 	});
 
-	onMount(() => {
-		if (mounted) {
-			clientSideComponent = null;
-			renderClientSideComponent();
-		}
-	});
+	$: if (mounted && $page.url) {
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+		$page.url;
+		clientSideComponent = null;
+		renderClientSideComponent();
+	}
 </script>
 
 <svelte:head>
-	<title>{data.metadata['title']}</title>
+	<title>{data.metadata['title']} - Carta</title>
 </svelte:head>
+
+<h3 class="mb-2 font-semibold text-sky-300">{data.metadata['section']}</h3>
+
+<h1 class="mb-4 text-5xl font-bold text-white">{data.metadata['title']}</h1>
 
 <div class="markdown">
 	{#if clientSideComponent}
