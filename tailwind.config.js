@@ -8,7 +8,11 @@ const config = {
 	corePlugins: {
 		aspectRatio: false
 	},
-	plugins: [require('@tailwindcss/typography'), require('@tailwindcss/aspect-ratio')],
+	plugins: [
+		require('@tailwindcss/typography'),
+		require('@tailwindcss/aspect-ratio'),
+		require('@catppuccin/tailwindcss')
+	],
 	theme: {
 		container: {
 			center: true,
@@ -59,8 +63,7 @@ const config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: [...fontFamily.sans],
-				satoshi: ['Satoshi', 'sans'],
+				sans: [...fontFamily.sans]
 			}
 		}
 	}
