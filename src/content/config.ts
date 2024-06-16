@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content'
+import { docsSchema } from '@astrojs/starlight/schema'
 
 function removeDupsAndLowerCase(array: string[]) {
 	if (!array.length) return array
@@ -61,4 +62,4 @@ const project = defineCollection({
 		})
 })
 
-export const collections = { post, project }
+export const collections = { post, project, docs: defineCollection({ schema: docsSchema() }) }

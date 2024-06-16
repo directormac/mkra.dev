@@ -1,0 +1,43 @@
+---
+title: Welcome to the docs
+head:
+  - tag: title
+    content: Welcome to the docs
+description: Docs it's all about the docs
+template: splash
+hero:
+  title: 'Docs, Guides, Gists and memes!'
+  tagline: I write everything here
+  actions:
+    - text: Get Started
+      icon: right-arrow
+      variant: primary
+      link: /docs/guide
+    - text: Github
+      icon: external
+      link: 'https://github.com/directormac'
+---
+import { Card, CardGrid } from '@astrojs/starlight/components'
+
+<CardGrid stagger>
+
+<Card title='Guides' icon='document'>
+ A set of guides for common programming tasks.
+</Card>
+
+<Card title='Developer Tools' icon='pencil'>
+ Tools that will make you a 10x developer.
+</Card>
+
+<Card title='Construction Services' icon='seti:puppet'>
+ Discover the complete lineup of ScrewFast's superior quality tools and equipment. Each subsection
+ offers detailed specifications, usage instructions, and maintenance tips.
+</Card>
+
+<Card title='Advanced Topics' icon='seti:terraform'>
+ Discover the complete lineup of ScrewFast's superior quality tools and equipment. Each subsection
+ offers detailed specifications, usage instructions, and maintenance tips.
+</Card>
+
+</CardGrid>
+

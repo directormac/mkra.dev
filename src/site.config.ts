@@ -35,13 +35,9 @@ export const menuLinks: Array<{ title: string; path: string }> = [
 	}
 ]
 
-const jsoncString = fs.readFileSync(new URL('./catpuccin.jsonc', import.meta.url), 'utf-8')
-const catpuccinMocha = ExpressiveCodeTheme.fromJSONString(jsoncString)
-
 // https://expressive-code.com/reference/configuration/
 export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 	// One dark, one light theme => https://expressive-code.com/guides/themes/#available-themes
-	themes: [catpuccinMocha, 'github-light'],
 	themeCssSelector(theme, { styleVariants }) {
 		// If one dark and one light theme are available
 		// generate theme CSS selectors compatible with cactus-theme dark mode switch

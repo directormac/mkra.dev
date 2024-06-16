@@ -9,22 +9,34 @@ import expressiveCode from 'astro-expressive-code'
 import { expressiveCodeOptions } from './src/site.config'
 import icon from 'astro-icon'
 
-// import vercel from '@astrojs/vercel/serverless'
-
 import svelte from '@astrojs/svelte'
+
+import starlight from '@astrojs/starlight'
+import { ExpressiveCodeTheme } from 'astro-expressive-code'
+import fs from 'node:fs'
+
+const jsoncString = fs.readFileSync(new URL('./catpuccin.jsonc', import.meta.url), 'utf-8')
+const catpuccinMocha = ExpressiveCodeTheme.fromJSONString(jsoncString)
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://mkra.dev',
 	integrations: [
-		expressiveCode(expressiveCodeOptions),
+		expressiveCode({
+			...expressiveCodeOptions,
+			themes: [catpuccinMocha, 'github-light']
+		}),
 		tailwind({
 			applyBaseStyles: false
 		}),
 		sitemap(),
 		mdx(),
 		icon(),
-		svelte()
+		svelte(),
+		starlight({
+			title: 'MKRA Docs',
+			customCss: ['./src/styles/starlight.css']
+		})
 	],
 	markdown: {
 		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
@@ -44,9 +56,4 @@ export default defineConfig({
 		}
 	},
 	prefetch: true
-	// output: 'server'
-	// adapter: vercel({
-	// 	webAnalytics: { enabled: true }
-	// })
 })
-
