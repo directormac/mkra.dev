@@ -5,10 +5,7 @@ import aspectRatio from '@tailwindcss/aspect-ratio'
 /** @type {import('tailwindcss').Config} */
 const config = {
 	darkMode: ['class'],
-	content: [
-		'./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
-		'!./src/content/docs/**/*.{md,mdx}'
-	],
+	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	safelist: ['dark'],
 	corePlugins: {
 		aspectRatio: false
@@ -64,7 +61,7 @@ const config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: [...fontFamily.sans]
+				sans: ['Inter Variable', ...fontFamily.sans]
 			}
 		}
 	}

@@ -1,5 +1,8 @@
 ---
 import { menuLinks } from '@/site-config'
+import { cn } from '@/utils'
+
+const currentPath = Astro.url.pathname.trimStart()
 ---
 
 <header class='mb-12 flex w-full flex-wrap pb-3 text-sm sm:flex-nowrap sm:justify-start'>
@@ -7,14 +10,19 @@ import { menuLinks } from '@/site-config'
 		class='relative mx-auto flex w-full items-center justify-between sm:flex sm:items-center'
 		aria-label='global'
 	>
-		<a class='flex-none text-xl font-semibold' href='/' aria-label='Brand'>mkra.dev</a>
+		<a class='flex-none text-xl font-semibold' href='/' aria-label='Brand'
+			>mkra<span class='hidden lg:inline-flex'>.dev</span></a
+		>
 
-		<div class='flex flex-row items-center justify-center gap-x-5 sm:gap-x-7'>
+		<div class='flex flex-row items-center justify-center gap-x-2'>
 			{
 				menuLinks.map(({ label, href }) => (
 					<a
 						href={href}
-						class='flex-none text-[1.05rem] font-medium hover:text-foreground/75'
+						class={cn(
+							currentPath === href ? 'text-white underline' : 'text-foreground/80',
+							'flex-none text-[1.05rem] font-medium hover:text-white hover:underline'
+						)}
 						aria-label='Nav Menu Item'
 					>
 						{label}
