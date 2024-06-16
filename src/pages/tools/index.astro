@@ -3,31 +3,17 @@ import PageLayout from '@/layouts/BaseLayout.astro'
 import ToolSection from '@/components/ToolSection.astro'
 import Button from '@/components/Button.astro'
 
-const DESIGN = [
-	{
-		name: 'Figma',
-		description: 'Design Tool',
-		href: 'https://www.figma.com/',
-		iconPath: 'figma',
-		iconBgColour: '#000001'
-	}
-]
+// const DESIGN = [
+// 	{
+// 		name: 'Figma',
+// 		description: 'Design Tool',
+// 		href: 'https://www.figma.com/',
+// 		iconPath: 'figma',
+// 		iconBgColour: '#000001'
+// 	}
+// ]
 
 const PRODUCTIVITY = [
-	{
-		name: 'Arc',
-		description: 'Browser',
-		href: 'https://arc.net/',
-		iconPath: 'arc',
-		iconBgColour: '#414350'
-	},
-	{
-		name: 'Notion',
-		description: 'Note Taking',
-		href: 'https://www.notion.so/product',
-		iconPath: 'notion',
-		iconBgColour: '#EFEFEE'
-	},
 	{
 		name: 'Obsidian',
 		description: 'Long-form Writing',
@@ -80,7 +66,7 @@ const DEVELOPMENT = [
 			</div>
 
 			<!-- <ToolSection title='Design' tools={DESIGN} /> -->
-			<!-- <ToolSection title='Productivity' tools={PRODUCTIVITY} /> -->
+			<ToolSection title='Productivity' tools={PRODUCTIVITY} />
 			<ToolSection title='Development' tools={DEVELOPMENT} />
 		</div>
 	</div>

@@ -4,6 +4,8 @@ description: Landing page for a certain community i am involved with
 publishDate: 21 Jan 2024
 repository: 'https://github.com/daedalus-developers/daedalus.codes'
 url: 'https://www.daedalus.codes/'
+ogImage: ./cover.png
+article: false
 coverImage:
   src: ./cover.png
   alt: daedalus-preview

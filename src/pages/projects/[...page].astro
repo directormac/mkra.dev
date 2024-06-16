@@ -8,21 +8,19 @@ import Button from '@/components/Button.astro'
 import Pagination from '@/components/Paginator.astro'
 import ProjectCard from '@/components/project/ProjectCard.astro'
 import PageLayout from '@/layouts/BaseLayout.astro'
-import { getAllProjects, getUniqueTags, sortMDByDate } from 'src/utils/project'
+import { getAllProjects, sortMDByDate } from 'src/utils/project'
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const allProjects = await getAllProjects()
 	const allPostsByDate = sortMDByDate(allProjects)
-	const uniqueTags = getUniqueTags(allProjects)
-	return paginate(allPostsByDate, { pageSize: 10, props: { uniqueTags } })
+	return paginate(allPostsByDate, { pageSize: 10, props: {} })
 }) satisfies GetStaticPaths
 
 interface Props {
 	page: Page<CollectionEntry<'project'>>
-	uniqueTags: string[]
 }
 
-const { page, uniqueTags } = Astro.props
+const { page } = Astro.props
 
 const meta = {
 	description: 'Projects',
