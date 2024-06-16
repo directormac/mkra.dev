@@ -1,6 +1,7 @@
 <script lang="ts">
 	import AnimatedText from './AnimatedText.svelte'
 	import { onMount } from 'svelte'
+	import RollingText from './RollingText.svelte'
 
 	let disableAnim = false
 	onMount(() => {
@@ -41,16 +42,12 @@
 	</div>
 
 	<div class="mt-12 max-w-2xl">
-		<h1
-			class="text-center text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100"
-		>
-			Fullstack Developer
-		</h1>
+		<RollingText />
 		<p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">A man with many roles and titles.</p>
 	</div>
 	<a
 		href="/"
-		class="bg-zinc-900 hover:bg-zinc-700 mt-4 flex mx-auto border-0 py-2 px-8 focus:outline-none rounded text-lg"
+		class="bg-zinc-900 hover:bg-zinc-700 text-white mt-4 flex mx-auto border-0 py-2 px-8 focus:outline-none rounded text-lg"
 	>
 		Hire Me
 	</a>
