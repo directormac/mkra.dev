@@ -1,5 +1,6 @@
 import type { SiteConfig } from '@/types'
-import type { AstroExpressiveCodeOptions } from 'astro-expressive-code'
+import { type AstroExpressiveCodeOptions, ExpressiveCodeTheme } from 'astro-expressive-code'
+import fs from 'node:fs'
 
 export const siteConfig: SiteConfig = {
 	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
@@ -34,10 +35,13 @@ export const menuLinks: Array<{ title: string; path: string }> = [
 	}
 ]
 
+const jsoncString = fs.readFileSync(new URL('./catpuccin.jsonc', import.meta.url), 'utf-8')
+const catpuccinMocha = ExpressiveCodeTheme.fromJSONString(jsoncString)
+
 // https://expressive-code.com/reference/configuration/
 export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 	// One dark, one light theme => https://expressive-code.com/guides/themes/#available-themes
-	themes: ['dracula', 'github-light'],
+	themes: [catpuccinMocha, 'github-light'],
 	themeCssSelector(theme, { styleVariants }) {
 		// If one dark and one light theme are available
 		// generate theme CSS selectors compatible with cactus-theme dark mode switch
