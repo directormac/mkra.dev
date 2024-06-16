@@ -39,6 +39,8 @@ const project = defineCollection({
 		z.object({
 			title: z.string().max(60),
 			description: z.string().min(30).max(160),
+			repository: z.string().optional(),
+			url: z.string().optional(),
 			publishDate: z
 				.string()
 				.or(z.date())

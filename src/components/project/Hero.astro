@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content'
+import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
 import FormattedDate from '../FormattedDate.astro'
 
@@ -38,9 +39,27 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 		{remarkPluginFrontmatter.minutesRead}
 	</p>
 </div>
-<h1 class='mt-2 text-3xl font-medium sm:mb-1'>
-	{data.title}
-</h1>
+<div class='grid gap-y-5 lg:grid-cols-2'>
+	<h1 class='mt-2 text-3xl font-medium sm:mb-1'>
+		{data.title}
+	</h1>
+	<div class='ml-auto flex gap-x-4 lg:gap-x-8'>
+		{
+			data.repository && (
+				<a href={data.repository}>
+					<Icon name='repository' class='inline-block h-4 w-4 hover:text-blue-500 lg:h-8 lg:w-8' />
+				</a>
+			)
+		}
+		{
+			data.url && (
+				<a href={data.url}>
+					<Icon name='link' class='inline-block h-6 w-6 hover:text-blue-500 lg:h-8 lg:w-8' />
+				</a>
+			)
+		}
+	</div>
+</div>
 
 {
 	!!data.tags?.length && (

@@ -6,7 +6,7 @@ import type { CollectionEntry } from 'astro:content'
 
 import Button from '@/components/Button.astro'
 import Pagination from '@/components/Paginator.astro'
-import ProjectPreview from '@/components/project/ProjectPreview.astro'
+import ProjectCard from '@/components/project/ProjectCard.astro'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import { getAllProjects, getUniqueTags, sortMDByDate } from 'src/utils/project'
 
@@ -68,11 +68,11 @@ const paginationProps = {
 
 		{
 			page.data.length > 0 && (
-				<div class='grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8'>
-					<section aria-label='Blog posts list'>
-						<ul class='flex flex-col gap-y-4 text-start'>
+				<div class='grid gap-y-16'>
+					<section aria-label='Project List'>
+						<ul class='mx-auto flex flex-col gap-y-4 text-start'>
 							{page.data.map((p) => (
-								<ProjectPreview project={p} withDesc />
+								<ProjectCard project={p} withDesc />
 							))}
 						</ul>
 						<Pagination {...paginationProps} />

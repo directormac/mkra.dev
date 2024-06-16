@@ -2,7 +2,7 @@
 import PageLayout from '../layouts/BaseLayout.astro'
 import Section from '../components/Section.astro'
 import Card from '../components/Card.astro'
-import ProjectCard from '../components/ProjectCard.astro'
+import ProjectCard from '../components/project/ProjectCard.astro'
 import Label from '../components/Label.astro'
 import SkillLayout from '../components/SkillLayout.astro'
 import PostPreview from '@/components/blog/PostPreview.astro'
@@ -11,6 +11,7 @@ import { Image } from 'astro:assets'
 import astro from '../assets/color.webp'
 
 import { getAllPosts, sortMDByDate } from '@/utils'
+import { getAllProjects, sortMDByDate as sortProjs } from 'src/utils/project'
 
 const languages = ['javascript', 'elixir', 'typescript']
 const frontend = ['svelte', 'react', 'astro']
@@ -20,9 +21,12 @@ const others = ['postgresql', 'cloudflare platform']
 const MAX_POSTS = 10
 const allPosts = await getAllPosts()
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
+
+const allProjects = await getAllProjects()
+const allProjectsByDate = sortProjs(allProjects).slice(0, MAX_POSTS)
 ---
 
-<PageLayout meta={{ title: 'Home' }}>
+<PageLayout meta={{ title: 'Mark Asena' }}>
 	<div class='flex w-full flex-col gap-y-10'>
 		<section class='flex flex-col items-center gap-y-7'>
 			<Image
@@ -79,32 +83,6 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 				to infuse your projects with a diverse skill set, guiding you through the ever-evolving
 				technological landscape.
 			</p>
-		</Section>
-		{
-			allPostsByDate.length > 0 && (
-				<Section title='Posts'>
-					<ul class='flex flex-col gap-y-2'>
-						{allPostsByDate.map((p) => (
-							<li class='flex flex-col gap-x-2 sm:flex-row'>
-								<PostPreview post={p} />
-							</li>
-						))}
-					</ul>
-				</Section>
-			)
-		}
-
-		<Section title='Projects'>
-			<div class='flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-0'>
-				<ProjectCard
-					href='https://www.google.com'
-					heading='Consectetur'
-					subheading='Lorem ipsum dolor sit amet consectetur adipisicing elit.'
-					imagePath='/src/assets/color.webp'
-					altText='Example'
-					class='w-full sm:w-1/2'
-				/>
-			</div>
 		</Section>
 
 		<Section title='Skills'>
@@ -170,16 +148,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 				date='2013 - 2015'
 				altText='education'
 				imageClass='h-12 w-auto md:-left-16'
-			>
-				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>
-						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore debitis recusandae, ut
-						molestiae laboriosam pariatur!
-
-						<li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, pariatur!</li>
-					</li>
-				</ul>
-			</Card>
+			/>
 			<Card
 				heading='University of the Immaculate Conception'
 				subheading='Information Technology'
@@ -212,5 +181,31 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 				href='https://www.coursera.org/account/accomplishments/verify/MXE9EZPNKLXF'
 			/>
 		</Section>
+
+		{
+			allPostsByDate.length > 0 && (
+				<Section title='Posts'>
+					<ul class='flex flex-col gap-y-2'>
+						{allPostsByDate.map((p) => (
+							<li class='flex flex-col gap-x-2 sm:flex-row'>
+								<PostPreview post={p} />
+							</li>
+						))}
+					</ul>
+				</Section>
+			)
+		}
+
+		{
+			allProjectsByDate.length > 0 && (
+				<Section title='Projects'>
+					<div class='flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-0'>
+						{allProjectsByDate.map((p) => (
+							<ProjectCard project={p} class='w-full sm:w-1/2' />
+						))}
+					</div>
+				</Section>
+			)
+		}
 	</div>
 </PageLayout>
