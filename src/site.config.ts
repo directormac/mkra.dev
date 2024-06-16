@@ -22,13 +22,17 @@ export const siteConfig: SiteConfig = {
 	}
 }
 
-export const menuLinks: Array<{ title: string; path: string }> = [
+export const menuLinks: Array<{ label: string; href: string }> = [
 	{
-		title: 'Home',
-		path: '/'
+		label: 'blog',
+		href: '/blog/'
 	},
 	{
-		title: 'Blog',
-		path: '/blog/'
+		label: 'projects',
+		href: '/projects/'
+	},
+	{
+		label: 'about',
+		href: '/about/'
 	}
 ]
