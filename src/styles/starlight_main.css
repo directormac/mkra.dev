@@ -1,0 +1,47 @@
+/* Dark mode colors. */
+:root {
+	--sl-color-accent-low: #192436;
+	--sl-color-accent: #4269a9;
+	--sl-color-accent-high: #bbcae1;
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: #edecf8;
+	--sl-color-gray-2: #c1c0cf;
+	--sl-color-gray-3: #8a88a4;
+	--sl-color-gray-4: #57556e;
+	--sl-color-gray-5: #37354c;
+	--sl-color-gray-6: #26233a;
+	--sl-color-black: #181721;
+}
+/* Light mode colors. */
+:root[data-theme='light'] {
+	--sl-color-accent-low: #ccd8ea;
+	--sl-color-accent: #446bab;
+	--sl-color-accent-high: #21324e;
+	--sl-color-white: #181721;
+	--sl-color-gray-1: #26233a;
+	--sl-color-gray-2: #37354c;
+	--sl-color-gray-3: #57556e;
+	--sl-color-gray-4: #8a88a4;
+	--sl-color-gray-5: #c1c0cf;
+	--sl-color-gray-6: #edecf8;
+	--sl-color-gray-7: #f6f5fc;
+	--sl-color-black: #ffffff;
+}
+
+.page {
+	background:
+		linear-gradient(215deg, var(--overlay-yellow), transparent 40%),
+		radial-gradient(var(--overlay-yellow), transparent 40%) no-repeat center center / cover,
+		radial-gradient(var(--overlay-yellow), transparent 65%) no-repeat center center / cover;
+	background-blend-mode: overlay;
+}
+
+header {
+	backdrop-filter: blur(12px) !important;
+	background-color: var(--backdrop-color) !important;
+}
+
+select {
+	background-image: none;
+	box-shadow: none;
+}
