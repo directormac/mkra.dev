@@ -94,58 +94,6 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 			)
 		}
 
-		<Section title='Experience'>
-			<Card
-				heading='Lorem Ipsum'
-				subheading='Sit amet consectetur'
-				date='Dec 2022 - Nov 2023'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			>
-				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>
-						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore debitis recusandae, ut
-						molestiae laboriosam pariatur!
-
-						<li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, pariatur!</li>
-					</li>
-				</ul>
-			</Card>
-			<Card
-				heading='Lorem Ipsum'
-				subheading='Sit amet consectetur'
-				date='Dec 2022 - Nov 2023'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			/>
-		</Section>
-
-		<Section title='Education'>
-			<Card
-				heading='Lorem Ipsum'
-				subheading='Sit amet consectetur'
-				date='Dec 2022 - Nov 2023'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			>
-				<ul class='ml-4 list-disc text-muted-foreground'>
-					<li>
-						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore debitis recusandae, ut
-						molestiae laboriosam pariatur!
-
-						<li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, pariatur!</li>
-					</li>
-				</ul>
-			</Card>
-			<Card
-				heading='Lorem Ipsum'
-				subheading='Sit amet consectetur'
-				date='Dec 2022 - Nov 2023'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-12 w-auto md:-left-16'
-			/>
-		</Section>
-
 		<Section title='Projects'>
 			<div class='flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-0'>
 				<ProjectCard
@@ -159,34 +107,110 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 			</div>
 		</Section>
 
-		<Section title='Certifications'>
-			<Card
-				as='a'
-				heading='Lorem ipsum, dolor sit amet consectetur adipisicing.'
-				subheading='Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam dicta magni consequuntur corrupti.'
-				date='Mar 2024 - Mar 2024'
-				imagePath='/src/assets/color.webp'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-11 w-auto md:-left-16'
-				href='https://www.google.com'
-			/>
-			<Card
-				as='a'
-				heading='Lorem ipsum, dolor sit amet'
-				subheading='Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam dicta.'
-				date='Mar 2029 - Mar 2032'
-				imagePath='/src/assets/color.webp'
-				altText='Lorem, ipsum dolor sit'
-				imageClass='h-11 w-auto md:-left-16'
-				href='https://www.google.com'
-			/>
-		</Section>
-
 		<Section title='Skills'>
 			<SkillLayout title='Languages' skills={languages} />
 			<SkillLayout title='Frontend' skills={frontend} />
 			<SkillLayout title='Backend' skills={backend} />
 			<SkillLayout title='Others' skills={others} />
+		</Section>
+
+		<Section title='Experience'>
+			<Card
+				heading='Full Stack Developer'
+				subheading='Freelance'
+				date='Jan 2020 - Present'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			>
+				<ul class='ml-4 list-disc text-muted-foreground'>
+					<li>
+						Led the decision-making process for selecting appropriate technology stacks based on
+						project requirements, ensuring alignment with business goals.
+					</li>
+					<li>
+						Integrated diverse technologies, effectively gluing frontend and backend components to
+						create seamless user experiences, specializing on meta frameworks specially SvelteKit
+						and others NextJS, Nuxt, Remix and Astro, delivering content via SSG , SSR or hybrid.
+					</li>
+					<li>
+						Collaborated with cross-functional teams to analyze project requirements and provide
+						technical expertise in architecting solutions.
+					</li>
+					<li>
+						Implemented and maintained continuous deployment pipelines, optimizing the deployment
+						process for increased efficiency.
+					</li>
+					<li>
+						Utilized best practices for security and performance optimization, ensuring a reliable
+						and high- performing application, with tools such as pagespeed,webpagetest etc.
+					</li>
+					<li>
+						Actively participated in code reviews, mentoring team members, and fostering a
+						collaborative and innovative development environment.
+					</li>
+					<li>
+						Staying ahead of the game, by exploring emerging frameworks,testing them on different
+						environments and interacting with different SDK's / API they provide.
+					</li>
+				</ul>
+			</Card>
+			<Card
+				heading='Network Engineer'
+				subheading='Consultancy'
+				date='May 2015 - Present'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+		</Section>
+
+		<Section title='Education'>
+			<Card
+				heading='STI Tacurong'
+				subheading='Information Technology'
+				date='2013 - 2015'
+				altText='education'
+				imageClass='h-12 w-auto md:-left-16'
+			>
+				<ul class='ml-4 list-disc text-muted-foreground'>
+					<li>
+						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore debitis recusandae, ut
+						molestiae laboriosam pariatur!
+
+						<li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, pariatur!</li>
+					</li>
+				</ul>
+			</Card>
+			<Card
+				heading='University of the Immaculate Conception'
+				subheading='Information Technology'
+				date='2010 - Nov 2012'
+				altText='Lorem, ipsum dolor sit'
+				imageClass='h-12 w-auto md:-left-16'
+			/>
+		</Section>
+
+		<Section title='Certifications'>
+			<Card
+				as='a'
+				heading='HTML, CSS and JavaScript'
+				subheading='The Hong Kong University of Science and Technology'
+				date='Dec 2015'
+				href='https://www.coursera.org/account/accomplishments/verify/Y63P3L8RKKEE'
+			/>
+			<Card
+				as='a'
+				heading='Software Processes and Agile Practices'
+				subheading='University of Alberta'
+				date='Jan 2016'
+				href='https://www.coursera.org/account/accomplishments/verify/VP4FW4RBDAVG'
+			/>
+			<Card
+				as='a'
+				heading='Introduction to Software Product Management'
+				subheading='University of Alberta'
+				date='Jan 2016'
+				href='https://www.coursera.org/account/accomplishments/verify/MXE9EZPNKLXF'
+			/>
 		</Section>
 	</div>
 </PageLayout>

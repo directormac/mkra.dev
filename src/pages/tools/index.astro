@@ -39,17 +39,17 @@ const PRODUCTIVITY = [
 
 const DEVELOPMENT = [
 	{
-		name: 'VS Code',
+		name: 'Neovim',
 		description: 'IDE',
-		href: 'https://code.visualstudio.com/',
-		iconPath: 'vscode',
+		href: 'https://neovim.io',
+		iconPath: 'neovim',
 		iconBgColour: '#2C2C32'
 	},
 	{
-		name: 'ChatGPT',
-		description: 'AI',
-		href: 'https://chat.openai.com/',
-		iconPath: 'chatgpt',
+		name: 'Wezterm',
+		description: 'Terminal',
+		href: 'https://wezfurlong.org/wezterm/index.html',
+		iconPath: 'wezterm',
 		iconBgColour: '#06A67F'
 	}
 ]
@@ -74,13 +74,13 @@ const DEVELOPMENT = [
 		</Button>
 
 		<div class='mt-5 flex w-full flex-col gap-y-10'>
-			<div>
+			<div class='text-center'>
 				<h1 class='mb-1 text-2xl font-bold'>Tools</h1>
 				<p>Tools and software I use daily</p>
 			</div>
 
-			<ToolSection title='Design' tools={DESIGN} />
-			<ToolSection title='Productivity' tools={PRODUCTIVITY} />
+			<!-- <ToolSection title='Design' tools={DESIGN} /> -->
+			<!-- <ToolSection title='Productivity' tools={PRODUCTIVITY} /> -->
 			<ToolSection title='Development' tools={DEVELOPMENT} />
 		</div>
 	</div>
