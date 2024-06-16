@@ -35,14 +35,16 @@ Our main UI Toolkit, allows us to create accessible interface, with it comes one
 
 Installation steps are as follows after creating a fresh _sveltekit_ project, you just need to install skeleton , tailwind and floating-ui/dom with the following commands
 
+Installing Skeleton
+
 ```bash
-#Installing Skeleton
 npm install -D @skeletonlabs/skeleton @skeletonlabs/tw-plugin #Required
 npm install @floating-ui/dom #Not required if not using any of popup
 ```
 
+Install Tailwind with the following command
+
 ```bash
-# Installing tailwind and utilities with svelte-add
 npx svelte-add@latest tailwindcss --tailwindcss-forms --tailwindcss-typography
 npm install
 ```
