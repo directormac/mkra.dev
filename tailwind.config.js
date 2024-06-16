@@ -8,11 +8,7 @@ const config = {
 	corePlugins: {
 		aspectRatio: false
 	},
-	plugins: [
-		require('@tailwindcss/typography'),
-		require('@tailwindcss/aspect-ratio'),
-		require('@catppuccin/tailwindcss')
-	],
+	plugins: [require('@tailwindcss/typography'), require('@tailwindcss/aspect-ratio')],
 	theme: {
 		container: {
 			center: true,
