@@ -1,4 +1,4 @@
-import { fontFamily } from 'tailwindcss/defaultTheme'
+// import { fontFamily } from 'tailwindcss/defaultTheme'
 import typography from '@tailwindcss/typography'
 import aspectRatio from '@tailwindcss/aspect-ratio'
 
@@ -61,7 +61,7 @@ const config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: ['Inter Variable', ...fontFamily.sans]
+				// sans: ['Inter Variable', ...fontFamily.sans]
 			}
 		}
 	}

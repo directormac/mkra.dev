@@ -8,6 +8,7 @@ import rehypeExternalLinks from 'rehype-external-links'
 import icon from 'astro-icon'
 import svelte from '@astrojs/svelte'
 import starlight from '@astrojs/starlight'
+import compress from 'astro-compress'
 
 // https://astro.build/config
 export default defineConfig({
@@ -64,7 +65,14 @@ export default defineConfig({
 		sitemap(),
 		mdx(),
 		icon(),
-		svelte()
+		svelte(),
+		compress({
+			CSS: true,
+			Image: false,
+			JavaScript: true,
+			SVG: false,
+			Logger: 1
+		})
 	],
 	markdown: {
 		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
