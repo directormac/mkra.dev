@@ -11,7 +11,7 @@
 		roller = setInterval(() => {
 			if (index === titles.length - 1) index = 0
 			else index++
-		}, 2500)
+		}, 1500)
 	})
 
 	onDestroy(() => {
