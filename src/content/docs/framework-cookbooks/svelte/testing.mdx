@@ -1,0 +1,329 @@
+---
+title: Testing
+---
+# Prerequisites
+
+Minimal testing prerequisites
+
+Dependencies.
+
+```sh title="Installing dependencies"
+# Test Suites
+pnpm i -D @playwright/test vitest @vitest/ui vitest-tsconfig-paths
+# Playwright Browser Dependencies
+pnpm dlx playwright install # npx playwrigth install
+# Testing Library
+pnpm i -D jsom @testing-library/svelte @testling-library/user-event @testing-library/jest-dom
+```
+
+Uni Testing - [Vitest](https://vitest.dev/guide/) and [Testing Library Svelte](https://testing-library.com/docs/svelte-testing-library/intro)
+
+```ts title="vite.config.ts"
+import { sveltekit } from '@sveltejs/kit/vite'
+import { defineConfig } from 'vite'
+import { configDefaults } from 'vitest/config'
+import tsconfigPaths from 'vitest-tsconfig-paths'
+
+export default defineConfig({
+ plugins: [sveltekit(), tsconfigPaths()],
+ test: {
+  plugins: [tsconfigPaths()],
+  globals: true,
+  reporters: 'verbose',
+  environment: 'jsdom',
+  restoreMocks: true,
+  includeSource: ['src/**/*.{test,spec}.{js,ts}'],
+  setupFiles: ['./src/test.config.ts'],
+  coverage: {
+   exclude: ['./src/test.config.ts']
+  },
+  exclude: [...configDefaults.exclude, 'tests']
+ }
+})
+```
+
+```ts title="src/test.config.ts"
+import { expect, afterEach } from 'vitest'
+import { cleanup } from '@testing-library/svelte'
+import '@testing-library/jest-dom'
+import * as matchers from '@testing-library/jest-dom/matchers'
+expect.extend(matchers) // extend jest matchers
+afterEach(cleanup) // cleanup DOM after each test
+```
+
+Enabling Global imports for unit tests
+
+```json title="tsconfig.json"
+{
+ "compilerOptions": {
+  "types": ["vitest/globals"]
+ }
+}
+```
+
+or use `unplugin-auto-import` install `pnpm install -D unplugin-auto-import/vite`
+
+```ts title="vite.config.ts"
+import { sveltekit } from '@sveltejs/kit/vite'
+import { defineConfig } from 'vite'
+import { configDefaults } from 'vitest/config'
+import AutoImport from 'unplugin-auto-import/vite'
+
+export default defineConfig({
+ plugins: [
+  sveltekit(),
+  AutoImport({
+   imports: ['vitest'],
+   dts: true // generate TypeScript declaration
+  })
+ ],
+ test: {
+  // ... rest of the options
+ }
+})
+```
+
+Integration Testing - [Playwright](https://playwright.dev/docs/writing-tests)
+
+```ts title="playwright.config.ts"
+import type { PlaywrightTestConfig } from '@playwright/test'
+const config: PlaywrightTestConfig = {
+ webServer: {
+  command: 'pnpm run build && pnpm run preview',
+  port: 4173
+ },
+ fullyParallel: true,
+ reporter: 'html',
+ testDir: 'tests',
+ testMatch: /(.+\.)?(test|spec)\.[jt]s/
+}
+export default config
+```
+
+Additional ignored files
+
+```txt title=".gitignore"
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+test-results
+playwright-report
+```
+
+External Links to read more about configuration
+[Vitest Config](https://vitest.dev/config/)
+[Playwright Config](https://playwright.dev/docs/test-configuration#basic-configuration)
+
+## Testing in Action
+
+TODO! Create a Simple Svelte App
+
+## Hooking into Svelte
+
+```ts title="src/test.config.ts"
+/* eslint-disable @typescript-eslint/no-empty-function */
+import matchers from '@testing-library/jest-dom/matchers'
+import { expect, vi } from 'vitest'
+expect.extend(matchers)
+vi.mock('$app/environment', () => ({ browser: true }))
+```
+
+```ts title="vite.config.ts"
+import { configDefaults, defineConfig } from 'vitest/config'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
+
+export default defineConfig({
+ plugins: [svelte({ hot: !process.env.VITEST })],
+ define: {
+  'import.meta.vitest': 'undefined'
+ },
+ test: {
+  globals: true,
+  environment: 'jsdom',
+  includeSource: ['src/**/*.{test,spec}.{js,ts,svelte}'],
+  setupFiles: ['./src/test.config.ts'],
+  coverage: {
+   exclude: ['./src/test.config.ts']
+  },
+  exclude: [...configDefaults.exclude, 'tests']
+ }
+})
+```
+
+## Hooking into SvelteKit
+
+```ts title="src/test.config.ts"
+import matchers from '@testing-library/jest-dom/matchers'
+import { expect, vi } from 'vitest'
+import { readable } from 'svelte/store'
+import type * as environments from '$app/environment'
+import type * as navigation from '$app/navigation'
+import type * as stores from '$app/stores'
+import type { Navigation, Page } from '@sveltejs/kit'
+expect.extend(matchers)
+
+vi.mock('$app/environment', (): typeof environments => ({
+ browser: true,
+ dev: true,
+ building: false,
+ version: 'any'
+}))
+
+// Mock SvelteKit runtime module $app/navigation
+vi.mock('$app/navigation', (): typeof navigation => ({
+ afterNavigate: () => {},
+ beforeNavigate: () => {},
+ disableScrollHandling: () => {},
+ goto: () => Promise.resolve(),
+ invalidate: () => Promise.resolve(),
+ invalidateAll: () => Promise.resolve(),
+ preloadData: () => Promise.resolve(),
+ preloadCode: () => Promise.resolve()
+}))
+
+// Mock SvelteKit runtime module $app/stores
+vi.mock('$app/stores', (): typeof stores => {
+ const getStores: typeof stores.getStores = () => {
+  const navigating = readable<Navigation | null>(null)
+  const page = readable<Page>({
+   url: new URL('http://localhost'),
+   params: {},
+   route: {
+    id: null
+   },
+   status: 200,
+   error: null,
+   data: {},
+   form: undefined
+  })
+  const updated = {
+   subscribe: readable(false).subscribe,
+   check: async () => false
+  }
+
+  return { navigating, page, updated }
+ }
+
+ const page: typeof stores.page = {
+  subscribe(fn) {
+   return getStores().page.subscribe(fn)
+  }
+ }
+ const navigating: typeof stores.navigating = {
+  subscribe(fn) {
+   return getStores().navigating.subscribe(fn)
+  }
+ }
+ const updated: typeof stores.updated = {
+  subscribe(fn) {
+   return getStores().updated.subscribe(fn)
+  },
+  check: async () => false
+ }
+
+ return {
+  getStores,
+  navigating,
+  page,
+  updated
+ }
+})
+```
+
+```ts title="src/test.config.ts"
+import { expect, afterEach, vi } from 'vitest'
+import { cleanup, configure } from '@testing-library/svelte'
+import '@testing-library/jest-dom'
+import * as matchers from '@testing-library/jest-dom/matchers'
+import type { Navigation, Page } from '@sveltejs/kit'
+import { readable } from 'svelte/store'
+import type * as environment from '$app/environment'
+import type * as stores from '$app/stores'
+import type * as navigation from '$app/navigation'
+
+expect.extend(matchers)
+afterEach(cleanup)
+
+configure({
+ asyncUtilTimeout: 1500
+})
+
+// Mock SvelteKit runtime module $app/environment
+vi.mock('$app/environment', (): typeof environment => ({
+ browser: false,
+ dev: true,
+ building: false,
+ version: 'any'
+}))
+
+// Mock SvelteKit runtime module $app/navigation
+vi.mock('$app/navigation', (): typeof navigation => ({
+ afterNavigate: () => {},
+ onNavigate: () => {},
+ beforeNavigate: () => {},
+ disableScrollHandling: () => {},
+ goto: () => Promise.resolve(),
+ invalidate: () => Promise.resolve(),
+ invalidateAll: () => Promise.resolve(),
+ preloadData: () => Promise.resolve(),
+ preloadCode: () => Promise.resolve()
+}))
+
+// Mock SvelteKit runtime module $app/stores
+vi.mock('$app/stores', (): typeof stores => {
+ const getStores: typeof stores.getStores = () => {
+  const navigating = readable<Navigation | null>(null)
+  const page = readable<Page>({
+   url: new URL('http://localhost'),
+   params: {},
+   route: {
+    id: null
+   },
+   status: 200,
+   error: null,
+   data: {},
+   form: undefined
+  })
+  const updated = {
+   subscribe: readable(false).subscribe,
+   check: async () => false
+  }
+
+  return { navigating, page, updated }
+ }
+
+ const page: typeof stores.page = {
+  subscribe(fn) {
+   return getStores().page.subscribe(fn)
+  }
+ }
+ const navigating: typeof stores.navigating = {
+  subscribe(fn) {
+   return getStores().navigating.subscribe(fn)
+  }
+ }
+ const updated: typeof stores.updated = {
+  subscribe(fn) {
+   return getStores().updated.subscribe(fn)
+  },
+  check: async () => false
+ }
+
+ return {
+  getStores,
+  navigating,
+  page,
+  updated
+ }
+})
+```
+
+### TODO explain snippets
+

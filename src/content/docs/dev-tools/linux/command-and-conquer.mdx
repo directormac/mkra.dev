@@ -1,0 +1,81 @@
+---
+title: Command and Conquer
+description: Tips for conquering the command line and the shell
+---
+import { Aside } from '@astrojs/starlight/components'
+
+## Introduction
+
+General things to have more information on a certain command
+
+The `--help` or `-h` flag is a very common command to use for a command help.
+it's used to display the help message of a command.
+
+```sh title="--help -h flag"
+man --help
+```
+
+The `man` command is used to display the manual of a command.
+
+```sh title="man"
+man find
+```
+
+<Aside type="tip">
+
+If you are using a modern terminal emulator most of them support scrolling.
+
+- `j` scroll down
+- `C-d` scroll down more lines
+- `k` scroll up
+- `C-u` scroll up more lines
+
+</Aside>
+
+If you don't like to read manuals, you can install [tealdeer](https://github.com/dbrgn/tealdeer)
+
+```sh title="tealdeer installation"
+apt install tealdeer # For Ubuntu
+pacman -Sy tealdeer # For Arch
+```
+
+```sh title="tealdeer usage"
+tldr find
+```
+
+If you are moving beyond basics you can also use `cheat.sh` you need `curl`
+
+```sh title="cheat.sh usage"
+curl cheat.sh/find
+```
+
+You can add this in your `bash` or `zsh` shell config
+
+```txt title="~/.zshrc"
+cheatsh() {
+    curl cheat.sh/"$1"
+}
+```
+
+## The Filesystem
+
+- pwd - print working directory
+- ls - list alternative [lsd](https://github.com/lsd-rs/lsd)
+- cd - change directory alternative [zoxide](https://github.com/ajeetdsouza/zoxide)
+- find - find files alternative [fd](https://github.com/sharkdp/fd)
+- less - read large files alternative [moar](https://github.com/walles/moar)
+- cat - read small files alternative [bat](https://github.com/sharkdp/bat)
+- touch - create an empty file
+- mkdir - create a directory
+- rmdir - remove an empty directory
+- rm - remove a file
+- mv - move a file or directory
+
+Other Useful commands(_WIP_)
+
+- uname
+- lscpu
+- lsblk
+- dmidecode
+- lsusb
+

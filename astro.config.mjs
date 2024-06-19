@@ -56,6 +56,33 @@ export default defineConfig({
 				{
 					label: 'Guides',
 					autogenerate: { directory: 'guides' }
+				},
+				{
+					label: 'Frontend in Action',
+					autogenerate: { directory: 'frontend-in-action' }
+				},
+				{
+					label: 'Backend in Action',
+					autogenerate: { directory: 'backend-in-action' }
+				},
+				{
+					label: 'Framework Cookbooks',
+					items: [
+						{
+							label: 'Svelte',
+							autogenerate: { directory: 'framework-cookbooks/svelte' }
+						}
+					],
+					autogenerate: { directory: 'framework-cookbooks' }
+				},
+				{
+					label: 'Servers, Services, and Apps',
+					autogenerate: { directory: 'servers-services-and-apps' }
+				},
+				{
+					label: '10x Dev tools',
+					items: [{ label: 'Linux', autogenerate: { directory: 'dev-tools/linux' } }],
+					autogenerate: { directory: 'dev-tools' }
 				}
 			]
 		}),
