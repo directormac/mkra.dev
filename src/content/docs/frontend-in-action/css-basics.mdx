@@ -1,0 +1,270 @@
+---
+title: CSS Basics
+description: Learn the basics of CSS
+---
+import { Tabs, TabItem, LinkCard, CardGrid } from '@astrojs/starlight/components'
+
+<CardGrid>
+<LinkCard
+ title='Docs'
+ description='MDN Documentation for CSS'
+ href='https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps'
+/>
+
+<LinkCard title='Learn' description='A web.dev course on CSS' href='https://web.dev/learn/css' />
+
+<LinkCard
+ title='CSS Fundamentals'
+ description='Mdc Documentation for CSS Fundamentals'
+ href='https://developer.mozilla.org/en-US/curriculum/core/css-fundamentals/'
+/>
+
+</CardGrid>
+
+## Syntax
+
+```css title="Syntax"
+selector {
+ property: value;
+ property: value;
+}
+```
+
+### Selectors
+
+<LinkCard
+ title='Selectors'
+ description='MDN Documentation for CSS Selectors'
+ href='https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors'
+/>
+
+- `<element>` e.g `p` `a` `h1` ...
+- `id` attribute e.g `<p id="paragraphedID"></p>` the id attribute in the example.
+- `class` attribute e.g `<p class="paragraphedClass"></p>` the class attribute in the example.
+
+```css title="Selectors"
+/* 
+<p>Paragraph</p>
+*/
+p {
+ /* Applies the values to all p elements */
+ property: value;
+}
+
+/* 
+<a id="idSelectorStyles">Paragraph</a>
+*/
+#idSelectorStyles {
+ /* Applies the styling to any element that has id of paragraphedID */
+ property: value;
+}
+
+/* 
+<p class="classyStyles">Paragraph</p>
+*/
+.classyStyles {
+ /* Applies the styling to any element that has class of paragraphedClass */
+ property: value;
+}
+```
+
+### Property and Value
+
+There is so many properties and values to choose from. Refer to the link below for a complete list.
+
+<LinkCard
+ title='CSS Reference Index'
+ description='Browse an alphabetical index of all of the standard CSS properties, pseudo-classes, pseudo-elements, data types, functional notations and at-rules. '
+ href='https://developer.mozilla.org/en-US/docs/Web/CSS/Reference#index'
+/>
+
+## The Box Model
+
+<LinkCard
+ title='The Box Model'
+ description='MDN Documentation for the Box Model'
+ href='https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model'
+/>
+
+<LinkCard
+ title='Learn the Box Model'
+ description='A web.dev course on the box model'
+ href='https://web.dev/learn/css/box-model'
+/>
+
+- Margin: It's the space between the border of an element and other elements around it;
+- Border: It's the boundary line of an element.
+- Padding: It's the space between the boundary line and the actual content.
+- Content: It's the area that holds the data to be rendered.
+
+## Where to write CSS
+
+//TODO: Create Examples for svelte and jsx
+
+### Inline
+
+<Tabs>
+ <TabItem label='svelte / vue / html'>
+
+```svelte title="component.svelte"
+<p style='color: red; background-color: white'>I have a red text</p>
+```
+
+ </TabItem>
+ <TabItem label='jsx / jsx'>
+
+```jsx title="component.tsx"
+<p style={{ color: 'red', backgroundColor: 'white' }}>I have a red text</p>
+```
+
+ </TabItem>
+</Tabs>
+
+### Internal
+
+<Tabs>
+ <TabItem label='svelte / vue / html'>
+
+```svelte title="component.svelte"
+<p>I have a red text</p>
+
+<style>
+  p {
+    color: red;
+    background-color: white
+  }
+</style>
+```
+
+</TabItem>
+<TabItem label='jsx / tsx'>
+  JSX Does not support internal CSS.
+</TabItem>
+</Tabs>
+
+### External
+
+```css title="component.css"
+.paragraph {
+ color: red;
+ background-color: white;
+}
+```
+
+<Tabs>
+<TabItem label='svelte / vue'>
+
+```svelte title="component.svelte"
+<script>
+ import './component.css'
+</script>
+<p>I have a red text</p>
+```
+
+```svelte title="component.vue"
+<p>I have a red text</p>
+<style>
+@import './component.css';
+</style>
+```
+
+</TabItem>
+<TabItem label='component.jsx'>
+
+```tsx title="component.tsx"
+import styles from './component.css' // Import the CSS module
+
+function MyComponent() {
+ return <p className={styles.paragraph}>I have a red text</p>
+}
+```
+
+```css title="component.css"
+.paragraph {
+ color: red;
+ background-color: white;
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Media Queries
+
+Media queries allow you to apply CSS styles depending on a device's media type (such as print vs. screen) or other features or characteristics such as screen resolution or orientation, aspect ratio, browser viewport width or height, user preferences such as preferring reduced motion, data usage, or transparency.
+
+<CardGrid>
+<LinkCard
+title='Media Queries Docs'
+description='MDN Documentation for Media Queries'
+href='https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries'
+/>
+
+<LinkCard
+ title='Learn'
+ description='A web.dev course on Media Queries'
+ href='https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Media_queries'
+/>
+
+<LinkCard
+title='Media Queries Reference'
+description='MDN Reference for Media Queries'
+href='https://developer.mozilla.org/en-US/docs/Web/CSS/@media#syntax'
+/>
+</CardGrid>
+
+```css title="Media Queries"
+@media only (min-width: 360px) and (max-width: 800px) {
+ div {
+  width: 10px;
+  height: 30px;
+ }
+}
+
+@media only (min-width: 801px) and (max-width: 1200px) {
+ div {
+  width: 20px;
+  height: 50px;
+ }
+}
+```
+
+## Rules
+
+### Order Matters
+
+CSS reads code from top to bottom.
+
+```css title="order"
+#paragraph {
+ color: green;
+ font-size: 20px;
+}
+
+#paragraph {
+ /*  */
+ color: red;
+}
+```
+
+### The `!important` Override
+
+```css title="important"
+#paragraph {
+ color: green !important; /* This is the prioritized output */
+ font-size: 20px;
+}
+
+#paragraph {
+ color: red;
+}
+```
+
+### Case insensitive
+
+Write your selectors, properties and values in **kebab** case.
+
+`my-custom-class` and not `myCustomClass`
+
+`font-size` and not `fontSize`
+
