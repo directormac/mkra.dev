@@ -9,6 +9,8 @@ import icon from 'astro-icon'
 import svelte from '@astrojs/svelte'
 import starlight from '@astrojs/starlight'
 import compress from 'astro-compress'
+import starlightImageZoom from 'starlight-image-zoom'
+import starlightViewModes from 'starlight-view-modes'
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,6 +21,7 @@ export default defineConfig({
 			favicon: '/favicon/favicon.ico',
 			disable404Route: true,
 			customCss: ['./src/styles/starlight.css'],
+			plugins: [starlightImageZoom(), starlightViewModes()],
 			expressiveCode: {
 				themes: ['catppuccin-mocha', 'catppuccin-latte'],
 				themeCssSelector(theme, { styleVariants }) {
@@ -54,8 +57,8 @@ export default defineConfig({
 			sidebar: [
 				{ label: 'Home', link: '/docs' },
 				{
-					label: 'Guides',
-					autogenerate: { directory: 'guides' }
+					label: 'Getting Started',
+					autogenerate: { directory: '/getting-started' }
 				},
 				{
 					label: 'Frontend in Action',
@@ -63,6 +66,20 @@ export default defineConfig({
 				},
 				{
 					label: 'Backend in Action',
+					items: [
+						{
+							label: 'JavaScript/Typescript',
+							autogenerate: { directory: 'backend-in-action/javascript' }
+						},
+						{
+							label: 'Rust',
+							autogenerate: { directory: 'backend-in-action/rust' }
+						},
+						{
+							label: 'Elixir',
+							autogenerate: { directory: 'backend-in-action/elixir' }
+						}
+					],
 					autogenerate: { directory: 'backend-in-action' }
 				},
 				{
@@ -71,6 +88,18 @@ export default defineConfig({
 						{
 							label: 'Svelte',
 							autogenerate: { directory: 'framework-cookbooks/svelte' }
+						},
+						{
+							label: 'React',
+							autogenerate: { directory: 'framework-cookbooks/react' }
+						},
+						{
+							label: 'Vue',
+							autogenerate: { directory: 'framework-cookbooks/vue' }
+						},
+						{
+							label: 'Others',
+							autogenerate: { directory: 'framework-cookbooks/others' }
 						}
 					],
 					autogenerate: { directory: 'framework-cookbooks' }
