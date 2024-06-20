@@ -104,6 +104,7 @@ There is so many properties and values to choose from. Refer to the link below f
 ### Inline
 
 <Tabs>
+
  <TabItem label='svelte / vue / html'>
 
 ```svelte title="component.svelte"
@@ -114,15 +115,19 @@ There is so many properties and values to choose from. Refer to the link below f
  <TabItem label='jsx / jsx'>
 
 ```jsx title="component.tsx"
-<p style={{ color: 'red', backgroundColor: 'white' }}>I have a red text</p>
+function Component() {
+ return <p style={{ color: 'red', backgroundColor: 'white' }}>I have a red text</p>
+}
 ```
 
  </TabItem>
+
 </Tabs>
 
 ### Internal
 
 <Tabs>
+
  <TabItem label='svelte / vue / html'>
 
 ```svelte title="component.svelte"
@@ -137,9 +142,22 @@ There is so many properties and values to choose from. Refer to the link below f
 ```
 
 </TabItem>
+
 <TabItem label='jsx / tsx'>
-  JSX Does not support internal CSS.
+
+```jsx title="component.tsx"
+  const styles = {
+    color: 'red';
+  backgroundColor: 'white';
+  }
+
+function Component() {
+ return <p style={styles}>I have a red text</p>
+}
+```
+
 </TabItem>
+
 </Tabs>
 
 ### External
@@ -152,6 +170,7 @@ There is so many properties and values to choose from. Refer to the link below f
 ```
 
 <Tabs>
+
 <TabItem label='svelte / vue'>
 
 ```svelte title="component.svelte"
@@ -174,19 +193,13 @@ There is so many properties and values to choose from. Refer to the link below f
 ```tsx title="component.tsx"
 import styles from './component.css' // Import the CSS module
 
-function MyComponent() {
+function Component() {
  return <p className={styles.paragraph}>I have a red text</p>
 }
 ```
 
-```css title="component.css"
-.paragraph {
- color: red;
- background-color: white;
-}
-```
-
 </TabItem>
+
 </Tabs>
 
 ## Media Queries
@@ -194,10 +207,11 @@ function MyComponent() {
 Media queries allow you to apply CSS styles depending on a device's media type (such as print vs. screen) or other features or characteristics such as screen resolution or orientation, aspect ratio, browser viewport width or height, user preferences such as preferring reduced motion, data usage, or transparency.
 
 <CardGrid>
+
 <LinkCard
-title='Media Queries Docs'
-description='MDN Documentation for Media Queries'
-href='https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries'
+ title='Media Queries Docs'
+ description='MDN Documentation for Media Queries'
+ href='https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries'
 />
 
 <LinkCard
@@ -207,10 +221,11 @@ href='https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_m
 />
 
 <LinkCard
-title='Media Queries Reference'
-description='MDN Reference for Media Queries'
-href='https://developer.mozilla.org/en-US/docs/Web/CSS/@media#syntax'
+ title='Media Queries Reference'
+ description='MDN Reference for Media Queries'
+ href='https://developer.mozilla.org/en-US/docs/Web/CSS/@media#syntax'
 />
+
 </CardGrid>
 
 ```css title="Media Queries"
