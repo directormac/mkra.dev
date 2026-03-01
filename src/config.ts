@@ -1,8 +1,9 @@
 export const SITE = {
   website: "https://mkra.dev",
-  author: "Mark Kendrick Asena",
+  author: "Mac",
   profile: "https://github.com/directormac",
   desc: "My little space of existence on the web",
+  tagline: "My little space of existence on the web",
   title: "mkra.dev",
   ogImage: "devosfera-og.webp",
   lightAndDarkMode: true,
