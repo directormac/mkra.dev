@@ -1,15 +1,16 @@
-import { defineCollection, z } from 'astro:content'
-import { docsSchema } from '@astrojs/starlight/schema'
+import { defineCollection, z } from "astro:content";
+import { docsLoader } from "@astrojs/starlight/loaders";
+import { docsSchema } from "@astrojs/starlight/schema";
 
 function removeDupsAndLowerCase(array: string[]) {
-	if (!array.length) return array
-	const lowercaseItems = array.map((str) => str.toLowerCase())
-	const distinctItems = new Set(lowercaseItems)
-	return Array.from(distinctItems)
+	if (!array.length) return array;
+	const lowercaseItems = array.map((str) => str.toLowerCase());
+	const distinctItems = new Set(lowercaseItems);
+	return Array.from(distinctItems);
 }
 
 const post = defineCollection({
-	type: 'content',
+	type: "content",
 	schema: ({ image }) =>
 		z.object({
 			title: z.string().max(60),
@@ -26,17 +27,17 @@ const post = defineCollection({
 			coverImage: z
 				.object({
 					src: image(),
-					alt: z.string()
+					alt: z.string(),
 				})
 				.optional(),
 			draft: z.boolean().default(false),
 			tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
-			ogImage: z.string().optional()
-		})
-})
+			ogImage: z.string().optional(),
+		}),
+});
 
 const project = defineCollection({
-	type: 'content',
+	type: "content",
 	schema: ({ image }) =>
 		z.object({
 			title: z.string().max(60),
@@ -55,13 +56,17 @@ const project = defineCollection({
 			coverImage: z
 				.object({
 					src: image(),
-					alt: z.string()
+					alt: z.string(),
 				})
 				.optional(),
 			draft: z.boolean().default(false),
 			tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
-			ogImage: z.string().optional()
-		})
-})
+			ogImage: z.string().optional(),
+		}),
+});
 
-export const collections = { post, project, docs: defineCollection({ schema: docsSchema() }) }
+export const collections = {
+	post,
+	project,
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+};
