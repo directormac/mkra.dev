@@ -3,6 +3,7 @@ import { glob } from "astro/loaders";
 import { SITE } from "@/config";
 import { docsLoader } from "@astrojs/starlight/loaders";
 import { docsSchema } from "@astrojs/starlight/schema";
+import { topicSchema } from "starlight-sidebar-topics/schema";
 
 export const BLOG_PATH = "src/content/blog";
 export const GALLERY_PATH = "src/content/galleries";
@@ -42,5 +43,8 @@ const galleries = defineCollection({
 export const collections = {
   blog,
   galleries,
-  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+  docs: defineCollection({
+    loader: docsLoader(),
+    schema: docsSchema({ extend: topicSchema }),
+  }),
 };

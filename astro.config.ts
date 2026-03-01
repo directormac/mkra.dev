@@ -12,7 +12,7 @@ import starlightCatppuccin from "@catppuccin/starlight";
 import starlightViewModes from "starlight-view-modes";
 import starlightAnnouncement from "starlight-announcement";
 import starlightAutoDrafts from "starlight-auto-drafts";
-import starlightSidebarTopics from "starlight-sidebar-topics";
+// import starlightSidebarTopics from "starlight-sidebar-topics";
 // import starlightScrollToTop from "starlight-scroll-to-top";
 import starlightImageZoom from "starlight-image-zoom";
 import starlightMarkdownBlocks, {
@@ -36,6 +36,46 @@ export default defineConfig({
           dark: { flavor: "macchiato", accent: "mauve" },
           light: { flavor: "latte", accent: "mauve" },
         }),
+
+        starlightImageZoom(),
+        starlightAnnouncement(),
+        starlightAutoDrafts(),
+        // starlightScrollToTop(),
+        starlightMarkdownBlocks({
+          blocks: {
+            draft: Draft(),
+            idea: Aside({ label: "Idea", color: "green", icon: "💡" }),
+          },
+        }),
+        // Configure Sidebar here
+        // starlightSidebarTopics(
+        //   [
+        //     {
+        //       label: "Hi",
+        //       link: "/hi",
+        //       id: "guides",
+        //       items: [
+        //         {
+        //           label: "Hi",
+        //           link: "/hi",
+        //         },
+        //         {
+        //           label: "Guides",
+        //           autogenerate: { directory: "guides" },
+        //         },
+        //         {
+        //           label: "Reference",
+        //           autogenerate: { directory: "reference" },
+        //         },
+        //       ],
+        //     },
+        //   ],
+        //   {
+        //     topics: {
+        //       guides: ["guides/**/*"],
+        //     },
+        //   }
+        // ),
         starlightViewModes({
           zenModeSettings: {
             enabled: true,
@@ -48,37 +88,6 @@ export default defineConfig({
             keyboardShortcut: ["Ctrl+Shift+Z"],
           },
         }),
-        starlightImageZoom(),
-        starlightAnnouncement(),
-        starlightAutoDrafts(),
-        // starlightScrollToTop(),
-        starlightMarkdownBlocks({
-          blocks: {
-            draft: Draft(),
-            idea: Aside({ label: "Idea", color: "green", icon: "💡" }),
-          },
-        }),
-        // Configure Sidebar here
-        starlightSidebarTopics([
-          {
-            label: "Hi",
-            link: "/hi",
-            items: [
-              {
-                label: "Hi",
-                link: "/hi",
-              },
-              {
-                label: "Guides",
-                autogenerate: { directory: "guides" },
-              },
-              {
-                label: "Reference",
-                autogenerate: { directory: "reference" },
-              },
-            ],
-          },
-        ]),
       ],
       title: `${SITE.title}`,
       pagefind: true,
@@ -92,6 +101,20 @@ export default defineConfig({
       expressiveCode: {
         themes: ["catppuccin-latte", "catppuccin-macchiato"],
       },
+      sidebar: [
+        {
+          label: "Hi",
+          link: "/hi",
+        },
+        {
+          label: "Guides",
+          autogenerate: { directory: "guides" },
+        },
+        {
+          label: "Reference",
+          autogenerate: { directory: "reference" },
+        },
+      ],
     }),
     mdx({
       extendMarkdownConfig: true,

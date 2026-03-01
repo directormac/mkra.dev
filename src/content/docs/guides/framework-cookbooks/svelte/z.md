@@ -1,7 +1,9 @@
 ---
 title: Unlisted
+topic: guides
 draft: true
 ---
+
 example test config
 
 <https://www.youtube.com/watch?v=NLjolI9FwCU&t=0s>
@@ -82,15 +84,15 @@ basically fetches your data before the `page` and its `components` use,
 
 ```ts
 async function getPosts() {
- const response = await fetch('https://mkra.dev/posts')
- return response.json() as Post[]
+  const response = await fetch("https://mkra.dev/posts");
+  return response.json() as Post[];
 }
 
 export const load = async () => {
- return {
-  posts: await getPost()
- }
-}
+  return {
+    posts: await getPost(),
+  };
+};
 ```
 
 ## Mocking Data
@@ -173,90 +175,90 @@ export function data_mock() {
 `vite.config.ts`
 
 ```ts
-import { sveltekit } from '@sveltejs/kit/vite'
-import { defineConfig } from 'vitest/config'
-import tsConfigPaths from 'vite-tsconfig-paths'
-import { configDefaults } from 'vitest/config'
-import { data_mock } from './plugins'
+import { sveltekit } from "@sveltejs/kit/vite";
+import { defineConfig } from "vitest/config";
+import tsConfigPaths from "vite-tsconfig-paths";
+import { configDefaults } from "vitest/config";
+import { data_mock } from "./plugins";
 
 export default defineConfig({
- plugins: [sveltekit(), tsConfigPaths(), data_mock()],
- test: {
-  globals: true,
-  environment: 'jsdom',
-  restoreMocks: true,
-  include: ['src/**/*.{test,spec}.{js,ts}'],
-  reporters: ['verbose', 'json'],
-  setupFiles: ['./src/test.config.ts'],
-  coverage: {
-   // reporter: ['text', 'json-summary', 'json'],
-   exclude: ['./src/test.config.ts']
+  plugins: [sveltekit(), tsConfigPaths(), data_mock()],
+  test: {
+    globals: true,
+    environment: "jsdom",
+    restoreMocks: true,
+    include: ["src/**/*.{test,spec}.{js,ts}"],
+    reporters: ["verbose", "json"],
+    setupFiles: ["./src/test.config.ts"],
+    coverage: {
+      // reporter: ['text', 'json-summary', 'json'],
+      exclude: ["./src/test.config.ts"],
+    },
+    exclude: [...configDefaults.exclude, "tests"],
+    // outputFile: 'test-results/results.json'
   },
-  exclude: [...configDefaults.exclude, 'tests']
-  // outputFile: 'test-results/results.json'
- }
-})
+});
 ```
 
 `svelte.config.ts`
 
 ```ts
-import adapter from '@sveltejs/adapter-node'
-import { vitePreprocess } from '@sveltejs/kit/vite'
+import adapter from "@sveltejs/adapter-node";
+import { vitePreprocess } from "@sveltejs/kit/vite";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
- preprocess: vitePreprocess(),
+  preprocess: vitePreprocess(),
 
- kit: {
-  adapter: adapter(),
-  alias: {
-   $schemas: './src/lib/schemas',
-   $stores: './src/lib/stores',
-   $types: './src/lib/types',
-   $utils: './src/lib/utils',
-   $components: './src/lib/components',
-   '$components/*': './src/lib/components/*',
+  kit: {
+    adapter: adapter(),
+    alias: {
+      $schemas: "./src/lib/schemas",
+      $stores: "./src/lib/stores",
+      $types: "./src/lib/types",
+      $utils: "./src/lib/utils",
+      $components: "./src/lib/components",
+      "$components/*": "./src/lib/components/*",
 
-   $server: './src/lib/server',
-   $repository: './src/lib/server/repository',
-   $services: './src/lib/server/services'
-  }
- }
-}
+      $server: "./src/lib/server",
+      $repository: "./src/lib/server/repository",
+      $services: "./src/lib/server/services",
+    },
+  },
+};
 
-export default config
+export default config;
 ```
 
 `src/types/index.ts`
 
 ```ts
 export type Repository<T> = {
- getAll: () => T[]
- find: (id: string) => T
- create: (data: T) => void
- update: (data: Partial<T>) => void
- delete: (id: string) => void
-}
+  getAll: () => T[];
+  find: (id: string) => T;
+  create: (data: T) => void;
+  update: (data: Partial<T>) => void;
+  delete: (id: string) => void;
+};
 ```
 
 `src/types/user.type.ts`
 
 ```ts
 export type User = {
- id: string
- username: string
- email: string
- password: string
- fullName: string
-}
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+  fullName: string;
+};
 
-export type CreateUser = Omit<User, 'id'>
+export type CreateUser = Omit<User, "id">;
 
 export type UpdateUser = {
- id: string
- data: Partial<CreateUser>
-}
+  id: string;
+  data: Partial<CreateUser>;
+};
 ```
 
 ```txt
@@ -288,4 +290,3 @@ export const getAll = () => Array.form(db.values());
 export const clear = () => db.clear();
 
 ```
-
