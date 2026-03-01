@@ -13,6 +13,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
+    "astro-expressive-code": "^0.41.7",
     "@expressive-code/plugin-collapsible-sections": "^0.41.7",
     "@expressive-code/plugin-line-numbers": "^0.41.7",
     "@mermaid-js/layout-elk": "^0.2.0",
@@ -60,8 +61,5 @@
     "typedoc-plugin-markdown": "^4.10.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.55.0"
-  },
-  "dependencies": {
-    "astro-expressive-code": "^0.41.7"
   }
 }

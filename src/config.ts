@@ -5,7 +5,7 @@ export const SITE = {
   desc: "My little space of existence on the web",
   tagline: "My little space of existence on the web",
   title: "mkra.dev",
-  ogImage: "devosfera-og.webp",
+  ogImage: "social-card.png",
   lightAndDarkMode: true,
   postPerIndex: 6,
   postPerPage: 8,
