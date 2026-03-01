@@ -3,28 +3,45 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-Welcome to my digital corner. I am a **developer** and **student** passionate about technology, video games, and building things that live on the internet.
+A passionate professional with over a decade in the freelance network engineering realm, recently immersing myself in the dynamic universe of full-stack web development. My goal is to infuse your projects with a diverse skill set, guiding you through the ever-evolving technological landscape.
 
-## Who am I?
+## Skills
 
-My name is Andrés, and for as long as I can remember, I've always been curious to understand how things work — from taking apart toys as a kid to taking apart someone else's code at 2 AM. I am currently studying engineering while developing projects that challenge me to learn something new every day.
+- **Languages:** JavaScript, Elixir, TypeScript
+- **Frontend:** Svelte, React, Astro
+- **Backend:** SvelteKit, Next.js, Phoenix
+- **Others:** PostgreSQL, Cloudflare Platform
 
-When I'm not programming, I'm probably in some virtual world exploring maps, completing missions, or competing online. Video games are not just my hobby; they also taught me how to solve problems, work in a team, and, above all, not to give up after attempt #847.
+## Experience
 
-## What I do
+### Full Stack Developer (Freelance)
+*Jan 2020 - Present*
 
-- **Web Development** — I love building modern web experiences with technologies like Astro, React, TypeScript, and everything the JavaScript ecosystem has to offer.
-- **Open Source** — I believe in the power of open source. You can find my projects on [GitHub](https://github.com/0xdres/).
-- **Continuous Learning** — I'm always exploring new tools, frameworks, and concepts. Technology evolves fast, and I like to keep pace.
+- Led the decision-making process for selecting appropriate technology stacks based on project requirements, ensuring alignment with business goals.
+- Integrated diverse technologies, effectively gluing frontend and backend components to create seamless user experiences, specializing on meta frameworks specially SvelteKit and others NextJS, Nuxt, Remix and Astro, delivering content via SSG , SSR or hybrid.
+- Collaborated with cross-functional teams to analyze project requirements and provide technical expertise in architecting solutions.
+- Implemented and maintained continuous deployment pipelines, optimizing the deployment process for increased efficiency.
+- Utilized best practices for security and performance optimization, ensuring a reliable and high- performing application, with tools such as pagespeed,webpagetest etc.
+- Actively participated in code reviews, mentoring team members, and fostering a collaborative and innovative development environment.
+- Staying ahead of the game, by exploring emerging frameworks,testing them on different environments and interacting with different SDK's / API they provide.
 
-## Gaming
+### Network Engineer (Consultancy)
+*May 2015 - Present*
 
-Video games are part of my DNA. From epic RPGs to competitive shooters, I enjoy practically any genre. It's that space where creativity meets strategy and pure fun.
+## Education
 
-## This blog
+### STI Tacurong
+*Information Technology | 2013 - 2015*
 
-**Devosfera** was born as a space to document my journey as a developer, share what I learn, and connect with people who share the same passions. Here you'll find posts about development, technology, and the occasional random late-night reflection.
+### University of the Immaculate Conception
+*Information Technology | 2010 - Nov 2012*
 
-If you want to connect, feel free to find me on [GitHub](https://github.com/0xdres/), [X](https://x.com/avdyen), or [LinkedIn](https://www.linkedin.com/in/avdyan/). It's always good to meet cool people from the community.
+## Certifications
 
-> _"Code is poetry, but with more semicolons."_ — Me, probably
+- **HTML, CSS and JavaScript** - The Hong Kong University of Science and Technology (Dec 2015) [Verify](https://www.coursera.org/account/accomplishments/verify/Y63P3L8RKKEE)
+- **Software Processes and Agile Practices** - University of Alberta (Jan 2016) [Verify](https://www.coursera.org/account/accomplishments/verify/VP4FW4RBDAVG)
+- **Introduction to Software Product Management** - University of Alberta (Jan 2016) [Verify](https://www.coursera.org/account/accomplishments/verify/MXE9EZPNKLXF)
+
+---
+
+Connect on [LinkedIn](https://www.linkedin.com/in/markasena/)

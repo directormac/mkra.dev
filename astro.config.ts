@@ -69,6 +69,10 @@ export default defineConfig({
                 link: "/hi",
               },
               {
+                label: "Guides",
+                autogenerate: { directory: "guides" },
+              },
+              {
                 label: "Reference",
                 autogenerate: { directory: "reference" },
               },
