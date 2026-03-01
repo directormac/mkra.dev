@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
+  <text x="50%" y="55%" 
+        dominant-baseline="middle" 
+        text-anchor="middle" 
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+        font-size="64" 
+        font-weight="800" 
+        fill="#1e293b"
+        letter-spacing="-3">mkra</text>
+</svg>
