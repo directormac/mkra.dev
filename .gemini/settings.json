@@ -1,0 +1,83 @@
+{
+	"$schema": "https://raw.githubusercontent.com/google-gemini/gemini-cli/refs/heads/main/schemas/settings.schema.json",
+	"ui": {
+		"footer": {
+			"hideContextPercentage": false
+		},
+		"showMemoryUsage": true,
+		"showCitations": true,
+		"showLineNumbers": true
+	},
+	"context": {
+		"loadMemoryFromIncludeDirectories": true,
+		"fileName": ["GEMINI.md"]
+	},
+	"mcpServers": {
+		"context-mode": {
+			"command": "context-mode"
+		},
+		"svelte": {
+			"command": "npx",
+			"args": ["-y", "@sveltejs/mcp"]
+		}
+	},
+	"experimental": {
+		"modelSteering": true
+	},
+	"general": {
+		"vimMode": true,
+		"sessionRetention": {
+			"maxAge": "30d"
+		}
+	},
+	"security": {
+		"enablePermanentToolApproval": true,
+		"autoAddToPolicyByDefault": true
+	},
+	"hooks": {
+		"BeforeTool": [
+			{
+				"matcher": "run_shell_command|read_file|read_many_files|grep_search|search_file_content|web_fetch|mcp__plugin_context-mode",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "context-mode hook gemini-cli beforetool"
+					}
+				]
+			}
+		],
+		"AfterTool": [
+			{
+				"matcher": "",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "context-mode hook gemini-cli aftertool"
+					}
+				]
+			}
+		],
+		"PreCompress": [
+			{
+				"matcher": "",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "context-mode hook gemini-cli precompress"
+					}
+				]
+			}
+		],
+		"SessionStart": [
+			{
+				"matcher": "",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "context-mode hook gemini-cli sessionstart"
+					}
+				]
+			}
+		]
+	}
+}

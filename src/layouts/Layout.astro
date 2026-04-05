@@ -185,7 +185,7 @@ const structuredData = {
     <div class="site-backdrop pointer-events-none" aria-hidden="true">
       <div class="site-grid"></div>
       <div class="site-glow"></div>
-      <div class="site-cursor-glow"></div>
+      <!-- <div class="site-cursor-glow"></div> -->
       <div class="site-grain"></div>
     </div>
 
@@ -273,7 +273,8 @@ const structuredData = {
     height: 1100px;
     margin-left: -550px;
     margin-top: -550px;
-    transform: translate(var(--site-cx, 50vw), var(--site-cy, 50vh)) translateZ(0);
+    transform: translate(var(--site-cx, 50vw), var(--site-cy, 50vh))
+      translateZ(0);
     background: radial-gradient(
       circle,
       color-mix(in oklab, var(--accent) 6%, transparent) 0%,

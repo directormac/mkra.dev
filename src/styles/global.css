@@ -203,8 +203,36 @@ i {
   box-shadow: 0 4px 15px color-mix(in srgb, var(--accent) 15%, transparent);
 }
 
+/* Mermaid diagrams — always dark, styled like code blocks */
+pre.mermaid,
+div.mermaid {
+  background: #1e1e2e !important;
+  border: 1px solid #45475a;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
 /* Smoothen the root crossfade during zoom */
 ::view-transition-group(root) {
   animation-duration: 400ms;
   animation-timing-function: ease-in-out;
+}
+
+/* Expressive Code fullscreen button hover-only fix */
+.expressive-code figure:not(:hover) .ec-fullscreen-button {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Expressive Code file icon alignment fix */
+.expressive-code figcaption .title {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  white-space: nowrap !important;
+}
+
+.expressive-code figcaption .title svg {
+  flex-shrink: 0 !important;
+  vertical-align: middle !important;
 }

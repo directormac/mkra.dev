@@ -20,7 +20,11 @@ import starlightMarkdownBlocks, {
   Aside,
 } from "starlight-markdown-blocks";
 
-import expressiveCode from "astro-expressive-code";
+// import expressiveCode from "astro-expressive-code";
+// import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
+// import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
+// import { pluginFullscreen } from "expressive-code-fullscreen";
+// import { pluginFileIcons } from "@xt0rted/expressive-code-file-icons";
 
 // https://astro.build/config
 export default defineConfig({
@@ -55,9 +59,6 @@ export default defineConfig({
           fontSize: "16px",
         },
       },
-    }),
-    expressiveCode({
-      themes: ["catppuccin-latte", "catppuccin-mocha"],
     }),
     starlight({
       plugins: [
@@ -126,9 +127,6 @@ export default defineConfig({
           label: "English",
           lang: "en",
         },
-      },
-      expressiveCode: {
-        themes: ["catppuccin-latte", "catppuccin-mocha"],
       },
       sidebar: [
         {
