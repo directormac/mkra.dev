@@ -26,14 +26,43 @@ import expressiveCode from "astro-expressive-code";
 export default defineConfig({
   site: SITE.website,
   integrations: [
-    mermaid(),
+    mermaid({
+      theme: "base",
+      autoTheme: false,
+      mermaidConfig: {
+        themeVariables: {
+          // Catppuccin Mocha — Mauve-biased, dark-mode readable
+          primaryColor: "#313244",
+          primaryTextColor: "#cdd6f4",
+          primaryBorderColor: "#cba6f7",
+          secondaryColor: "#45475a",
+          secondaryBorderColor: "#f5c2e7",
+          secondaryTextColor: "#cdd6f4",
+          tertiaryColor: "#313244",
+          tertiaryBorderColor: "#cba6f7",
+          tertiaryTextColor: "#cdd6f4",
+          noteBkgColor: "#313244",
+          noteTextColor: "#cdd6f4",
+          noteBorderColor: "#cba6f7",
+          lineColor: "#cba6f7",
+          textColor: "#cdd6f4",
+          background: "#1e1e2e",
+          mainBkg: "#313244",
+          nodeTextColor: "#cdd6f4",
+          errorBkgColor: "#f38ba8",
+          errorTextColor: "#cdd6f4",
+          fontFamily: '"Wotfard", sans-serif',
+          fontSize: "16px",
+        },
+      },
+    }),
     expressiveCode({
       themes: ["catppuccin-latte", "catppuccin-mocha"],
     }),
     starlight({
       plugins: [
         starlightCatppuccin({
-          dark: { flavor: "macchiato", accent: "mauve" },
+          dark: { flavor: "mocha", accent: "mauve" },
           light: { flavor: "latte", accent: "mauve" },
         }),
 
