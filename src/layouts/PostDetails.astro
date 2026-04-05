@@ -9,6 +9,7 @@ import ShareLinks from "@/components/ShareLinks.astro";
 import BackButton from "@/components/BackButton.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
 import GalleryEmbed from "@/components/GalleryEmbed.astro";
+import ImageZoom from "@/components/ImageZoom.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
 import { SITE } from "@/config";
@@ -181,7 +182,9 @@ const nextPost =
       id="article"
       class="app-prose mt-8 w-full max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
     >
-      <Content components={{ GalleryEmbed }} />
+      <ImageZoom>
+        <Content components={{ GalleryEmbed }} />
+      </ImageZoom>
     </article>
 
     <!-- ═══════ Post footer section ═══════ -->
@@ -386,6 +389,76 @@ const nextPost =
   }
   addHeadingLinks();
 
+  /** Mermaid Diagram Zoom functionality */
+  function initMermaidZoom() {
+    const mermaids = document.querySelectorAll(".mermaid:not([data-zoom-ready])");
+    
+    mermaids.forEach(container => {
+      // Mermaid renders SVGs asynchronously
+      const attachZoom = (svg) => {
+        container.setAttribute("data-zoom-ready", "true");
+        container.addEventListener("click", e => {
+          if (e.target.closest("a")) return;
+
+          const toggleZoom = () => {
+            const isZoomed = container.classList.toggle("zoomed");
+            document.documentElement.classList.toggle("overflow-hidden", isZoomed);
+            
+            if (isZoomed) {
+              const handleEsc = (event) => {
+                if (event.key === "Escape" && container.classList.contains("zoomed")) {
+                  if (document.startViewTransition) {
+                    const transition = document.startViewTransition(() => {
+                      container.classList.remove("zoomed");
+                      document.documentElement.classList.remove("overflow-hidden");
+                    });
+                    transition.finished.finally(() => {
+                      svg.style.viewTransitionName = "";
+                    });
+                  } else {
+                    container.classList.remove("zoomed");
+                    document.documentElement.classList.remove("overflow-hidden");
+                    svg.style.viewTransitionName = "";
+                  }
+                  window.removeEventListener("keydown", handleEsc);
+                }
+              };
+              window.addEventListener("keydown", handleEsc);
+            }
+          };
+
+          if (document.startViewTransition) {
+            svg.style.viewTransitionName = "zoomed-mermaid-svg";
+            const transition = document.startViewTransition(toggleZoom);
+            transition.finished.finally(() => {
+              if (!container.classList.contains("zoomed")) {
+                svg.style.viewTransitionName = "";
+              }
+            });
+          } else {
+            toggleZoom();
+          }
+        });
+      };
+
+      // Check if SVG already exists, otherwise observe
+      const existingSvg = container.querySelector("svg");
+      if (existingSvg) {
+        attachZoom(existingSvg);
+      } else {
+        const observer = new MutationObserver((mutations, obs) => {
+          const svg = container.querySelector("svg");
+          if (svg) {
+            attachZoom(svg);
+            obs.disconnect();
+          }
+        });
+        observer.observe(container, { childList: true });
+      }
+    });
+  }
+  initMermaidZoom();
+
   /* Go to page start after page swap */
   document.addEventListener("astro:after-swap", () =>
     window.scrollTo({ left: 0, top: 0, behavior: "instant" })
@@ -393,6 +466,8 @@ const nextPost =
 </script>
 
 <style>
+  @reference "../styles/global.css";
+
   .post-title {
     background: linear-gradient(
       135deg,
@@ -485,5 +560,33 @@ const nextPost =
   .post-nav-link:hover .post-nav-bg {
     opacity: 1;
     filter: blur(20px);
+  }
+
+  /* Mermaid Diagram Zoom - Global because it's from Markdown content */
+  :global(.mermaid) {
+    @apply my-8 flex cursor-zoom-in justify-center overflow-hidden rounded-xl border border-border bg-foreground/[0.02] p-4;
+    contain: layout;
+  }
+
+  :global(.mermaid.zoomed) {
+    @apply fixed inset-0 z-[100] !m-0 flex cursor-zoom-out items-center justify-center overflow-auto !rounded-none bg-background/80 p-4 backdrop-blur-[4px] md:p-16;
+  }
+
+  :global(.mermaid.zoomed svg) {
+    @apply h-auto !max-h-[85vh] w-auto !max-w-none drop-shadow-2xl md:!max-h-[92vh];
+  }
+
+  /* View Transition Pseudo-elements are always global scope */
+  ::view-transition-group(zoomed-mermaid-svg) {
+    animation-duration: 400ms;
+    animation-timing-function: ease-in-out;
+  }
+
+  ::view-transition-old(zoomed-mermaid-svg),
+  ::view-transition-new(zoomed-mermaid-svg) {
+    mix-blend-mode: normal;
+    height: 100%;
+    width: 100%;
+    overflow: visible;
   }
 </style>

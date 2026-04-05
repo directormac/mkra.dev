@@ -5,6 +5,7 @@
 
 :root,
 html[data-theme="light"] {
+  scrollbar-gutter: stable;
   --background: #eff1f5;
   --foreground: #4c4f69;
   --accent: #8839ef;
@@ -13,6 +14,7 @@ html[data-theme="light"] {
 }
 
 html[data-theme="dark"] {
+  scrollbar-gutter: stable;
   --background: #24273a;
   --foreground: #cad3f5;
   --accent: #c6a0f6;
@@ -103,7 +105,8 @@ i {
   background: color-mix(in srgb, var(--foreground) 3%, var(--background));
   padding: 1rem 1rem 1rem 3.5rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px -5px color-mix(in srgb, var(--background) 50%, transparent);
+  box-shadow: 0 4px 20px -5px
+    color-mix(in srgb, var(--background) 50%, transparent);
 }
 
 .premium-search input.pagefind-ui__search-input:focus-visible {
@@ -157,7 +160,8 @@ i {
   border-color: color-mix(in srgb, var(--accent) 30%, transparent);
   background: color-mix(in srgb, var(--accent) 4%, var(--background));
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--accent) 15%, transparent);
+  box-shadow: 0 10px 30px -10px
+    color-mix(in srgb, var(--accent) 15%, transparent);
 }
 
 .premium-search .pagefind-ui__result-title a {
@@ -199,15 +203,8 @@ i {
   box-shadow: 0 4px 15px color-mix(in srgb, var(--accent) 15%, transparent);
 }
 
-/* Mermaid Diagram Zoom */
-.mermaid {
-  @apply my-8 flex justify-center transition-all duration-300 ease-in-out cursor-zoom-in overflow-hidden border border-border rounded-xl bg-foreground/[0.02] p-4;
-}
-
-.mermaid.zoomed {
-  @apply fixed inset-0 z-[100] bg-background/98 p-4 md:p-16 flex items-center justify-center cursor-zoom-out overflow-auto !m-0 !rounded-none;
-}
-
-.mermaid.zoomed svg {
-  @apply max-w-none w-auto h-auto max-h-[85vh] md:max-h-[92vh] drop-shadow-2xl;
+/* Smoothen the root crossfade during zoom */
+::view-transition-group(root) {
+  animation-duration: 400ms;
+  animation-timing-function: ease-in-out;
 }
