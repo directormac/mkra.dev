@@ -346,5 +346,36 @@ const structuredData = {
         { signal }
       );
     }
+
+    // Mermaid Diagram Zoom
+    const initMermaidZoom = () => {
+      const mermaids = document.querySelectorAll(".mermaid:not([data-zoom-ready])");
+      mermaids.forEach(container => {
+        container.setAttribute("data-zoom-ready", "true");
+        container.addEventListener("click", e => {
+          // If the click was on a link inside the diagram, don't zoom
+          if ((e.target as HTMLElement).closest("a")) return;
+
+          const isZoomed = container.classList.toggle("zoomed");
+          document.body.style.overflow = isZoomed ? "hidden" : "";
+
+          // Press ESC to close zoom
+          if (isZoomed) {
+            const handleEsc = (event: KeyboardEvent) => {
+              if (event.key === "Escape") {
+                container.classList.remove("zoomed");
+                document.body.style.overflow = "";
+                window.removeEventListener("keydown", handleEsc);
+              }
+            };
+            window.addEventListener("keydown", handleEsc);
+          }
+        });
+      });
+    };
+
+    // Run immediately and again after a short delay to catch Mermaid's post-render
+    initMermaidZoom();
+    setTimeout(initMermaidZoom, 1000);
   });
 </script>

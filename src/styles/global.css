@@ -198,3 +198,16 @@ i {
   background: color-mix(in srgb, var(--accent) 15%, transparent);
   box-shadow: 0 4px 15px color-mix(in srgb, var(--accent) 15%, transparent);
 }
+
+/* Mermaid Diagram Zoom */
+.mermaid {
+  @apply my-8 flex justify-center transition-all duration-300 ease-in-out cursor-zoom-in overflow-hidden border border-border rounded-xl bg-foreground/[0.02] p-4;
+}
+
+.mermaid.zoomed {
+  @apply fixed inset-0 z-[100] bg-background/98 p-4 md:p-16 flex items-center justify-center cursor-zoom-out overflow-auto !m-0 !rounded-none;
+}
+
+.mermaid.zoomed svg {
+  @apply max-w-none w-auto h-auto max-h-[85vh] md:max-h-[92vh] drop-shadow-2xl;
+}
