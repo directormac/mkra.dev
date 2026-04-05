@@ -1,0 +1,191 @@
+---
+/**
+ * ImageZoom component for blog posts and other non-Starlight pages.
+ * Reuses the logic from starlight-image-zoom but adapted for general use.
+ */
+---
+
+<image-zoom>
+  <template>
+    <dialog class="image-zoom-dialog">
+      <button aria-label="Unzoom image" class="image-zoom-close">
+        <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M18 6L6 18M6 6l12 12"></path>
+        </svg>
+      </button>
+      <figure></figure>
+    </dialog>
+  </template>
+  <slot />
+</image-zoom>
+
+<style is:global>
+  @reference "../styles/global.css";
+
+  image-zoom-zoomable {
+    display: block;
+    position: relative;
+    width: 100%;
+    cursor: zoom-in;
+  }
+
+  image-zoom-zoomable img {
+    @apply rounded-xl border border-border/40;
+  }
+
+  .image-zoom-dialog {
+    @apply fixed inset-0 z-[200] m-0 h-screen w-screen max-h-none max-w-none border-0 bg-transparent p-0 overflow-hidden;
+  }
+
+  .image-zoom-dialog::backdrop {
+    @apply bg-background/80 backdrop-blur-md opacity-0 transition-opacity duration-300;
+  }
+
+  .image-zoom-opened .image-zoom-dialog::backdrop {
+    @apply opacity-100;
+  }
+
+  .image-zoom-dialog figure {
+    @apply flex items-center justify-center h-full w-full cursor-zoom-out;
+  }
+
+  .image-zoom-dialog .zoomed-image {
+    @apply cursor-zoom-out transition-all duration-300 ease-in-out object-contain;
+    max-width: calc(100vw - 80px);
+    max-height: calc(100vh - 80px);
+  }
+
+  .image-zoom-close {
+    @apply absolute top-4 right-4 z-[210] flex h-10 w-10 items-center justify-center rounded-full bg-foreground/10 text-foreground opacity-0 transition-opacity duration-300 hover:bg-foreground/20;
+  }
+
+  .image-zoom-opened .image-zoom-close {
+    @apply opacity-100;
+  }
+</style>
+
+<script>
+  class ImageZoom extends HTMLElement {
+    #currentZoom: any = null;
+    #template = this.querySelector('template');
+
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      // Find all images in the content that should be zoomable
+      // By default, let's make all images in .app-prose zoomable
+      const images = document.querySelectorAll('.app-prose img:not(.no-zoom)');
+      images.forEach(img => {
+        if (img.parentElement?.tagName === 'A') return;
+        
+        const wrapper = document.createElement('image-zoom-zoomable');
+        img.parentNode?.insertBefore(wrapper, img);
+        wrapper.appendChild(img);
+        
+        wrapper.addEventListener('click', () => this.#open(img as HTMLImageElement));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.#currentZoom) {
+          this.#close();
+        }
+      });
+    }
+
+    #open(image: HTMLImageElement) {
+      if (!this.#template || this.#currentZoom) return;
+
+      const portal = document.createElement('div');
+      portal.append(this.#template.content.cloneNode(true));
+      
+      const dialog = portal.querySelector('dialog') as HTMLDialogElement;
+      const figure = dialog.querySelector('figure') as HTMLElement;
+      const closeBtn = dialog.querySelector('button') as HTMLButtonElement;
+
+      // Clone and setup zoomed image
+      const zoomedImage = image.cloneNode(true) as HTMLImageElement;
+      zoomedImage.classList.add('zoomed-image');
+      
+      const rect = image.getBoundingClientRect();
+      
+      // Initial position (matches original image)
+      zoomedImage.style.position = 'fixed';
+      zoomedImage.style.top = `${rect.top}px`;
+      zoomedImage.style.left = `${rect.left}px`;
+      zoomedImage.style.width = `${rect.width}px`;
+      zoomedImage.style.height = `${rect.height}px`;
+      zoomedImage.style.maxWidth = 'none';
+      zoomedImage.style.maxHeight = 'none';
+      zoomedImage.style.transform = 'none';
+      
+      figure.appendChild(zoomedImage);
+      document.body.appendChild(portal);
+      
+      // Lock scroll
+      document.documentElement.classList.add('overflow-hidden');
+      
+      dialog.showModal();
+      portal.classList.add('image-zoom-opened');
+
+      // Animate to center
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          zoomedImage.style.position = '';
+          zoomedImage.style.top = '';
+          zoomedImage.style.left = '';
+          zoomedImage.style.width = '';
+          zoomedImage.style.height = '';
+          zoomedImage.style.maxWidth = '';
+          zoomedImage.style.maxHeight = '';
+          zoomedImage.style.transform = '';
+        });
+      });
+
+      const close = () => this.#close();
+      dialog.addEventListener('click', close);
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        close();
+      });
+
+      this.#currentZoom = { portal, dialog, image, zoomedImage, rect };
+    }
+
+    #close() {
+      if (!this.#currentZoom) return;
+      
+      const { portal, image, zoomedImage } = this.#currentZoom;
+      
+      // Get current position for close animation
+      const currentRect = image.getBoundingClientRect();
+      
+      // Animate back to original position
+      zoomedImage.style.position = 'fixed';
+      zoomedImage.style.top = `${currentRect.top}px`;
+      zoomedImage.style.left = `${currentRect.left}px`;
+      zoomedImage.style.width = `${currentRect.width}px`;
+      zoomedImage.style.height = `${currentRect.height}px`;
+      zoomedImage.style.maxWidth = 'none';
+      zoomedImage.style.maxHeight = 'none';
+      zoomedImage.style.transform = 'none';
+      
+      portal.classList.remove('image-zoom-opened');
+      
+      if (this.#currentZoom.handleResize) {
+        window.removeEventListener('resize', this.#currentZoom.handleResize);
+      }
+
+      setTimeout(() => {
+        document.documentElement.classList.remove('overflow-hidden');
+        portal.remove();
+        this.#currentZoom = null;
+      }, 300);
+    }
+  }
+
+  if (!customElements.get('image-zoom')) {
+    customElements.define('image-zoom', ImageZoom);
+  }
+</script>
