@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
+import { externalLink } from "./src/lib/plugins/externalLink";
 import { SITE } from "./src/config";
 import mermaid from "astro-mermaid";
 
@@ -146,13 +147,30 @@ export default defineConfig({
     }),
     mdx({
       extendMarkdownConfig: true,
+      remarkPlugins: [
+        [
+          externalLink,
+          {
+            domains: ["mkra.dev", "localhost:4321"],
+          },
+        ],
+      ],
     }),
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
     }),
   ],
   markdown: {
-    remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
+    remarkPlugins: [
+      remarkToc,
+      [remarkCollapse, { test: "Table of contents" }],
+      [
+        externalLink,
+        {
+          domains: ["mkra.dev", "localhost:4321"],
+        },
+      ],
+    ],
   },
   vite: {
     // eslint-disable-next-line
