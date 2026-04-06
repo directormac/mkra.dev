@@ -1,6 +1,6 @@
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-sections';
-import { pluginFullscreen } from 'expressive-code-fullscreen';
+// import { pluginFullscreen } from 'expressive-code-fullscreen';
 import { pluginFileIcons } from "@xt0rted/expressive-code-file-icons";
 import { pluginLanguageLogo } from 'ec-lang-logo';
 
@@ -10,15 +10,15 @@ export default {
   plugins: [
     pluginLineNumbers(),
     pluginCollapsibleSections(),
-    pluginFullscreen({
-      // enabled: true,
-      showOnHoverOnly: true,
-      fullscreenButtonTooltip: 'View code in fullscreen',
-      enableEscapeKey: true,
-      exitOnBrowserBack: true,
-      animationDuration: 250,
-      addToUntitledBlocks: false,
-    }),
+    // pluginFullscreen({
+    //   // enabled: true,
+    //   showOnHoverOnly: true,
+    //   fullscreenButtonTooltip: 'View code in fullscreen',
+    //   enableEscapeKey: true,
+    //   exitOnBrowserBack: true,
+    //   animationDuration: 250,
+    //   addToUntitledBlocks: false,
+    // }),
     pluginFileIcons({
       iconClass: "size-4 flex-shrink-0",
       titleClass: "flex items-center gap-1",
