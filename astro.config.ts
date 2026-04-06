@@ -59,6 +59,7 @@ export default defineConfig({
           fontSize: "16px",
         },
       },
+      enableLog: false,
     }),
     starlight({
       plugins: [
