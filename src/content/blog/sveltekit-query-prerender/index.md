@@ -478,7 +478,7 @@ With this in place, you can catch and display validation errors directly in your
 
 ```
 
-Depending on your requirements, Standard Schema should cover most edge cases. Here is the approach I find most effective when working with derived state:
+Depending on your requirements, Standard Schema should cover most edge cases. Here is the approach.
 
 ```svelte
 <!-- src/routes/users/+page.svelte -->
@@ -487,8 +487,8 @@ Depending on your requirements, Standard Schema should cover most edge cases. He
 
   let name = $state<string>("");
 
-  let usersQuery = $derived(listUsersQuery({ name }));
-  let users = $derived(usersQuery.current);
+  let usersQuery = listUsersQuery({ name });
+  let users = usersQuery.current;
 </script>
 <h1>Users</h1>
 <input type="text" bind:value={name} />

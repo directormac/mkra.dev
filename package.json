@@ -70,5 +70,6 @@
   "overrides": {
     "typescript": "$typescript",
     "astro": "$astro"
-  }
+  },
+  "packageManager": "^bun@1.2.0"
 }
