@@ -34,6 +34,7 @@ export default defineConfig({
     mermaid({
       theme: "base",
       autoTheme: false,
+      enableLog: process.env.NODE_ENV === "development",
       mermaidConfig: {
         themeVariables: {
           // Catppuccin Mocha — Mauve-biased, dark-mode readable
@@ -60,7 +61,29 @@ export default defineConfig({
           fontSize: "16px",
         },
       },
-      enableLog: false,
+      iconPacks: [
+        {
+          name: "logos",
+          loader: () =>
+            fetch("https://unpkg.com/@iconify-json/logos@1/icons.json").then(
+              res => res.json()
+            ),
+        },
+        {
+          name: "devicon",
+          loader: () =>
+            fetch("https://unpkg.com/@iconify-json/devicon@1/icons.json").then(
+              res => res.json()
+            ),
+        },
+        {
+          name: "iconoir",
+          loader: () =>
+            fetch("https://unpkg.com/@iconify-json/iconoir@1/icons.json").then(
+              res => res.json()
+            ),
+        },
+      ],
     }),
     starlight({
       plugins: [
@@ -68,7 +91,6 @@ export default defineConfig({
           dark: { flavor: "mocha", accent: "mauve" },
           light: { flavor: "latte", accent: "mauve" },
         }),
-
         starlightImageZoom(),
         starlightAnnouncement(),
         starlightAutoDrafts(),
@@ -178,9 +200,9 @@ export default defineConfig({
     // This will be fixed in Astro 6 with Vite 7 support
     // See: https://github.com/withastro/astro/issues/14030
     plugins: [tailwindcss()],
-    optimizeDeps: {
-      exclude: ["@resvg/resvg-js"],
-    },
+    // optimizeDeps: {
+    //   exclude: ["@resvg/resvg-js"],
+    // },
   },
   image: {
     responsiveStyles: true,

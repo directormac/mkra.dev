@@ -9,8 +9,8 @@ tags:
 draft: false
 ---
 
-After [Svelte's](https://svelte.dev) experimental support for [**await**](https://svelte.dev/docs/svelte/await-expressions), which gave us more control over how we load data, the concept of remote functions was first introduced [here](https://github.com/sveltejs/svelte/discussions/15845). 
- One thing led to another, and it paved the way for the [remote functions](https://github.com/sveltejs/kit/discussions/13897) discussions.
+After [Svelte's](https://svelte.dev) experimental support for [**await**](https://svelte.dev/docs/svelte/await-expressions), which gave us more control over how we load data, the concept of remote functions was first introduced [here](https://github.com/sveltejs/svelte/discussions/15845).
+One thing led to another, and it paved the way for the [remote functions](https://github.com/sveltejs/kit/discussions/13897) discussions.
 
 Since then, it has evolved significantly and, in my opinion, is nearly mature enough to exit the experimental phase.
 
@@ -70,49 +70,35 @@ You can place this in your route directory; a common convention is naming it **`
 The `query` function is used for reading dynamic data from the server. Here is how the data flows through the different layers:
 
 ```mermaid
-graph TD
-    subgraph Client ["Browser (Client Layers)"]
-        UI["Svelte Component <br/><i>(Markup/Script)</i>"]
-        Proxy["Remote Proxy Wrapper"]
+sequenceDiagram
+    participant UI as Svelte Component
+    participant Proxy as Remote Proxy
+    participant SK as SvelteKit Runtime
+    participant Val as Schema Validator
+    participant Fn as Server Function
+    participant DB as Database / API
+
+    UI->>Proxy: 1. Call getUsers()
+
+    alt 2a. Cache Hit
+        Proxy-->>UI: Resolve immediately (no network)
+    else 2b. Cache Miss / .refresh()
+        Proxy->>SK: 2b. HTTP GET (args serialized via devalue)
+        SK->>Val: 3. Deserialize & validate input
+
+        alt Validation Fails
+            Val-->>SK: Invalid
+            SK-->>Proxy: 400 Bad Request
+            Proxy-->>UI: 5b. Throw error
+        else Validation Passes
+            Val->>Fn: 4. Validated args
+            Fn->>DB: 5a. Query (server-only access)
+            DB-->>Fn: 6. Data
+            Fn-->>SK: 7. Return result
+            SK-->>Proxy: 8. HTTP Response (serialized via devalue)
+            Proxy-->>UI: 9. Resolve Promise
+        end
     end
-
-    subgraph Network ["Network Boundary"]
-        HTTP_REQ["HTTP GET <br/><i>(Serialized args in URL via devalue)</i>"]
-        HTTP_RES["HTTP Response <br/><i>(Serialized data/error via devalue)</i>"]
-    end
-
-    subgraph Server ["SvelteKit (Server Layers)"]
-        SK_Runtime["SvelteKit Runtime <br/><i>(Endpoint Matching)</i>"]
-        Validation["Schema Validation <br/><i>(Zod / Valibot)</i>"]
-        QueryFunc["Server-Side Logic <br/><i>(Your code in .remote.ts)</i>"]
-        DB[("Database / API")]
-    end
-
-    %% Flow
-    UI -->|1. Calls function| Proxy
-
-    %% Caching & Refresh Logic
-    Proxy -->|2a. Cache Hit| UI
-    Proxy -->|2b. Cache Miss or .refresh| HTTP_REQ
-
-    HTTP_REQ -->|3. Hits hidden endpoint| SK_Runtime
-    SK_Runtime -->|4. Validates Input| Validation
-
-    %% Server Execution & Errors
-    Validation -->|5a. Passes| QueryFunc
-    Validation -. "5b. Fails (400)" .-> SK_Runtime
-
-    QueryFunc -->|6. Server-only Access| DB
-    DB -->|7. Data| QueryFunc
-    QueryFunc -. "Throws Error" .-> SK_Runtime
-
-    QueryFunc -->|8. Returns| SK_Runtime
-    SK_Runtime -->|9. Serializes via devalue| HTTP_RES
-
-    %% Client Resolution
-    HTTP_RES -->|10. Deserializes & Resolves| Proxy
-    Proxy -->|11. Resolves Promise / Throws Error| UI
-
 ```
 
 ### The Internal Flow (Step-by-Step)
