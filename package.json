@@ -68,6 +68,7 @@
     "unist-util-visit": "^5.1.0"
   },
   "overrides": {
-    "typescript": "$typescript"
+    "typescript": "$typescript",
+    "astro": "$astro"
   }
 }
