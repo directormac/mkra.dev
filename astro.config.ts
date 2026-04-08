@@ -201,9 +201,13 @@ export default defineConfig({
     // This will be fixed in Astro 6 with Vite 7 support
     // See: https://github.com/withastro/astro/issues/14030
     plugins: [tailwindcss()],
-    // optimizeDeps: {
-    //   exclude: ["@resvg/resvg-js"],
-    // },
+    optimizeDeps: {
+      include: ["mermaid", "mermaid/dist/mermaid.esm.mjs"],
+      exclude: [],
+    },
+    ssr: {
+      noExternal: ["mermaid"],
+    },
   },
   image: {
     responsiveStyles: true,
