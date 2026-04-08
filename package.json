@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
+    "clean": "npx rimraf .astro node_modules/.vite node_modules/.cache",
     "build": "astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/",
     "preview": "astro preview",
     "sync": "astro sync",
@@ -71,5 +72,9 @@
     "typescript": "$typescript",
     "astro": "$astro"
   },
-  "packageManager": "^bun@1.2.0"
+  "packageManager": "^bun@1.2.0",
+  "dependencies": {
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0"
+  }
 }

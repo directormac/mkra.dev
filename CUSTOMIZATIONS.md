@@ -635,3 +635,67 @@ Rendered after the social links block in the hero, guarded by `SITE.introAudio.e
   </div>
 )}
 ```
+
+## 29. Auto-embed Videos and GIFs in Markdown
+
+**File:** `src/lib/plugins/remarkAutoEmbed.ts`
+
+A remark plugin that automatically transforms standalone links to YouTube, Vimeo, Giphy, and Tenor into embedded iframes/images. Works in **regular `.md` files** (no MDX required).
+
+### Supported platforms
+
+- **YouTube**: `https://www.youtube.com/watch?v=VIDEO_ID` or `https://youtu.be/VIDEO_ID`
+- **YouTube Shorts**: `https://www.youtube.com/shorts/VIDEO_ID`
+- **Vimeo**: `https://vimeo.com/VIDEO_ID`
+- **Giphy**: `https://giphy.com/gifs/...` or direct `media.giphy.com` URLs (including v1 API URLs)
+- **Tenor**: `https://tenor.com/view/...` or direct `media.tenor.com` GIF URLs
+- **Direct media**: Any direct `.gif` or `.mp4` URL
+
+### Usage
+
+```markdown
+Just paste the link on its own line:
+
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+```
+
+### Configuration
+
+Added to both `markdown.remarkPlugins` and `mdx.remarkPlugins` in `astro.config.ts`.
+
+---
+
+## 30. Mathematical Expressions (KaTeX)
+
+**Files:**
+- `astro.config.ts`
+- `src/layouts/Layout.astro`
+
+Added support for LaTeX math expressions using KaTeX.
+
+### Syntax
+
+```markdown
+Inline math: $E = mc^2$
+
+Block math:
+$$
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+$$
+```
+
+### Configuration
+
+1. **Packages installed:** `remark-math` and `rehype-katex`
+2. **Astro config:** Added to `remarkPlugins` and `rehypePlugins`
+3. **KaTeX CSS:** Loaded from CDN in `Layout.astro` head:
+
+```astro
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+  integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+  crossorigin="anonymous"
+/>
+```
+```

@@ -4,9 +4,12 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 import { remarkHeaderImage } from "./src/lib/plugins/remarkHeaderImage";
 import { remarkImageZoom } from "./src/lib/plugins/remarkImageZoom";
 import { externalLink } from "./src/lib/plugins/externalLink";
+import { remarkAutoEmbed } from "./src/lib/plugins/remarkAutoEmbed";
 import { SITE } from "./src/config";
 import mermaid from "astro-mermaid";
 
@@ -169,6 +172,8 @@ export default defineConfig({
       remarkPlugins: [
         remarkHeaderImage,
         remarkImageZoom,
+        remarkAutoEmbed,
+        remarkMath,
         [
           externalLink,
           {
@@ -176,6 +181,7 @@ export default defineConfig({
           },
         ],
       ],
+      rehypePlugins: [rehypeKatex],
     }),
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
@@ -185,6 +191,8 @@ export default defineConfig({
     remarkPlugins: [
       remarkHeaderImage,
       remarkImageZoom,
+      remarkAutoEmbed,
+      remarkMath,
       remarkToc,
       [remarkCollapse, { test: "Table of contents" }],
       [
@@ -194,6 +202,7 @@ export default defineConfig({
         },
       ],
     ],
+    rehypePlugins: [rehypeKatex],
   },
   vite: {
     // eslint-disable-next-line
@@ -202,8 +211,7 @@ export default defineConfig({
     // See: https://github.com/withastro/astro/issues/14030
     plugins: [tailwindcss()],
     optimizeDeps: {
-      include: ["mermaid", "mermaid/dist/mermaid.esm.mjs"],
-      exclude: [],
+      exclude: ["@resvg/resvg-js"],
     },
     ssr: {
       noExternal: ["mermaid"],

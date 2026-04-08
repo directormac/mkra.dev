@@ -1,0 +1,203 @@
+---
+/**
+ * GifEmbed Component - Embed GIFs from Giphy, Tenor, or direct URLs
+ *
+ * Usage in markdown:
+ * <GifEmbed id="GIF_ID" platform="giphy" />
+ * <GifEmbed id="GIF_ID" platform="tenor" alt="Description" />
+ * <GifEmbed url="https://media.giphy.com/media/.../giphy.gif" alt="Description" />
+ * <GifEmbed url="https://example.com/my-animation.gif" alt="My GIF" width={480} />
+ */
+
+interface Props {
+  /** GIF ID from platform (Giphy/Tenor) */
+  id?: string;
+  /** Direct GIF URL or share URL */
+  url?: string;
+  /** Platform: giphy, tenor, or direct (for any URL) */
+  platform?: "giphy" | "tenor" | "direct";
+  /** Alt text for accessibility */
+  alt?: string;
+  /** Caption below the GIF */
+  caption?: string;
+  /** Maximum width in pixels */
+  width?: number;
+  /** Alignment: left, center, right, full */
+  align?: "left" | "center" | "right" | "full";
+  /** Enable lazy loading */
+  lazy?: boolean;
+}
+
+const {
+  id,
+  url,
+  platform = "direct",
+  alt = "Animated GIF",
+  caption,
+  width,
+  align = "center",
+  lazy = true,
+} = Astro.props;
+
+// Extract GIF ID from Giphy URLs
+function extractGiphyId(inputUrl: string): string | null {
+  const patterns = [
+    /giphy\.com\/media\/([a-zA-Z0-9]+)/,
+    /giphy\.com\/gifs\/(?:[\w-]+-)?([a-zA-Z0-9]+)/,
+    /gph\.is\/([a-zA-Z0-9]+)/,
+    /^([a-zA-Z0-9]{10,})$/, // Direct ID
+  ];
+  for (const pattern of patterns) {
+    const match = inputUrl.match(pattern);
+    if (match) return match[1];
+  }
+  return null;
+}
+
+// Extract GIF ID from Tenor URLs
+function extractTenorId(inputUrl: string): string | null {
+  const patterns = [
+    /tenor\.com\/view\/(?:[\w-]+-)?(\d+)/,
+    /tenor\.com\/(\d+)\.gif/,
+    /media\.tenor\.com\/[^/]+\/(\d+)/,
+    /^(\d{8,})$/, // Direct ID
+  ];
+  for (const pattern of patterns) {
+    const match = inputUrl.match(pattern);
+    if (match) return match[1];
+  }
+  return null;
+}
+
+// Detect platform from URL
+function detectPlatform(inputUrl: string): "giphy" | "tenor" | "direct" {
+  if (inputUrl.includes("giphy.com") || inputUrl.includes("gph.is")) {
+    return "giphy";
+  }
+  if (inputUrl.includes("tenor.com") || inputUrl.includes("media.tenor.com")) {
+    return "tenor";
+  }
+  return "direct";
+}
+
+// Build the final GIF URL
+let gifUrl: string | null = null;
+let gifAlt = alt;
+
+if (url && !id) {
+  const detectedPlatform = detectPlatform(url);
+
+  if (detectedPlatform === "giphy") {
+    const extractedId = extractGiphyId(url);
+    if (extractedId) {
+      gifUrl = `https://media.giphy.com/media/${extractedId}/giphy.gif`;
+    }
+  } else if (detectedPlatform === "tenor") {
+    // Tenor requires their embed script for proper display
+    // We'll use their iframe embed
+    const extractedId = extractTenorId(url);
+    if (extractedId) {
+      gifUrl = `tenor-iframe:${extractedId}`;
+    }
+  } else {
+    // Direct URL
+    gifUrl = url;
+  }
+} else if (id) {
+  // Use explicit ID
+  if (platform === "giphy") {
+    gifUrl = `https://media.giphy.com/media/${id}/giphy.gif`;
+  } else if (platform === "tenor") {
+    gifUrl = `tenor-iframe:${id}`;
+  } else {
+    gifUrl = id; // Treat as direct URL
+  }
+}
+
+// Alignment classes
+const alignClasses = {
+  left: "mr-auto",
+  center: "mx-auto",
+  right: "ml-auto",
+  full: "w-full",
+};
+
+const isTenorIframe = gifUrl?.startsWith("tenor-iframe:") ?? false;
+const tenorId =
+  isTenorIframe && gifUrl ? gifUrl.replace("tenor-iframe:", "") : null;
+---
+
+{
+  gifUrl && !isTenorIframe ? (
+    <figure class={`gif-embed not-prose ${alignClasses[align]}`}>
+      <div
+        class="gif-container overflow-hidden border border-border/20 bg-foreground/5 shadow-sm transition-all duration-300 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5"
+        style={width && align !== "full" ? `max-width: ${width}px;` : undefined}
+      >
+        <img
+          src={gifUrl}
+          alt={gifAlt}
+          loading={lazy ? "lazy" : "eager"}
+          class="h-auto w-full"
+          decoding="async"
+        />
+      </div>
+      {caption && (
+        <figcaption class="mt-2 text-center text-sm text-foreground/60">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  ) : isTenorIframe && tenorId ? (
+    <figure class={`gif-embed not-prose ${alignClasses[align]}`}>
+      <div
+        class="gif-container overflow-hidden border border-border/20 bg-foreground/5 shadow-sm"
+        style={`aspect-ratio: 16/9; ${width && align !== "full" ? `max-width: ${width}px;` : ""}`}
+      >
+        <iframe
+          src={`https://tenor.com/embed/${tenorId}?background=%231e1e2e&shareButton=false`}
+          title={gifAlt}
+          allow="autoplay; encrypted-media"
+          loading={lazy ? "lazy" : "eager"}
+          class="h-full w-full border-0"
+        />
+      </div>
+      {caption && (
+        <figcaption class="mt-2 text-center text-sm text-foreground/60">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  ) : (
+    <div class="gif-embed-error not-prose my-6 border border-red-500/20 bg-red-500/5 p-4 text-sm text-red-500/80">
+      <p class="font-medium">⚠️ Invalid GIF URL or ID</p>
+      <p class="mt-1 opacity-80">
+        Please provide a valid Giphy/Tenor URL or GIF ID.
+      </p>
+    </div>
+  )
+}
+
+<style>
+  @reference "../styles/global.css";
+
+  .gif-container {
+    position: relative;
+  }
+
+  .gif-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Smooth hover transition */
+  .gif-container img {
+    transition: transform 0.3s ease;
+  }
+
+  .gif-container:hover img {
+    transform: scale(1.02);
+  }
+</style>

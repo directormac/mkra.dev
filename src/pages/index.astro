@@ -32,17 +32,16 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       <div class="relative z-10">
         <!-- Terminal prompt badge -->
         <div
-          class="mb-3 inline-flex items-center gap-2    border border-border/40 bg-muted/20 px-3.5 py-1.5 font-cartograph text-xs sm:text-sm"
+          class="mb-3 inline-flex items-center gap-2 border border-border/40 bg-muted/20 px-3.5 py-1.5 font-cartograph text-xs sm:text-sm"
         >
           <span class="relative flex h-2 w-2">
             <span
-              class="absolute inline-flex h-full w-full animate-ping    bg-accent opacity-60"
+              class="absolute inline-flex h-full w-full animate-ping bg-accent opacity-60"
             ></span>
-            <span class="relative inline-flex h-2 w-2    bg-accent"
-            ></span>
+            <span class="relative inline-flex h-2 w-2 bg-accent"></span>
           </span>
-          <span class="text-accent">~</span>/mkra.dev <span
-            class="opacity-40">$</span
+          <span class="text-accent">~</span>/mkra.dev <span class="opacity-40"
+            >$</span
           >
         </div>
 
@@ -86,8 +85,8 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         >
           {SITE.desc}
         </p>
-        <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
-          <p class="text-sm opacity-50 shrink-0">
+        <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <p class="shrink-0 text-sm opacity-50">
             Written by
             <LinkButton
               class="font-medium underline decoration-dashed underline-offset-4 hover:text-accent"
@@ -101,7 +100,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           {
             // only display if at least one social link is enabled
             SOCIALS.length > 0 && (
-              <div class="sm:border-l border-border/40 sm:pl-4">
+              <div class="border-border/40 sm:border-l sm:pl-4">
                 <Socials />
               </div>
             )
@@ -143,9 +142,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       recentPosts.length > 0 && (
         <section id="recent-posts" class="pt-6 pb-6">
           <div class="mb-6 flex items-center gap-3">
-            <h2 class="text-sm font-bold tracking-widest uppercase">
-              Recent
-            </h2>
+            <h2 class="text-sm font-bold tracking-widest uppercase">Recent</h2>
             <div class="h-px flex-1 bg-border/20" />
             <span class="font-cartograph text-xs text-accent/40 select-none">
               [{recentPosts.slice(0, SITE.postPerIndex).length}/
@@ -159,16 +156,13 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
             )}
           </ul>
 
-          <!-- ═══════════════════ CTA ═══════════════════ -->
-          <div class="mt-8 mb-4 flex justify-center w-full">
+          <div class="mt-8 mb-4 flex w-full justify-center">
             <LinkButton
               href="/posts/"
-              class="group inline-flex items-center w-full sm:w-auto justify-center gap-2    border border-accent/20 bg-accent/10 px-8 py-4 text-base font-bold text-accent transition-all duration-300 hover:border-accent hover:bg-accent/20 hover:shadow-xl hover:shadow-accent/20 hover:-translate-y-0.5"
+              class="group inline-flex w-full items-center justify-center gap-2 border border-accent/20 bg-accent/10 px-8 py-4 text-base font-bold text-accent transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent/20 hover:shadow-xl hover:shadow-accent/20 sm:w-auto"
             >
               Explore all posts
-              <IconArrowRight
-                class="inline-block transition-transform duration-300 group-hover:translate-x-1 rtl:-rotate-180"
-              />
+              <IconArrowRight class="inline-block transition-transform duration-300 group-hover:translate-x-1 rtl:-rotate-180" />
             </LinkButton>
           </div>
         </section>

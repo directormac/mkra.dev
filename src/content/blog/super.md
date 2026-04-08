@@ -328,7 +328,41 @@ E=mc^2^ (superscript).
 
 ---
 
-## Mathematical Expressions (if supported)
+## Embedded Media (Auto-embed from Links)
+
+Just paste standalone links to YouTube, Vimeo, Giphy, or Tenor on their own line:
+
+### YouTube Video
+
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+### Vimeo Video
+
+https://vimeo.com/1168555141?fl=wc
+
+### Giphy GIF (Standard)
+
+https://giphy.com/gifs/reaction-giff-vulture-NB51jI9mjEj7OlDjXN
+
+### Giphy GIF (Direct Media URL with v1 API)
+
+https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTNuc2QyYXpiMWt3NXBkZmFzcGVvOHo0MzF3aHE2MngwZzNqY3V6YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/g7GKcSzwQfugw/giphy.gif
+
+### Tenor GIF (View Page)
+
+https://tenor.com/view/happy-gif-27563888
+
+### Tenor GIF (Direct Media URL)
+
+https://media1.tenor.com/m/x8v1oNUOmg4AAAAd/rickroll-roll.gif
+
+### YouTube Shorts 🎵
+
+https://www.youtube.com/shorts/41iWg91yFv0
+
+---
+
+## Mathematical Expressions (KaTeX)
 
 Inline math: $E = mc^2$
 
@@ -336,6 +370,16 @@ Block math:
 
 $$
 \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+$$
+
+More examples:
+
+$$
+\sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n
+$$
+
+$$
+\frac{d}{dx}\left( \int_{0}^{x} f(u) \, du\right) = f(x)
 $$
 
 ---

@@ -381,3 +381,92 @@ Add a `coverVideo: z.string().url().optional()` field in the schema for gallerie
 ### F. Gallery embedded in a post ✅ **Implemented**
 
 > See the [GalleryEmbed](#galleryembed--gallery-inside-mdx-posts) section for full documentation.
+
+---
+
+## Auto-embed for Videos and GIFs (Markdown)
+
+Unlike `GalleryEmbed` which requires MDX, there's a **remark plugin** that enables auto-embedding of videos and GIFs in **regular `.md` files** by simply pasting links on their own line.
+
+### Supported Platforms
+
+| Platform | Example URL | Result |
+|----------|-------------|--------|
+| **YouTube** | `https://www.youtube.com/watch?v=VIDEO_ID` | Embedded iframe (privacy-enhanced mode) |
+| **YouTube (short)** | `https://youtu.be/VIDEO_ID` | Embedded iframe |
+| **YouTube Shorts** | `https://www.youtube.com/shorts/VIDEO_ID` | Embedded iframe |
+| **Vimeo** | `https://vimeo.com/VIDEO_ID` | Embedded iframe |
+| **Giphy** | `https://giphy.com/gifs/...` | Direct GIF image |
+| **Giphy (media)** | `https://media.giphy.com/media/.../giphy.gif` | Direct GIF image (handles v1 API URLs) |
+| **Tenor** | `https://tenor.com/view/...` | Embedded iframe |
+| **Tenor (direct)** | `https://media.tenor.com/.../name.gif` | Displays as inline image |
+| **Direct GIF** | `https://example.com/animation.gif` | Displays as inline image |
+| **Direct MP4** | `https://example.com/video.mp4` | Displays as HTML5 video player |
+
+### Usage in Markdown
+
+Simply paste a supported link on its own line (paragraph with only the link):
+
+```markdown
+## My favorite video
+
+Check out this tutorial:
+
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+And this funny GIF:
+
+https://giphy.com/gifs/food-eating-HGe4zsOVo7Jvy
+
+Direct media URLs also work:
+
+https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjEx.../g7GKcSzwQfugw/giphy.gif
+
+https://media1.tenor.com/m/x8v1oNUOmg4AAAAd/rickroll-roll.gif
+```
+
+The plugin transforms these standalone links into properly styled embeds automatically.
+
+### How it works
+
+The `remarkAutoEmbed` plugin (in `src/lib/plugins/remarkAutoEmbed.ts`) runs during markdown processing:
+
+1. Scans for paragraphs containing **only a single link**
+2. Matches the URL against platform-specific regex patterns
+3. Replaces the paragraph with an HTML embed (iframe for videos, img for GIFs)
+4. Applies consistent styling (rounded corners, borders, responsive aspect ratios)
+
+### Configuration
+
+The plugin is enabled by default in `astro.config.ts` for both markdown and MDX:
+
+```ts
+// astro.config.ts
+import { remarkAutoEmbed } from "./src/lib/plugins/remarkAutoEmbed";
+
+export default defineConfig({
+  markdown: {
+    remarkPlugins: [
+      remarkAutoEmbed,  // ← auto-embed plugin
+      // ...other plugins
+    ],
+  },
+  // Also applies to MDX via extendMarkdownConfig: true
+});
+```
+
+### Limitations
+
+- **Standalone links only**: The link must be on its own line with no other text
+- **No custom titles**: Uses default titles (the link text if provided, otherwise generic)
+- **No sizing options**: Videos are always 16:9, GIFs use their natural size (max-width: 100%)
+
+### Comparison: GalleryEmbed vs Auto-embed
+
+| Feature | GalleryEmbed | Auto-embed |
+|---------|--------------|------------|
+| File type | `.mdx` only | `.md` and `.mdx` |
+| Syntax | `<GalleryEmbed slug="..." />` | Just paste the URL |
+| Customizable | Yes (limit, cols, showLink) | No |
+| Platforms | Gallery images only | YouTube, Vimeo, Giphy, Tenor |
+| Use case | Image collections | Individual videos/GIFs |
