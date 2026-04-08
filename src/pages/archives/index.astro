@@ -7,13 +7,15 @@ import Breadcrumb from "@/components/Breadcrumb.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
 import getPostsByGroupCondition from "@/utils/getPostsByGroupCondition";
+import postFilter from "@/utils/postFilter";
 import { SITE } from "@/config";
 
 if (!SITE.showArchives) {
   return Astro.redirect("/404");
 }
 
-const posts = await getCollection("blog", ({ data }) => !data.draft);
+const posts = await getCollection("blog");
+const filteredPosts = posts.filter(postFilter);
 
 const months = [
   "January",
@@ -30,10 +32,10 @@ const months = [
   "December",
 ];
 
-const totalPosts = posts.length;
+const totalPosts = filteredPosts.length;
 
 const yearGroups = Object.entries(
-  getPostsByGroupCondition(posts, post => post.data.pubDatetime.getFullYear())
+  getPostsByGroupCondition(filteredPosts, post => post.data.pubDatetime.getFullYear())
 ).sort(([a], [b]) => Number(b) - Number(a));
 ---
 

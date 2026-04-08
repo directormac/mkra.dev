@@ -7,15 +7,17 @@ import Breadcrumb from "@/components/Breadcrumb.astro";
 import IconHash from "@/assets/icons/IconHash.svg";
 import getUniqueTags from "@/utils/getUniqueTags";
 import getPostsByTag from "@/utils/getPostsByTag";
+import postFilter from "@/utils/postFilter";
 import { SITE } from "@/config";
 
 const posts = await getCollection("blog");
+const filteredPosts = posts.filter(postFilter);
 
-const tags = getUniqueTags(posts);
+const tags = getUniqueTags(filteredPosts);
 const tagsWithCount = tags.map(({ tag, tagName }) => ({
   tag,
   tagName,
-  count: getPostsByTag(posts, tag).length,
+  count: getPostsByTag(filteredPosts, tag).length,
 }));
 
 const maxCount = Math.max(...tagsWithCount.map(t => t.count));
@@ -44,7 +46,7 @@ const maxCount = Math.max(...tagsWithCount.map(t => t.count));
             {tagsWithCount.length} etiquetas
           </span>
           <span class="hero-badge">
-            {posts.length} posts
+            {filteredPosts.length} posts
           </span>
         </div>
       </div>

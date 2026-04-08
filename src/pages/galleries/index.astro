@@ -38,7 +38,7 @@ function getGalleryImages(slug: string): ImageMetadata[] {
 
 const rawGalleries = await getCollection(
   "galleries",
-  ({ data }) => !data.draft
+  ({ data }) => import.meta.env.DEV || !data.draft
 );
 
 const galleries = rawGalleries

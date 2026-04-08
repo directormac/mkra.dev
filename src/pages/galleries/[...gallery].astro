@@ -12,7 +12,7 @@ import { SITE } from "@/config";
 export async function getStaticPaths() {
   if (!SITE.showGalleries) return [];
 
-  const galleries = await getCollection("galleries", ({ data }) => !data.draft);
+  const galleries = await getCollection("galleries", ({ data }) => import.meta.env.DEV || !data.draft);
   return galleries.map(gallery => ({
     params: {
       gallery: gallery.id

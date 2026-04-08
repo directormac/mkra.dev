@@ -15,7 +15,7 @@ const postFilter = ({ data }: CollectionEntry<"blog">) => {
   const isPublishTimePassed =
     dayjs().tz(SITE.timezone).valueOf() >
     pubDatetime.valueOf() - SITE.scheduledPostMargin;
-  return !data.draft && (import.meta.env.DEV || isPublishTimePassed);
+  return (import.meta.env.DEV || !data.draft) && (import.meta.env.DEV || isPublishTimePassed);
 };
 
 export default postFilter;

@@ -1,30 +1,84 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import LinkButton from "@/components/LinkButton.astro";
+import Card from "@/components/Card.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
+import postFilter from "@/utils/postFilter";
 import { SITE } from "@/config";
+
+const posts = await getCollection("blog");
+const filteredPosts = posts.filter(postFilter);
+const sortedPosts = getSortedPosts(filteredPosts);
+const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+
+// Recomendar posts: preferir destacados, si no hay suficientes, usar los más recientes.
+const recommendedPosts =
+  featuredPosts.length > 0
+    ? featuredPosts.slice(0, 3)
+    : sortedPosts.slice(0, 3);
 ---
 
 <Layout title={`404 Not Found | ${SITE.title}`}>
   <Header />
 
-  <main
-    id="main-content"
-    class="app-layout flex flex-1 items-center justify-center"
-  >
-    <div class="mb-14 flex flex-col items-center justify-center">
-      <h1 class="text-9xl font-bold text-accent">404</h1>
-      <span aria-hidden="true">¯\_(ツ)_/¯</span>
-      <p class="mt-4 text-2xl sm:text-3xl">Page not found</p>
+  <main id="main-content" class="app-layout pb-16">
+    <div class="flex flex-col items-center justify-center py-20 text-center">
+      <h1
+        class="text-9xl font-bold tracking-tighter text-accent opacity-20 sm:text-[12rem]"
+      >
+        404
+      </h1>
+      <div class="-mt-10 mb-8 sm:-mt-16">
+        <span class="text-4xl sm:text-6xl" aria-hidden="true">¯\_(ツ)_/¯</span>
+        <h2 class="mt-6 text-2xl font-bold sm:text-3xl">Page not found</h2>
+        <p class="mt-4 text-foreground/60">
+          The page you're looking for doesn't exist or has been moved.
+        </p>
+      </div>
+
       <LinkButton
         href="/"
-        class="my-6 text-lg underline decoration-dashed underline-offset-8"
+        class="group inline-flex items-center gap-2 rounded-xl border border-accent/20 bg-accent/10 px-8 py-4 text-base font-bold text-accent transition-all duration-300 hover:border-accent hover:bg-accent/20 hover:shadow-xl hover:shadow-accent/20 hover:-translate-y-0.5"
       >
-        Go back home
+        Back to safety
       </LinkButton>
     </div>
+
+    {
+      recommendedPosts.length > 0 && (
+        <section class="mt-12 border-t border-border/40 pt-16">
+          <div class="mb-8 flex items-center gap-3">
+            <h2 class="text-sm font-bold tracking-widest text-accent uppercase">
+              Maybe read one of these?
+            </h2>
+            <div class="h-px flex-1 bg-border/20" />
+          </div>
+          <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {recommendedPosts.map(post => (
+              <Card variant="h3" {...post} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
   </main>
 
   <Footer />
 </Layout>
+
+<script>
+  // Script para el efecto de resplandor en las tarjetas (copiado de index.astro para consistencia)
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll<HTMLElement>(".card-glow").forEach(card => {
+      card.addEventListener("mousemove", (e: MouseEvent) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+        card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+      });
+    });
+  });
+</script>
+

@@ -9,6 +9,8 @@ tags:
 draft: false
 ---
 
+## Table of contents
+
 After [Svelte's](https://svelte.dev) experimental support for [**await**](https://svelte.dev/docs/svelte/await-expressions), which gave us more control over how we load data, the concept of remote functions was first introduced [here](https://github.com/sveltejs/svelte/discussions/15845).
 One thing led to another, and it paved the way for the [remote functions](https://github.com/sveltejs/kit/discussions/13897) discussions.
 

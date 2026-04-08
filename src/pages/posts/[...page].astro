@@ -11,9 +11,12 @@ import "@pagefind/default-ui/css/ui.css";
 import getSortedPosts from "@/utils/getSortedPosts";
 import { SITE } from "@/config";
 
+import postFilter from "@/utils/postFilter";
+
 export const getStaticPaths = (async ({ paginate }) => {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
-  return paginate(getSortedPosts(posts), { pageSize: SITE.postPerPage });
+  const posts = await getCollection("blog");
+  const filteredPosts = posts.filter(postFilter);
+  return paginate(getSortedPosts(filteredPosts), { pageSize: SITE.postPerPage });
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
