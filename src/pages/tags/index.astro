@@ -55,10 +55,7 @@ const maxCount = Math.max(...tagsWithCount.map(t => t.count));
               href={`/tags/${tag}/`}
               transition:name={tag}
               class="tag-card group"
-              data-tag-card
             >
-              <div class="tag-aurora" data-tag-aurora />
-              <div class="tag-border-glow" data-tag-border />
               <div class="tag-content">
                 <div class="flex items-center gap-1.5">
                   <IconHash class="size-5 text-accent opacity-60 transition-opacity group-hover:opacity-100" />
@@ -123,41 +120,6 @@ const maxCount = Math.max(...tagsWithCount.map(t => t.count));
         { signal }
       );
     }
-
-    // Tag cards mouse-follow aurora
-    const tagCards = document.querySelectorAll("[data-tag-card]");
-    tagCards.forEach(card => {
-      const aurora = card.querySelector("[data-tag-aurora]") as HTMLElement;
-      const border = card.querySelector("[data-tag-border]") as HTMLElement;
-      if (!aurora || !border) return;
-
-      card.addEventListener(
-        "mousemove",
-        e => {
-          requestAnimationFrame(() => {
-            const rect = (card as HTMLElement).getBoundingClientRect();
-            const x = (e as MouseEvent).clientX - rect.left;
-            const y = (e as MouseEvent).clientY - rect.top;
-            aurora.style.setProperty("--mx", `${x}px`);
-            aurora.style.setProperty("--my", `${y}px`);
-            aurora.style.opacity = "1";
-            border.style.setProperty("--mx", `${x}px`);
-            border.style.setProperty("--my", `${y}px`);
-            border.style.opacity = "1";
-          });
-        },
-        { signal }
-      );
-
-      card.addEventListener(
-        "mouseleave",
-        () => {
-          aurora.style.opacity = "0";
-          border.style.opacity = "0";
-        },
-        { signal }
-      );
-    });
   });
 </script>
 
@@ -166,7 +128,6 @@ const maxCount = Math.max(...tagsWithCount.map(t => t.count));
   .tags-hero {
     position: relative;
     overflow: hidden;
-    border-radius: 1.5rem;
     padding: 2.5rem 2rem;
     margin-bottom: 2.5rem;
     background: color-mix(
@@ -202,7 +163,6 @@ const maxCount = Math.max(...tagsWithCount.map(t => t.count));
     align-items: center;
     gap: 0.25rem;
     padding: 0.3rem 0.85rem;
-    border-radius: 999px;
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--color-accent);
@@ -225,7 +185,6 @@ const maxCount = Math.max(...tagsWithCount.map(t => t.count));
     flex-direction: column;
     gap: 0.75rem;
     padding: 1.25rem;
-    border-radius: 1rem;
     background: color-mix(
       in srgb,
       var(--color-foreground) 2%,
@@ -250,54 +209,6 @@ const maxCount = Math.max(...tagsWithCount.map(t => t.count));
       0 10px 40px -10px color-mix(in srgb, var(--color-accent) 15%, transparent),
       0 0 0 1px color-mix(in srgb, var(--color-accent) 8%, transparent),
       inset 0 1px 0 color-mix(in srgb, var(--color-accent) 6%, transparent);
-  }
-
-  /* Mouse-follow aurora inside card */
-  .tag-aurora {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      color-mix(in srgb, var(--color-accent) 22%, transparent),
-      color-mix(in srgb, var(--color-border) 10%, transparent) 40%,
-      transparent 70%
-    );
-    filter: blur(35px);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    transform: translate(
-      calc(var(--mx, 0px) - 100px),
-      calc(var(--my, 0px) - 100px)
-    );
-    will-change: transform;
-    z-index: -1;
-  }
-
-  /* Mouse-follow border glow */
-  .tag-border-glow {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      color-mix(in srgb, var(--color-accent) 40%, transparent),
-      transparent 70%
-    );
-    filter: blur(20px);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    transform: translate(
-      calc(var(--mx, 0px) - 60px),
-      calc(var(--my, 0px) - 60px)
-    );
-    will-change: transform;
-    z-index: -1;
-    mix-blend-mode: screen;
   }
 
   .tag-content {

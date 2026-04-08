@@ -35,7 +35,9 @@ const months = [
 const totalPosts = filteredPosts.length;
 
 const yearGroups = Object.entries(
-  getPostsByGroupCondition(filteredPosts, post => post.data.pubDatetime.getFullYear())
+  getPostsByGroupCondition(filteredPosts, post =>
+    post.data.pubDatetime.getFullYear()
+  )
 ).sort(([a], [b]) => Number(b) - Number(a));
 ---
 

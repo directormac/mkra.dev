@@ -15,7 +15,8 @@ A passionate professional with over a decade in the freelance network engineerin
 ## Experience
 
 ### Full Stack Developer (Freelance)
-*Jan 2020 - Present*
+
+_Jan 2020 - Present_
 
 - Led the decision-making process for selecting appropriate technology stacks based on project requirements, ensuring alignment with business goals.
 - Integrated diverse technologies, effectively gluing frontend and backend components to create seamless user experiences, specializing on meta frameworks specially SvelteKit and others NextJS, Nuxt, Remix and Astro, delivering content via SSG , SSR or hybrid.
@@ -26,15 +27,18 @@ A passionate professional with over a decade in the freelance network engineerin
 - Staying ahead of the game, by exploring emerging frameworks,testing them on different environments and interacting with different SDK's / API they provide.
 
 ### Network Engineer (Consultancy)
-*May 2015 - Present*
+
+_May 2015 - Present_
 
 ## Education
 
 ### STI Tacurong
-*Information Technology | 2013 - 2015*
+
+_Information Technology | 2013 - 2015_
 
 ### University of the Immaculate Conception
-*Information Technology | 2010 - Nov 2012*
+
+_Information Technology | 2010 - Nov 2012_
 
 ## Certifications
 

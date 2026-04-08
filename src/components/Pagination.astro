@@ -23,8 +23,8 @@ const { page } = Astro.props;
         disabled={!page.url.prev}
         href={page.url.prev as string}
         class:list={[
-          "pagination-btn select-none group/btn",
-          { "opacity-50 pointer-events-none": !page.url.prev }
+          "pagination-btn group/btn select-none",
+          { "pointer-events-none opacity-50": !page.url.prev },
         ]}
         aria-label="Goto Previous Page"
       >
@@ -32,10 +32,10 @@ const { page } = Astro.props;
           <IconArrowLeft class="size-4.5 transition-transform duration-300 group-hover/btn:-translate-x-0.5" />
         </span>
       </LinkButton>
-      
+
       <div class="pagination-info select-none">
-        <span class="font-semibold text-foreground">{page.currentPage}</span> 
-        <span class="text-foreground/40 mx-1">/</span> 
+        <span class="font-semibold text-foreground">{page.currentPage}</span>
+        <span class="mx-1 text-foreground/40">/</span>
         <span class="text-foreground/70">{page.lastPage}</span>
       </div>
 
@@ -43,8 +43,8 @@ const { page } = Astro.props;
         disabled={!page.url.next}
         href={page.url.next as string}
         class:list={[
-          "pagination-btn select-none group/btn",
-          { "opacity-50 pointer-events-none": !page.url.next }
+          "pagination-btn group/btn select-none",
+          { "pointer-events-none opacity-50": !page.url.next },
         ]}
         aria-label="Goto Next Page"
       >
@@ -77,14 +77,15 @@ const { page } = Astro.props;
     border-color: color-mix(in srgb, var(--accent) 30%, transparent);
     background: color-mix(in srgb, var(--accent) 8%, transparent);
     transform: translateY(-2px);
-    box-shadow: 
+    box-shadow:
       0 8px 20px -6px color-mix(in srgb, var(--accent) 20%, transparent),
       0 0 0 1px color-mix(in srgb, var(--accent) 10%, transparent);
   }
 
   .pagination-btn:active:not(.opacity-50) {
     transform: translateY(0) scale(0.96);
-    box-shadow: 0 2px 5px -2px color-mix(in srgb, var(--accent) 30%, transparent);
+    box-shadow: 0 2px 5px -2px
+      color-mix(in srgb, var(--accent) 30%, transparent);
   }
 
   .btn-icon-wrapper {

@@ -8,6 +8,7 @@ tags:
   - ide
 draft: false
 ---
+
 In commun usage, a scoop is any specialized spoon used to serve food.
 
 In windows scoop is a command-line installer for Windows, you dont have to
@@ -259,4 +260,3 @@ If all went well you can open your browser and head to `http://localhost:5173`
 ![scaffolddone](./scaffolddone.png)
 
 Awesome! Goodluck, the goal of this post is to improve our developer experience.
-

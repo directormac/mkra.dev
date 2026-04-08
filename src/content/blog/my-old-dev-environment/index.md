@@ -8,6 +8,7 @@ tags:
   - tutorial
 draft: false
 ---
+
 I don't hate VScode, i use it from time to time when my neovim
 config breaks yes sometimes updates from plugins break it
 
@@ -113,4 +114,3 @@ Have a good day!
 ---
 
 Incase you did not notice my wallpaper , I am **batman**
-

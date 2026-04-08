@@ -19,7 +19,7 @@ const coverSrc = coverImage ?? fallbackImage;
 <a
   href={`/galleries/${slug}`}
   class:list={[
-    "card-glow group/card relative flex flex-col overflow-hidden  ",
+    "card-glow group/card relative flex flex-col overflow-hidden",
     "border border-border/25",
     "transition-all duration-300 ease-out",
     "hover:border-accent/30 hover:bg-accent/5",
@@ -29,7 +29,7 @@ const coverSrc = coverImage ?? fallbackImage;
 >
   <!-- Cursor-following glow -->
   <div
-    class="card-glow-effect pointer-events-none absolute inset-0 z-0   opacity-0 transition-opacity duration-300 group-hover/card:opacity-100"
+    class="card-glow-effect pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-300 group-hover/card:opacity-100"
     aria-hidden="true"
   >
   </div>
@@ -71,7 +71,7 @@ const coverSrc = coverImage ?? fallbackImage;
     }
     {
       imageCount !== undefined && imageCount > 0 && (
-        <span class="absolute end-2 bottom-2    bg-background/80 px-2 py-0.5 text-xs font-medium backdrop-blur-sm">
+        <span class="absolute end-2 bottom-2 bg-background/80 px-2 py-0.5 text-xs font-medium backdrop-blur-sm">
           {imageCount} {imageCount === 1 ? "foto" : "fotos"}
         </span>
       )

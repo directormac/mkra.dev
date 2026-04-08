@@ -1,5 +1,5 @@
 ---
-title: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id'
+title: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id"
 description: >-
   This post is purely for testing if the css is correct for the title on the
   page
@@ -8,5 +8,5 @@ tags:
   - test
 draft: true
 ---
-## Testing the title tag
 
+## Testing the title tag

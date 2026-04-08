@@ -8,6 +8,7 @@ tags:
   - markdown
 draft: true
 ---
+
 ## This is a H2 Heading
 
 ### This is a H3 Heading
@@ -103,10 +104,10 @@ Syntax highlighting
 
 ```js
 var foo = function (bar) {
- return bar++
-}
+  return bar++;
+};
 
-console.log(foo(5))
+console.log(foo(5));
 ```
 
 ### Expressive code examples
@@ -114,7 +115,7 @@ console.log(foo(5))
 Adding a title
 
 ```js title="file.js"
-console.log('Title example')
+console.log("Title example");
 ```
 
 A bash terminal
@@ -127,11 +128,11 @@ Highlighting code lines
 
 ```js title="line-markers.js" del={2} ins={3-4} {6}
 function demo() {
- console.log('this line is marked as deleted')
- // This line and the next one are marked as inserted
- console.log('this is the second inserted line')
+  console.log("this line is marked as deleted");
+  // This line and the next one are marked as inserted
+  console.log("this is the second inserted line");
 
- return 'this line uses the neutral default marker type'
+  return "this line uses the neutral default marker type";
 }
 ```
 
@@ -162,4 +163,3 @@ Image in the same folder: `src/content/post/markdown-elements/logo.png`
 ## Links
 
 [Content from markdown-it](https://markdown-it.github.io/)
-
