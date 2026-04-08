@@ -9,19 +9,12 @@ tags:
   - python
 featured: true
 draft: true
+headerImage: https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80
 ---
 
 Durante años, los asistentes de IA actuaron como oráculos: tú preguntabas, ellos respondían. En 2026 el paradigma cambió. Ahora los **agentes autónomos** pueden planificar, ejecutar herramientas, evaluar resultados y corregir su propio rumbo sin intervención humana constante.
 
-<figure>
-  <img
-    src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80"
-    alt="Diagrama abstracto de redes neuronales interconectadas"
-  />
-  <figcaption class="text-center">
-    Los agentes IA encadenan razonamiento y acción en bucles autónomos.
-  </figcaption>
-</figure>
+## Header Image
 
 ## Table of contents
 

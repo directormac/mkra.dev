@@ -3,6 +3,7 @@ title: SvelteKit (query and prerender)
 description: "Exploring the new Remote Functions in SvelteKit: Query and Prerender."
 pubDatetime: 2026-04-02T00:00:00Z
 ogImage: ./query.png
+headerImage: ./query.png
 tags:
   - svelte
   - sveltekit
@@ -10,6 +11,8 @@ draft: false
 ---
 
 ## Table of contents
+
+## Header Image
 
 After [Svelte's](https://svelte.dev) experimental support for [**await**](https://svelte.dev/docs/svelte/await-expressions), which gave us more control over how we load data, the concept of remote functions was first introduced [here](https://github.com/sveltejs/svelte/discussions/15845).
 One thing led to another, and it paved the way for the [remote functions](https://github.com/sveltejs/kit/discussions/13897) discussions.

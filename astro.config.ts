@@ -4,6 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
+import { remarkHeaderImage } from "./src/lib/plugins/remarkHeaderImage";
+import { remarkImageZoom } from "./src/lib/plugins/remarkImageZoom";
 import { externalLink } from "./src/lib/plugins/externalLink";
 import { SITE } from "./src/config";
 import mermaid from "astro-mermaid";
@@ -13,9 +15,6 @@ import starlightCatppuccin from "@catppuccin/starlight";
 import starlightViewModes from "starlight-view-modes";
 import starlightAnnouncement from "starlight-announcement";
 import starlightAutoDrafts from "starlight-auto-drafts";
-// import starlightSidebarTopics from "starlight-sidebar-topics";
-// import starlightScrollToTop from "starlight-scroll-to-top";
-import starlightImageZoom from "starlight-image-zoom";
 import starlightMarkdownBlocks, {
   Draft,
   Aside,
@@ -91,10 +90,8 @@ export default defineConfig({
           dark: { flavor: "mocha", accent: "mauve" },
           light: { flavor: "latte", accent: "mauve" },
         }),
-        starlightImageZoom(),
         starlightAnnouncement(),
         starlightAutoDrafts(),
-        // starlightScrollToTop(),
         starlightMarkdownBlocks({
           blocks: {
             draft: Draft(),
@@ -170,6 +167,8 @@ export default defineConfig({
     mdx({
       extendMarkdownConfig: true,
       remarkPlugins: [
+        remarkHeaderImage,
+        remarkImageZoom,
         [
           externalLink,
           {
@@ -184,6 +183,8 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [
+      remarkHeaderImage,
+      remarkImageZoom,
       remarkToc,
       [remarkCollapse, { test: "Table of contents" }],
       [
