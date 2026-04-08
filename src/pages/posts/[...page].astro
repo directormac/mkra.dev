@@ -16,7 +16,9 @@ import postFilter from "@/utils/postFilter";
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = await getCollection("blog");
   const filteredPosts = posts.filter(postFilter);
-  return paginate(getSortedPosts(filteredPosts), { pageSize: SITE.postPerPage });
+  return paginate(getSortedPosts(filteredPosts), {
+    pageSize: SITE.postPerPage,
+  });
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
@@ -29,10 +31,6 @@ const totalPosts = page.total;
   <main id="main-content" class="app-layout pb-4">
     <!-- Hero -->
     <div class="posts-hero" data-posts-hero>
-      <div class="aurora-orb aurora-orb-1"></div>
-      <div class="aurora-orb aurora-orb-2"></div>
-      <div class="aurora-orb aurora-orb-3"></div>
-      <div class="aurora-mouse" data-posts-mouse></div>
       <div class="relative z-10">
         <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
           <span class="glow-text">Posts</span>
@@ -75,9 +73,9 @@ const totalPosts = page.total;
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="9" y1="15" x2="15" y2="15"></line>
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="9" y1="15" x2="15" y2="15" />
               </svg>
             </div>
             <h3 class="empty-title">No posts yet</h3>
@@ -87,11 +85,13 @@ const totalPosts = page.total;
           </div>
         ) : (
           <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {page.data.map((data: any) => <Card {...data} />)}
+            {page.data.map(data => (
+              <Card {...data} />
+            ))}
           </ul>
         )
       }
-      
+
       <div data-pagination-wrapper>
         <Pagination {page} />
       </div>
@@ -103,7 +103,7 @@ const totalPosts = page.total;
 
 <script>
   let cleanupController: AbortController | null = null;
-  
+
   function initPostsPage() {
     if (cleanupController) cleanupController.abort();
     cleanupController = new AbortController();
@@ -111,19 +111,29 @@ const totalPosts = page.total;
 
     // Hero mouse glow
     const hero = document.querySelector("[data-posts-hero]") as HTMLElement;
-    const heroMouse = document.querySelector("[data-posts-mouse]") as HTMLElement;
+    const heroMouse = document.querySelector(
+      "[data-posts-mouse]"
+    ) as HTMLElement;
     if (hero && heroMouse) {
-      hero.addEventListener("mousemove", e => {
-        requestAnimationFrame(() => {
-          const rect = hero.getBoundingClientRect();
-          heroMouse.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-          heroMouse.style.setProperty("--my", `${e.clientY - rect.top}px`);
-          heroMouse.style.opacity = "1";
-        });
-      }, { signal });
-      hero.addEventListener("mouseleave", () => {
-        heroMouse.style.opacity = "0";
-      }, { signal });
+      hero.addEventListener(
+        "mousemove",
+        e => {
+          requestAnimationFrame(() => {
+            const rect = hero.getBoundingClientRect();
+            heroMouse.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+            heroMouse.style.setProperty("--my", `${e.clientY - rect.top}px`);
+            heroMouse.style.opacity = "1";
+          });
+        },
+        { signal }
+      );
+      hero.addEventListener(
+        "mouseleave",
+        () => {
+          heroMouse.style.opacity = "0";
+        },
+        { signal }
+      );
     }
 
     // Initialize Pagefind local search
@@ -132,12 +142,12 @@ const totalPosts = page.total;
 
     const onIdle = window.requestIdleCallback || (cb => setTimeout(cb, 1));
     onIdle(async () => {
-      // @ts-expect-error
+      // @ts-expect-error Dynamic import
       const { PagefindUI } = await import("@pagefind/default-ui");
-      
+
       if (import.meta.env.DEV) {
         container.innerHTML = `
-          <div class="bg-muted/75 rounded p-4 text-sm mb-4 border border-border">
+          <div class="bg-muted/75 p-4 text-sm mb-4 border border-border">
             <p><strong>Dev Mode:</strong> The search will try to use the most recently built index. If you don't see results, run <code>pnpm run build</code> first.</p>
           </div>
         `;
@@ -151,9 +161,13 @@ const totalPosts = page.total;
       });
 
       // Toggle default posts grid visibility when typing
-      const input = container.querySelector(".pagefind-ui__search-input") as HTMLInputElement;
-      const defaultContainer = document.querySelector("[data-default-posts-container]") as HTMLElement;
-      
+      const input = container.querySelector(
+        ".pagefind-ui__search-input"
+      ) as HTMLInputElement;
+      const defaultContainer = document.querySelector(
+        "[data-default-posts-container]"
+      ) as HTMLElement;
+
       if (input && defaultContainer) {
         const toggleVisibility = () => {
           const hasValue = input.value.trim().length > 0;
@@ -165,13 +179,17 @@ const totalPosts = page.total;
         };
 
         input.addEventListener("input", toggleVisibility, { signal });
-        
+
         // Handle clear button
         const clearBtn = container.querySelector(".pagefind-ui__search-clear");
         if (clearBtn) {
-          clearBtn.addEventListener("click", () => {
-            requestAnimationFrame(() => toggleVisibility());
-          }, { signal });
+          clearBtn.addEventListener(
+            "click",
+            () => {
+              requestAnimationFrame(() => toggleVisibility());
+            },
+            { signal }
+          );
         }
       }
 
@@ -183,14 +201,16 @@ const totalPosts = page.total;
           if (input) {
             input.focus();
             // Scroll to the search box if it's not visible
-            input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            input.scrollIntoView({ behavior: "smooth", block: "center" });
           }
         }
       };
-      
-      // Use capture mode to intercept before the global modal listener
-      document.addEventListener("keydown", handleCmdK, { signal, capture: true });
 
+      // Use capture mode to intercept before the global modal listener
+      document.addEventListener("keydown", handleCmdK, {
+        signal,
+        capture: true,
+      });
     });
   }
 
@@ -202,7 +222,7 @@ const totalPosts = page.total;
   .posts-hero {
     position: relative;
     overflow: hidden;
-    border-radius: 1.5rem;
+    border-radius: 0;
     padding: 2.5rem 2rem;
     margin-bottom: 2rem;
     background: color-mix(
@@ -216,97 +236,6 @@ const totalPosts = page.total;
     .posts-hero {
       padding: 3rem;
     }
-  }
-
-  .aurora-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    pointer-events: none;
-    will-change: transform;
-  }
-  .aurora-orb-1 {
-    width: 300px;
-    height: 300px;
-    top: -30%;
-    left: -10%;
-    background: radial-gradient(
-      circle,
-      color-mix(in srgb, var(--color-accent) 25%, transparent),
-      transparent 70%
-    );
-    animation: orb-1 7s ease-in-out infinite alternate;
-  }
-  .aurora-orb-2 {
-    width: 250px;
-    height: 250px;
-    top: 10%;
-    right: -5%;
-    background: radial-gradient(
-      circle,
-      color-mix(in srgb, var(--color-border) 20%, transparent),
-      transparent 70%
-    );
-    animation: orb-2 9s ease-in-out infinite alternate;
-  }
-  .aurora-orb-3 {
-    width: 200px;
-    height: 200px;
-    bottom: -20%;
-    left: 40%;
-    background: radial-gradient(
-      circle,
-      color-mix(in srgb, var(--color-accent) 12%, transparent),
-      transparent 70%
-    );
-    animation: orb-3 11s ease-in-out infinite alternate;
-  }
-  @keyframes orb-1 {
-    0% {
-      transform: translate(0, 0) scale(1);
-    }
-    100% {
-      transform: translate(40px, 20px) scale(1.2);
-    }
-  }
-  @keyframes orb-2 {
-    0% {
-      transform: translate(0, 0) scale(1);
-    }
-    100% {
-      transform: translate(-30px, 30px) scale(1.15);
-    }
-  }
-  @keyframes orb-3 {
-    0% {
-      transform: translate(0, 0) scale(1);
-    }
-    100% {
-      transform: translate(20px, -25px) scale(1.1);
-    }
-  }
-
-  .aurora-mouse {
-    position: absolute;
-    width: 350px;
-    height: 350px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      color-mix(in srgb, var(--color-accent) 18%, transparent),
-      color-mix(in srgb, var(--color-border) 8%, transparent) 40%,
-      transparent 70%
-    );
-    filter: blur(50px);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    transform: translate(
-      calc(var(--mx, 0px) - 175px),
-      calc(var(--my, 0px) - 175px)
-    );
-    will-change: transform;
-    z-index: 1;
   }
 
   .glow-text {
@@ -354,7 +283,7 @@ const totalPosts = page.total;
     justify-content: center;
     padding: 4rem 2rem;
     text-align: center;
-    border-radius: 1.5rem;
+    border-radius: 0;
     border: 2px dashed color-mix(in srgb, var(--border) 40%, transparent);
     background: color-mix(in srgb, var(--background) 50%, transparent);
     backdrop-filter: blur(12px);
@@ -366,19 +295,23 @@ const totalPosts = page.total;
     justify-content: center;
     width: 5rem;
     height: 5rem;
-    border-radius: 1.25rem;
+    border-radius: 0;
     background: color-mix(in srgb, var(--accent) 8%, transparent);
     color: var(--accent);
     margin-bottom: 1.5rem;
-    box-shadow: 
+    box-shadow:
       0 0 0 1px color-mix(in srgb, var(--accent) 15%, transparent),
       0 10px 30px -10px color-mix(in srgb, var(--accent) 25%, transparent);
     animation: empty-float 4s ease-in-out infinite alternate;
   }
 
   @keyframes empty-float {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-8px); }
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-8px);
+    }
   }
 
   .empty-title {

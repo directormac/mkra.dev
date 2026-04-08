@@ -94,14 +94,14 @@ i {
   --pagefind-ui-border: color-mix(in srgb, var(--border) 50%, transparent);
   --pagefind-ui-primary: var(--accent);
   --pagefind-ui-tag: var(--background);
-  --pagefind-ui-border-radius: 0.75rem;
+  --pagefind-ui-border-radius: 0;
 }
 
 /* Search input look */
 .premium-search input.pagefind-ui__search-input {
   font-weight: 400;
   border: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
-  border-radius: 1rem;
+  border-radius: 0;
   background: color-mix(in srgb, var(--foreground) 3%, var(--background));
   padding: 1rem 1rem 1rem 3.5rem;
   transition: all 0.3s ease;
@@ -132,7 +132,7 @@ i {
 }
 
 .premium-search .pagefind-ui__search-clear {
-  border-radius: 0.5rem;
+  border-radius: 0;
   padding: 0 1rem;
   background: color-mix(in srgb, var(--foreground) 5%, transparent);
   right: 10px;
@@ -150,7 +150,7 @@ i {
 .premium-search .pagefind-ui__result {
   padding: 1.25rem;
   border: 1px solid color-mix(in srgb, var(--border) 30%, transparent);
-  border-radius: 1rem;
+  border-radius: 0;
   background: color-mix(in srgb, var(--foreground) 2%, var(--background));
   transition: all 0.2s ease;
   margin-bottom: 1rem;
@@ -190,7 +190,7 @@ i {
 }
 
 .premium-search .pagefind-ui__button {
-  border-radius: 0.75rem;
+  border-radius: 0;
   border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
   background: color-mix(in srgb, var(--accent) 8%, transparent);
   color: var(--accent);
@@ -208,7 +208,7 @@ pre.mermaid,
 div.mermaid {
   background: #1e1e2e !important;
   border: 1px solid #45475a;
-  border-radius: 0.75rem;
+  border-radius: 0;
   padding: 1.5rem;
 }
 

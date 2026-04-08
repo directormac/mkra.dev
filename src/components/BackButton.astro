@@ -2,109 +2,172 @@
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
 import { SITE } from "@/config";
 
+// Get the domain name
+const domain = "mkra.dev";
+
 // Build breadcrumb from current URL
 const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
 const pathSegments = currentUrlPath.split("/").filter(s => s.trim());
+const isHomePage = currentUrlPath === "" || currentUrlPath === "/";
 ---
 
 {
   SITE.showBackButton && (
     <div class="app-layout">
-      <div class="nav-bar-back mt-6 mb-2 flex items-center gap-3 overflow-hidden">
-        <div class="inline-flex items-center gap-1.5 rounded-full border border-border/20 bg-muted/5 px-3 py-1.5 font-cartograph text-sm backdrop-blur-sm breadcrumb-bar">
-          {/* Back button */}
-          <a
-            id="back-button"
-            href="/"
-            class="back-btn group inline-flex shrink-0 items-center justify-center gap-1 rounded-md px-1.5 py-0.5 text-foreground/50 transition-all duration-200 hover:bg-muted/10 hover:text-accent"
-          >
-            <IconChevronLeft class="size-3.5 transition-transform duration-200 group-hover:-translate-x-0.5 rtl:rotate-180 rtl:group-hover:translate-x-0.5" />
-            <span>cd ..</span>
-          </a>
-
-        {/* Breadcrumb trail */}
-        {pathSegments.length > 0 && (
-          <nav
-            aria-label="breadcrumb"
-            class="breadcrumb-trail flex min-w-0 items-center gap-1 text-sm"
-          >
-            {/* Separator after Back button */}
-            <span
-              class="breadcrumb-sep shrink-0 text-accent/40"
-              aria-hidden="true"
-            >
-              /
-            </span>
-
-            {/* Home / Root */}
+      <div class="nav-bar-back mt-6 mb-2">
+        <div class="breadcrumb-bar flex items-center justify-between gap-4 border border-border/20 bg-muted/5 px-3 py-1.5 font-cartograph text-sm backdrop-blur-sm">
+          {/* Left side - Path with cd .. */}
+          <div class="flex items-center gap-1.5 min-w-0 flex-1">
+            {/* Back button / cd .. */}
             <a
+              id="back-button"
               href="/"
-              class="breadcrumb-link shrink-0 rounded-md px-1.5 py-0.5 text-foreground/50 transition-colors duration-200 hover:bg-muted/10 hover:text-accent"
-              aria-label="Ir a inicio"
-              title="Inicio"
+              class="back-btn group inline-flex shrink-0 items-center justify-center gap-1 px-1.5 py-0.5 text-foreground/50 transition-all duration-200 hover:bg-muted/10 hover:text-accent"
             >
-              ~
+              <IconChevronLeft class="size-3.5 transition-transform duration-200 group-hover:-translate-x-0.5 rtl:rotate-180 rtl:group-hover:translate-x-0.5" />
+              <span>cd ..</span>
             </a>
 
-            {pathSegments.map((segment, index) => (
-              <>
-                <span
-                  class="breadcrumb-sep shrink-0 text-accent/40"
-                  aria-hidden="true"
-                >
-                  /
-                </span>
+            <span class="breadcrumb-sep shrink-0 text-accent/40">/</span>
 
-                {index + 1 === pathSegments.length ? (
-                  <span
-                    class="breadcrumb-current truncate px-1.5 py-0.5 text-accent/90 capitalize"
-                    aria-current="page"
-                  >
-                    {decodeURIComponent(segment)}
-                  </span>
-                ) : (
-                  <a
-                    href={`/${pathSegments.slice(0, index + 1).join("/")}/`}
-                    class="breadcrumb-link shrink-0 rounded-md px-1.5 py-0.5 capitalize text-foreground/50 transition-colors duration-200 hover:bg-muted/10 hover:text-accent"
-                  >
-                    {decodeURIComponent(segment)}
-                  </a>
-                )}
-              </>
-            ))}
-          </nav>
-        )}
+            {/* Home icon */}
+            <span class="text-accent/60 shrink-0">~</span>
+            <span class="breadcrumb-sep shrink-0 text-accent/40">/</span>
+            
+            {isHomePage ? (
+              <span class="breadcrumb-current truncate text-accent/90" aria-current="page">
+                {domain}
+              </span>
+            ) : (
+              <a
+                href="/"
+                class="breadcrumb-link shrink-0 text-foreground/50 transition-colors duration-200 hover:text-accent"
+                aria-label="Home"
+              >
+                {domain}
+              </a>
+            )}
+
+            {pathSegments.map((segment, index) => {
+              // Skip page numbers in display
+              if (!isNaN(Number(segment))) return null;
+              
+              const isLast = index === pathSegments.length - 1 || 
+                            (index === pathSegments.length - 2 && !isNaN(Number(pathSegments[index + 1])));
+              const displayText = decodeURIComponent(segment).replace(/-/g, " ");
+              
+              return (
+                <>
+                  <span class="breadcrumb-sep shrink-0 text-accent/40">/</span>
+                  
+                  {isLast ? (
+                    <span class="breadcrumb-current truncate text-accent/90 capitalize" aria-current="page">
+                      {displayText}
+                    </span>
+                  ) : (
+                    <a
+                      href={`/${pathSegments.slice(0, index + 1).join("/")}/`}
+                      class="breadcrumb-link shrink-0 capitalize text-foreground/50 transition-colors duration-200 hover:text-accent"
+                    >
+                      {displayText}
+                    </a>
+                  )}
+                </>
+              );
+            })}
+          </div>
+
+          {/* Right side - Status info */}
+          <div class="flex items-center gap-3 shrink-0 text-xs">
+            {/* Git branch indicator */}
+            <span class="git-status hidden sm:inline-flex items-center gap-1 text-foreground/50" data-git-status>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="6" y1="3" x2="6" y2="15"></line>
+                <circle cx="18" cy="6" r="3"></circle>
+                <circle cx="6" cy="18" r="3"></circle>
+                <path d="M18 9a9 9 0 0 1-9 9"></path>
+              </svg>
+              <span class="git-branch">main</span>
+            </span>
+
+            {/* Package version */}
+            <span class="pkg-version hidden lg:inline-flex items-center gap-1 text-foreground/40" title="Site version">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+              <span>v1.0.0</span>
+            </span>
+
+            {/* Build info */}
+            <span class="build-info hidden md:inline-flex items-center gap-1 text-foreground/40" title="Last built">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span class="build-time" data-build-time>--:--</span>
+            </span>
+
+            {/* Current time */}
+            <span class="current-time flex items-center gap-1 text-accent/70 font-mono" data-current-time>
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span class="time-display">--:--:--</span>
+            </span>
+
+            {/* Prompt symbol */}
+            <span class="prompt-symbol text-foreground/30 ml-1">$</span>
+          </div>
         </div>
       </div>
     </div>
   )
 }
 
-<style>
-  .breadcrumb-bar {
-    -webkit-backdrop-filter: blur(4px);
-  }
-
-  .breadcrumb-current {
-    max-width: 22ch;
-  }
-
-  /* Mobile: hide breadcrumb text, keep back button */
-  @media (max-width: 639px) {
-    .breadcrumb-trail {
-      display: none;
-    }
-  }
-</style>
-
 <script>
+  // Update current time
+  function updateTime() {
+    const timeElements = document.querySelectorAll('[data-current-time] .time-display');
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('en-US', { 
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+    timeElements.forEach(el => {
+      el.textContent = timeString;
+    });
+  }
+
+  // Update build time (static after build)
+  function setBuildTime() {
+    const buildElements = document.querySelectorAll('[data-build-time]');
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('en-US', { 
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    buildElements.forEach(el => {
+      el.textContent = timeString;
+    });
+  }
+
+  // Initialize
+  setBuildTime();
+  updateTime();
+  setInterval(updateTime, 1000);
+
   /* Update back URL from session */
   function updateGoBackUrl() {
-    const backButton: HTMLAnchorElement | null =
-      document.querySelector("#back-button");
-
+    const backButton = document.querySelector("#back-button") as HTMLAnchorElement | null;
     const backUrl = sessionStorage.getItem("backUrl");
-
     if (backUrl && backButton) {
       backButton.href = backUrl;
     }
@@ -113,3 +176,42 @@ const pathSegments = currentUrlPath.split("/").filter(s => s.trim());
   document.addEventListener("astro:page-load", updateGoBackUrl);
   updateGoBackUrl();
 </script>
+
+<style>
+  .breadcrumb-bar {
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .breadcrumb-current {
+    max-width: 20ch;
+  }
+
+  @media (max-width: 640px) {
+    .breadcrumb-current {
+      max-width: 10ch;
+    }
+  }
+
+  /* Git status animation for changes */
+  .git-status.has-changes {
+    color: rgb(251 191 36); /* amber-400 */
+  }
+
+  /* Terminal cursor blink effect on time */
+  .current-time .time-display::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: currentColor;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+</style>

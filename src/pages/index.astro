@@ -32,13 +32,13 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       <div class="relative z-10">
         <!-- Terminal prompt badge -->
         <div
-          class="mb-3 inline-flex items-center gap-2 rounded-full border border-border/40 bg-muted/20 px-3.5 py-1.5 font-cartograph text-xs sm:text-sm"
+          class="mb-3 inline-flex items-center gap-2    border border-border/40 bg-muted/20 px-3.5 py-1.5 font-cartograph text-xs sm:text-sm"
         >
           <span class="relative flex h-2 w-2">
             <span
-              class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60"
+              class="absolute inline-flex h-full w-full animate-ping    bg-accent opacity-60"
             ></span>
-            <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"
+            <span class="relative inline-flex h-2 w-2    bg-accent"
             ></span>
           </span>
           <span class="text-accent">~</span>/mkra.dev <span
@@ -87,7 +87,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           {SITE.desc}
         </p>
         <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
-          <p class="text-sm opacity-50 flex-shrink-0">
+          <p class="text-sm opacity-50 shrink-0">
             Written by
             <LinkButton
               class="font-medium underline decoration-dashed underline-offset-4 hover:text-accent"
@@ -163,7 +163,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           <div class="mt-8 mb-4 flex justify-center w-full">
             <LinkButton
               href="/posts/"
-              class="group inline-flex items-center w-full sm:w-auto justify-center gap-2 rounded-xl border border-accent/20 bg-accent/10 px-8 py-4 text-base font-bold text-accent transition-all duration-300 hover:border-accent hover:bg-accent/20 hover:shadow-xl hover:shadow-accent/20 hover:-translate-y-0.5"
+              class="group inline-flex items-center w-full sm:w-auto justify-center gap-2    border border-accent/20 bg-accent/10 px-8 py-4 text-base font-bold text-accent transition-all duration-300 hover:border-accent hover:bg-accent/20 hover:shadow-xl hover:shadow-accent/20 hover:-translate-y-0.5"
             >
               Explore all posts
               <IconArrowRight

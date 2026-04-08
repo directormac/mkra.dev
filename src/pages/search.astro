@@ -133,9 +133,9 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
       // Display warning in dev mode
       if (import.meta.env.DEV) {
         pageFindSearch.innerHTML = `
-            <div class="bg-muted/75 rounded p-4 space-y-4 mb-4">
+            <div class="bg-muted/75 p-4 space-y-4 mb-4">
               <p><strong>DEV mode Warning! </strong>You need to build the project at least once to see the search results during development.</p>
-              <code class="block bg-black text-white px-2 py-1 rounded">pnpm run build</code>
+              <code class="block bg-black text-white px-2 py-1">pnpm run build</code>
             </div>
           `;
       }
@@ -186,7 +186,7 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
   .search-hero {
     position: relative;
     overflow: hidden;
-    border-radius: 1.5rem;
+    border-radius: 0;
     padding: 2.5rem 2rem;
     margin-bottom: 2rem;
     background: color-mix(
@@ -310,7 +310,7 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
   /* ===== Search Container ===== */
   .search-container {
     position: relative;
-    border-radius: 1.25rem;
+    border-radius: 0;
     padding: 1.5rem;
     background: color-mix(
       in srgb,

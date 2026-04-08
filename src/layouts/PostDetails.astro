@@ -6,7 +6,7 @@ import Footer from "@/components/Footer.astro";
 import Datetime from "@/components/Datetime.astro";
 import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
-import BackButton from "@/components/BackButton.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
 import GalleryEmbed from "@/components/GalleryEmbed.astro";
 import ImageZoom from "@/components/ImageZoom.astro";
@@ -83,17 +83,16 @@ const nextPost =
 
 <Layout {...layoutProps}>
   <Header />
-  <BackButton />
+  <Breadcrumb />
   <main
     id="main-content"
-    class:list={["relative app-layout pb-12", { "mt-8": !SITE.showBackButton }]}
+    class="relative app-layout pb-12 mt-8"
     data-pagefind-body
   >
     <!-- Post header section -->
     <header class="post-header relative mb-10 text-center">
-      <div class="post-hero-bg"></div>
       <div
-        class="relative z-10 rounded-3xl border border-border/20 bg-muted/5 px-6 py-8 backdrop-blur-md sm:px-10 sm:py-12"
+        class="relative z-10 border border-border/20 bg-muted/5 px-6 py-8 backdrop-blur-md sm:px-10 sm:py-12"
       >
         <!-- Title -->
         <h1
@@ -109,7 +108,7 @@ const nextPost =
             tags.map((tag: string) => (
               <a
                 href={`/tags/${slugifyStr(tag)}/`}
-                class="post-tag-badge inline-flex items-center gap-1 rounded-full border border-accent/20 bg-accent/5 px-2.5 py-0.5 font-cartograph text-xs text-accent transition-all duration-200 hover:border-accent/40 hover:bg-accent/10 hover:shadow-sm hover:shadow-accent/10"
+                class="post-tag-badge inline-flex items-center gap-1 border border-accent/20 bg-accent/5 px-2.5 py-0.5 font-cartograph text-xs text-accent transition-all duration-200 hover:border-accent/40 hover:bg-accent/10 hover:shadow-sm hover:shadow-accent/10"
               >
                 <span class="opacity-50">#</span>
                 {tag}
@@ -124,7 +123,7 @@ const nextPost =
         >
           <!-- Author chip -->
           <div
-            class="inline-flex items-center gap-1.5 rounded-lg border border-border/25 bg-muted/10 px-2.5 py-1 backdrop-blur-sm"
+            class="inline-flex items-center gap-1.5 border border-border/25 bg-muted/10 px-2.5 py-1 backdrop-blur-sm"
           >
             <svg
               class="size-3.5 text-accent/70"
@@ -143,7 +142,7 @@ const nextPost =
 
           <!-- Date chip -->
           <div
-            class="inline-flex items-center gap-1.5 rounded-lg border border-border/25 bg-muted/10 px-2.5 py-1 backdrop-blur-sm"
+            class="inline-flex items-center gap-1.5 border border-border/25 bg-muted/10 px-2.5 py-1 backdrop-blur-sm"
           >
             <svg
               class="size-3.5 text-accent/70"
@@ -172,7 +171,7 @@ const nextPost =
           <EditPost
             {hideEditPost}
             {post}
-            class="hidden rounded-lg border border-border/25 bg-muted/10 px-2.5 py-1 opacity-70 backdrop-blur-sm transition-all duration-200 hover:border-accent/30 hover:opacity-100 sm:flex [&>svg]:size-3.5"
+            class="hidden border border-border/25 bg-muted/10 px-2.5 py-1 opacity-70 backdrop-blur-sm transition-all duration-200 hover:border-accent/30 hover:opacity-100 sm:flex [&>svg]:size-3.5"
           />
         </div>
       </div>
@@ -205,7 +204,7 @@ const nextPost =
         class="relative z-10 flex items-center gap-2 font-cartograph text-[10px] tracking-widest text-accent/40 uppercase select-none"
       >
         <span
-          class="h-1.5 w-1.5 rounded-full bg-accent/50 shadow-[0_0_8px_var(--color-accent)]"
+          class="h-1.5 w-1.5 bg-accent/50 shadow-[0_0_8px_var(--color-accent)]"
         ></span>
         end
       </div>
@@ -232,7 +231,7 @@ const nextPost =
           tags.map((tag: string) => (
             <a
               href={`/tags/${slugifyStr(tag)}/`}
-              class="inline-flex items-center gap-1 rounded-full border border-border/25 bg-muted/10 px-2.5 py-1 font-cartograph text-xs transition-all duration-200 hover:border-accent/40 hover:bg-accent/5 hover:text-accent"
+              class="inline-flex items-center gap-1 border border-border/25 bg-muted/10 px-2.5 py-1 font-cartograph text-xs transition-all duration-200 hover:border-accent/40 hover:bg-accent/5 hover:text-accent"
             >
               <span class="opacity-40">#</span>
               {tag}
@@ -259,7 +258,7 @@ const nextPost =
         prevPost ? (
           <a
             href={getPath(prevPost.id, prevPost.filePath)}
-            class="post-nav-link group relative flex flex-col gap-1 rounded-2xl border border-border/20 px-5 py-4 transition-all duration-300 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5"
+            class="post-nav-link group relative flex flex-col gap-1 border border-border/20 px-5 py-4 transition-all duration-300 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5"
           >
             <div class="post-nav-bg" />
             <div class="flex items-center gap-1.5">
@@ -291,7 +290,7 @@ const nextPost =
         nextPost && (
           <a
             href={getPath(nextPost.id, nextPost.filePath)}
-            class="post-nav-link group relative col-start-2 flex flex-col items-end gap-1 rounded-2xl border border-border/20 px-5 py-4 text-end transition-all duration-300 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5"
+            class="post-nav-link group relative col-start-2 flex flex-col items-end gap-1 border border-border/20 px-5 py-4 text-end transition-all duration-300 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5"
           >
             <div class="post-nav-bg" />
             <div class="flex items-center gap-1.5">
@@ -516,7 +515,7 @@ const nextPost =
     filter: blur(24px);
     pointer-events: none;
     z-index: 0;
-    border-radius: 1.5rem; /* matches rounded-3xl */
+    border-radius: 1.5rem; /* matches    */
   }
 
   .header-image-wrapper {
@@ -590,12 +589,12 @@ const nextPost =
 
   /* Mermaid Diagram Zoom - Global because it's from Markdown content */
   :global(.mermaid) {
-    @apply my-8 flex cursor-zoom-in justify-center overflow-hidden rounded-xl border border-border bg-foreground/2 p-4;
+    @apply my-8 flex cursor-zoom-in justify-center overflow-hidden border border-border bg-foreground/2 p-4;
     contain: layout;
   }
 
   :global(.mermaid.zoomed) {
-    @apply fixed inset-0 z-100 m-0! flex cursor-zoom-out items-center justify-center overflow-auto rounded-none! bg-background/80 p-4 backdrop-blur-xs md:p-16;
+    @apply fixed inset-0 z-100 m-0! flex cursor-zoom-out items-center justify-center overflow-auto bg-background/80 p-4 backdrop-blur-xs md:p-16;
   }
 
   :global(.mermaid.zoomed svg) {

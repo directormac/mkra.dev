@@ -11,14 +11,8 @@ export const remarkHeaderImage = () => {
   return (tree: Root, file: VFile) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data = file.data as any;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const filePath = file.path || file.history[0] || "unknown";
-
-    // Debug: Log every file being processed
-    if (filePath.includes("content/blog") || filePath.includes("sveltekit")) {
-      console.error("[remarkHeaderImage] File:", filePath);
-      console.error("[remarkHeaderImage] Has data.astro:", !!data.astro);
-      console.error("[remarkHeaderImage] Has data.fm:", !!data.fm);
-    }
 
     const frontmatter = data.astro?.frontmatter || data.fm || {};
     const headerImage = frontmatter.headerImage;
@@ -41,6 +35,7 @@ export const remarkHeaderImage = () => {
       }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let found = false;
 
     visit(
@@ -85,7 +80,7 @@ export const remarkHeaderImage = () => {
             hName: "div",
             hProperties: {
               class:
-                "header-image-wrapper mx-auto mb-10 overflow-hidden rounded-3xl border border-border/20 bg-muted/5 shadow-2xl shadow-accent/5 not-prose",
+                "header-image-wrapper mx-auto mb-10 overflow-hidden    border border-border/20 bg-muted/5 shadow-2xl shadow-accent/5 not-prose",
             },
           },
           children: [imageNode],
