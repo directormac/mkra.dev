@@ -236,3 +236,20 @@ div.mermaid {
   flex-shrink: 0 !important;
   vertical-align: middle !important;
 }
+
+/* KaTeX dark mode support - force text color to inherit from parent */
+.katex-display {
+  @apply my-8 overflow-x-auto overflow-y-hidden py-4;
+}
+
+.katex {
+  @apply text-foreground;
+  font-size: 1.1em;
+}
+
+/* Ensure all KaTeX internal elements use the current text color */
+.katex * {
+  fill: currentColor;
+  stroke: currentColor;
+  color: inherit !important;
+}

@@ -214,6 +214,7 @@ function isDirectMediaUrl(url: string): boolean {
 export const remarkAutoEmbed = (options: EmbedPluginOptions = {}) => {
   const { youtube = true, vimeo = true, giphy = true, tenor = true } = options;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return (tree: Root, file: VFile) => {
     const embedsToProcess: Array<{
       parent: Parent;

@@ -169,19 +169,6 @@ export default defineConfig({
     }),
     mdx({
       extendMarkdownConfig: true,
-      remarkPlugins: [
-        remarkHeaderImage,
-        remarkImageZoom,
-        remarkAutoEmbed,
-        remarkMath,
-        [
-          externalLink,
-          {
-            domains: ["mkra.dev", "localhost:4321"],
-          },
-        ],
-      ],
-      rehypePlugins: [rehypeKatex],
     }),
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
