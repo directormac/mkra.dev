@@ -1,15 +1,10 @@
 ---
-title: "Super"
-description: "Super "
+title: "Kitchen Sink MDX"
+description: "Kitchen Sink MDX"
 pubDatetime: 2026-02-18T10:00:00Z
 tags:
   - super
-  - blog
-  - Blog
-  - test
-  - bloG
-  - Test
-  - BLOG
+  - mdx
 featured: true
 draft: true
 ---
@@ -17,6 +12,195 @@ draft: true
 # Markdown Kitchen Sink
 
 This is a comprehensive test page to verify how various markdown elements render on the website.
+
+---
+
+## Images
+
+### Regular Image
+
+![Alt text for the image](./placeholder-image.png)
+
+### Image with Title
+
+![Alt text](./placeholder-image.png "Image Title")
+
+### Linked Image
+
+[![Clickable image](./placeholder-image.png)](https://example.com)
+
+---
+
+## Embedded Media (Auto-embed from Links)
+
+Just paste standalone links to YouTube, Vimeo, Giphy, or Tenor on their own line:
+
+### YouTube Video
+
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+### Vimeo Video
+
+https://vimeo.com/1168555141?fl=wc
+
+### Giphy GIF (Standard)
+
+https://giphy.com/gifs/reaction-giff-vulture-NB51jI9mjEj7OlDjXN
+
+### Giphy GIF (Direct Media URL with v1 API)
+
+https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTNuc2QyYXpiMWt3NXBkZmFzcGVvOHo0MzF3aHE2MngwZzNqY3V6YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/g7GKcSzwQfugw/giphy.gif
+
+### Tenor GIF (View Page)
+
+https://tenor.com/view/happy-gif-27563888
+
+### Tenor GIF (Direct Media URL)
+
+https://media1.tenor.com/m/x8v1oNUOmg4AAAAd/rickroll-roll.gif
+
+### YouTube Shorts 🎵
+
+https://www.youtube.com/shorts/41iWg91yFv0
+
+---
+
+## Mathematical Expressions (KaTeX)
+
+Inline math: $E = mc^2$
+
+Block math:
+
+$$
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+$$
+
+More examples:
+
+$$
+\sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n
+$$
+
+$$
+\frac{d}{dx}\left( \int_{0}^{x} f(u) \, du\right) = f(x)
+$$
+
+---
+
+## Abbreviations
+
+_[HTML]: HyperText Markup Language
+_[CSS]: Cascading Style Sheets
+
+HTML and CSS are web technologies.
+
+---
+
+## Mermaid Charts
+
+### Flowchart
+
+```mermaid
+flowchart TD
+    A[Start] --> B{Is it?}
+    B -->|Yes| C[OK]
+    C --> D[Rethink]
+    D --> B
+    B ---->|No| E[End]
+```
+
+### Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop Healthcheck
+        John->>John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts <br/>prevail!
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!
+```
+
+### Class Diagram
+
+```mermaid
+classDiagram
+    Class01 <|-- AveryLongClass : Cool
+    Class03 *-- Class04
+    Class05 o-- Class06
+    Class07 .. Class08
+    Class09 --> C2 : Where am i?
+    Class09 --* C3
+    Class09 --|> Class07
+    Class07 : equals()
+    Class07 : Object[] elementData
+    Class01 : size()
+    Class01 : int chimp
+    Class01 : int gorilla
+    Class08 <--> C2: Cool label
+```
+
+### State Diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> Still
+    Still --> [*]
+    Still --> Moving
+    Moving --> Still
+    Moving --> Crash
+    Crash --> [*]
+```
+
+### Entity Relationship Diagram
+
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE-ITEM : contains
+    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
+```
+
+### User Journey
+
+```mermaid
+journey
+    title My working day
+    section Go to work
+      Make tea: 5: Me
+      Go upstairs: 3: Me
+      Do work: 1: Me, Cat
+    section Go home
+      Go downstairs: 5: Me
+      Sit down: 5: Me
+```
+
+### Gantt Chart
+
+```mermaid
+gantt
+    title A Gantt Diagram
+    dateFormat  YYYY-MM-DD
+    section Section
+    A task           :a1, 2014-01-01, 30d
+    Another task     :after a1  , 20d
+    section Another
+    Task in sec      :2014-01-12  , 12d
+    another task      : 24d
+```
+
+### Pie Chart
+
+```mermaid
+pie title Pets adopted by volunteers
+    "Dogs" : 386
+    "Cats" : 85
+    "Rats" : 15
+```
 
 ---
 
@@ -259,13 +443,7 @@ Here's one with underscores:
 
 <details>
   <summary>Click to expand</summary>
-  
-  This content is hidden by default.
-  
-  - Can contain
-  - markdown
-  - lists
-  
+  This content is hidden by default. - Can contain - markdown - lists
 </details>
 
 ### Keyboard
@@ -309,195 +487,6 @@ Here's some text with a footnote[^1]. And another footnote[^2].
 H~2~O is water (subscript).
 
 E=mc^2^ (superscript).
-
----
-
-## Images
-
-### Regular Image
-
-![Alt text for the image](/placeholder-image.png)
-
-### Image with Title
-
-![Alt text](/placeholder-image.png "Image Title")
-
-### Linked Image
-
-[![Clickable image](/placeholder-image.png)](https://example.com)
-
----
-
-## Embedded Media (Auto-embed from Links)
-
-Just paste standalone links to YouTube, Vimeo, Giphy, or Tenor on their own line:
-
-### YouTube Video
-
-https://www.youtube.com/watch?v=dQw4w9WgXcQ
-
-### Vimeo Video
-
-https://vimeo.com/1168555141?fl=wc
-
-### Giphy GIF (Standard)
-
-https://giphy.com/gifs/reaction-giff-vulture-NB51jI9mjEj7OlDjXN
-
-### Giphy GIF (Direct Media URL with v1 API)
-
-https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTNuc2QyYXpiMWt3NXBkZmFzcGVvOHo0MzF3aHE2MngwZzNqY3V6YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/g7GKcSzwQfugw/giphy.gif
-
-### Tenor GIF (View Page)
-
-https://tenor.com/view/happy-gif-27563888
-
-### Tenor GIF (Direct Media URL)
-
-https://media1.tenor.com/m/x8v1oNUOmg4AAAAd/rickroll-roll.gif
-
-### YouTube Shorts 🎵
-
-https://www.youtube.com/shorts/41iWg91yFv0
-
----
-
-## Mathematical Expressions (KaTeX)
-
-Inline math: $E = mc^2$
-
-Block math:
-
-$$
-\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
-$$
-
-More examples:
-
-$$
-\sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n
-$$
-
-$$
-\frac{d}{dx}\left( \int_{0}^{x} f(u) \, du\right) = f(x)
-$$
-
----
-
-## Abbreviations
-
-_[HTML]: HyperText Markup Language
-_[CSS]: Cascading Style Sheets
-
-HTML and CSS are web technologies.
-
----
-
-## Mermaid Charts
-
-### Flowchart
-
-```mermaid
-flowchart TD
-    A[Start] --> B{Is it?}
-    B -->|Yes| C[OK]
-    C --> D[Rethink]
-    D --> B
-    B ---->|No| E[End]
-```
-
-### Sequence Diagram
-
-```mermaid
-sequenceDiagram
-    participant Alice
-    participant Bob
-    Alice->>John: Hello John, how are you?
-    loop Healthcheck
-        John->>John: Fight against hypochondria
-    end
-    Note right of John: Rational thoughts <br/>prevail!
-    John-->>Alice: Great!
-    John->>Bob: How about you?
-    Bob-->>John: Jolly good!
-```
-
-### Class Diagram
-
-```mermaid
-classDiagram
-    Class01 <|-- AveryLongClass : Cool
-    Class03 *-- Class04
-    Class05 o-- Class06
-    Class07 .. Class08
-    Class09 --> C2 : Where am i?
-    Class09 --* C3
-    Class09 --|> Class07
-    Class07 : equals()
-    Class07 : Object[] elementData
-    Class01 : size()
-    Class01 : int chimp
-    Class01 : int gorilla
-    Class08 <--> C2: Cool label
-```
-
-### State Diagram
-
-```mermaid
-stateDiagram-v2
-    [*] --> Still
-    Still --> [*]
-    Still --> Moving
-    Moving --> Still
-    Moving --> Crash
-    Crash --> [*]
-```
-
-### Entity Relationship Diagram
-
-```mermaid
-erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    ORDER ||--|{ LINE-ITEM : contains
-    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
-```
-
-### User Journey
-
-```mermaid
-journey
-    title My working day
-    section Go to work
-      Make tea: 5: Me
-      Go upstairs: 3: Me
-      Do work: 1: Me, Cat
-    section Go home
-      Go downstairs: 5: Me
-      Sit down: 5: Me
-```
-
-### Gantt Chart
-
-```mermaid
-gantt
-    title A Gantt Diagram
-    dateFormat  YYYY-MM-DD
-    section Section
-    A task           :a1, 2014-01-01, 30d
-    Another task     :after a1  , 20d
-    section Another
-    Task in sec      :2014-01-12  , 12d
-    another task      : 24d
-```
-
-### Pie Chart
-
-```mermaid
-pie title Pets adopted by volunteers
-    "Dogs" : 386
-    "Cats" : 85
-    "Rats" : 15
-```
 
 ---
 
