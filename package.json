@@ -8,6 +8,7 @@
     "build": "astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/",
     "preview": "astro preview",
     "sync": "astro sync",
+    "check": "astro check",
     "astro": "astro",
     "format:check": "prettier --check .",
     "format": "prettier --write .",

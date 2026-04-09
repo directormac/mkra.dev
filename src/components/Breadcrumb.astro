@@ -207,22 +207,7 @@ if (breadcrumbList.length > 0) {
     });
   }
 
-  // Update build time (static after build)
-  function setBuildTime() {
-    const buildElements = document.querySelectorAll("[data-build-time]");
-    const now = new Date();
-    const timeString = now.toLocaleTimeString("en-US", {
-      hour12: false,
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    buildElements.forEach(el => {
-      el.textContent = timeString;
-    });
-  }
-
   // Initialize
-  setBuildTime();
   updateTime();
   setInterval(updateTime, 1000);
 </script>

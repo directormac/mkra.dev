@@ -75,10 +75,6 @@ i {
   @apply mx-auto w-full max-w-app px-4;
 }
 
-.active-nav {
-  @apply text-accent;
-}
-
 /* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
 /* Anything that has been anchored to should have extra scroll margin */
 :target {

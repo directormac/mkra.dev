@@ -53,35 +53,7 @@ const { frontmatter } = Astro.props;
     aboutCleanup = new AbortController();
     const { signal } = aboutCleanup;
 
-    const hero = document.querySelector("[data-about-hero]") as HTMLElement;
-    const mouseOrb = document.querySelector(
-      "[data-about-mouse]"
-    ) as HTMLElement;
-
-    if (hero && mouseOrb) {
-      hero.addEventListener(
-        "mousemove",
-        e => {
-          requestAnimationFrame(() => {
-            const rect = hero.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            mouseOrb.style.setProperty("--mx", `${x}px`);
-            mouseOrb.style.setProperty("--my", `${y}px`);
-            mouseOrb.style.opacity = "1";
-          });
-        },
-        { signal }
-      );
-
-      hero.addEventListener(
-        "mouseleave",
-        () => {
-          mouseOrb.style.opacity = "0";
-        },
-        { signal }
-      );
-    }
+    // const hero = document.querySelector("[data-about-hero]") as HTMLElement;
 
     // Badge hover ripple
     const badges = document.querySelectorAll("[data-badge]");
