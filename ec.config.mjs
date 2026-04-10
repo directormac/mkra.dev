@@ -1,7 +1,7 @@
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-sections';
 // import { pluginFullscreen } from 'expressive-code-fullscreen';
-import { pluginFileIcons } from "@xt0rted/expressive-code-file-icons";
+// import { pluginFileIcons } from "@xt0rted/expressive-code-file-icons";
 import { pluginLanguageLogo } from 'ec-lang-logo';
 
 /** @type {import('@astrojs/starlight/expressive-code').StarlightExpressiveCodeOptions} */
@@ -19,10 +19,10 @@ export default {
     //   animationDuration: 250,
     //   addToUntitledBlocks: false,
     // }),
-    pluginFileIcons({
-      iconClass: "size-4 flex-shrink-0",
-      titleClass: "flex items-center gap-1",
-    }),
+    // pluginFileIcons({
+    //   iconClass: "size-4 flex-shrink-0",
+    //   titleClass: "flex items-center gap-1",
+    // }),
     pluginLanguageLogo( { 
       color: 'original'
     })

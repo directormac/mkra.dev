@@ -1,6 +1,5 @@
 ---
 title: Coding Conventions
-topic: guides
 draft: true
 ---
 

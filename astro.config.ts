@@ -15,7 +15,8 @@ import mermaid from "astro-mermaid";
 
 import starlight from "@astrojs/starlight";
 import starlightCatppuccin from "@catppuccin/starlight";
-import starlightViewModes from "starlight-view-modes";
+import starlightSidebarTopics from "starlight-sidebar-topics";
+// import starlightViewModes from "starlight-view-modes";
 import starlightAnnouncement from "starlight-announcement";
 import starlightAutoDrafts from "starlight-auto-drafts";
 import starlightMarkdownBlocks, {
@@ -102,48 +103,25 @@ export default defineConfig({
           },
         }),
         // Configure Sidebar here
-        // starlightSidebarTopics(
-        //   [
-        //     {
-        //       label: "Hi",
-        //       link: "/hi",
-        //       id: "guides",
-        //       items: [
-        //         {
-        //           label: "Hi",
-        //           link: "/hi",
-        //         },
-        //         {
-        //           label: "Guides",
-        //           autogenerate: { directory: "guides" },
-        //         },
-        //         {
-        //           label: "Reference",
-        //           autogenerate: { directory: "reference" },
-        //         },
-        //       ],
-        //     },
-        //   ],
-        //   {
-        //     topics: {
-        //       guides: ["guides/**/*"],
-        //     },
-        //   }
-        // ),
-        starlightViewModes({
-          zenModeSettings: {
-            enabled: true,
-            displayOptions: {
-              showHeader: false,
-              showSidebar: false,
-              showTableOfContents: false,
-              showFooter: false,
-            },
-            keyboardShortcut: ["Ctrl+Shift+Z"],
+        starlightSidebarTopics([
+          {
+            label: "Notes",
+            link: "/notes/",
+            icon: "pen",
+            items: [
+              {
+                label: "Books",
+                autogenerate: { directory: "notes/books" },
+              },
+              {
+                label: "Guides",
+                autogenerate: { directory: "notes/guides" },
+              },
+            ],
           },
-        }),
+        ]),
       ],
-      title: `${SITE.title}`,
+      title: "Notes",
       pagefind: true,
       disable404Route: true,
       locales: {
@@ -152,20 +130,6 @@ export default defineConfig({
           lang: "en",
         },
       },
-      sidebar: [
-        {
-          label: "Hi",
-          link: "/hi",
-        },
-        {
-          label: "Guides",
-          autogenerate: { directory: "guides" },
-        },
-        {
-          label: "Reference",
-          autogenerate: { directory: "reference" },
-        },
-      ],
     }),
     mdx({
       extendMarkdownConfig: true,
